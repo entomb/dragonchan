@@ -1,8 +1,8 @@
 <?php
 //4chan dragon raid
-error_reporting(0);
+error_reporting(E_ALL);
 
-$thread_id = (int)$_GET['id'];
+$thread_id = 472864774;//(int)$_GET['id'];
 $api_url   = "http://api.4chan.org/b/res/$thread_id.json";
 
 try{
@@ -15,6 +15,15 @@ try{
 if(!isset($THREAD->posts) || count($THREAD->posts)<1){
     exit("that is not a valid 4chan thead id...");
 }
+
+/*
+include("dragonraid.php");
+
+$Raid = new DragonRaid($THREAD);
+$Raid->play();
+$Raid->display();
+exit();
+*/
 
 //assign OP status
 $firstPost = $THREAD->posts[0];

@@ -14,15 +14,15 @@
         var $DragonHP;
         var $DragonHP_MAX;
 
-        var $WINNER;
-        var $deadPlayers;
+        var $WINNER = array();
+        var $deadPlayers = array();
 
         var $min_roll = 11;
         var $min_roll_enraged = 22;
 
         /*
         TODO: config vars
-         */
+
         var $config = array(
                 'dragon_hp_factor'   => 200,
                 'dragon_heal_factor' => 100,
@@ -44,7 +44,7 @@
             //dragon status
             $this->DragonIMG = "http://0.thumbs.4chan.org/b/thumb/".$this->OPost->tim."s".$this->OPost->ext;
             $this->DragonHP_MAX = self::roll($this->OPost->no)*200;
-            $this->DragonHP = $this->DragonHP_MAX
+            $this->DragonHP = $this->DragonHP_MAX;
 
         }
 
