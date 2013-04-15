@@ -16,10 +16,16 @@ Rules:
 This huge motherfucking dragon appears out of nowhere.
 This thread last 2 digits x200 define its HP
 
+If your ID starts with a number you are a HEALER.
+otherwise you are a KNIGHT
 Your last 2 digits represent the damage you do
-If Roll ends in 5 or 0 you do DOUBLE DAMAGE
+if KNIGHT Roll ends in 5 or 0 you do DOUBLE DAMAGE
 If you roll under 11 you DIE! (your posts will no longer do damage)
-If you roll 00 you REVIVE everyone! their damage will count again!
+HEALERS can revive fallen soldiers by targeting them and rolling 0 or 5
+HEALERS can avenge fallen soldiers by targeting them and rolling 0 or 5
+you can be avenged/revived 3 times max
+If you roll 00 or 69 you REVIVE everyone! their damage will count again! 
+The boss will enrage bellow 20% HP, the minimum roll will be 22. however, he will no longer heal himself 
 
-I have the webpage to track things, I will post a link to it here.
+I have a webpage to track things, I will post a link to it here.
 ```

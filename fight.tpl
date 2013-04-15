@@ -32,7 +32,9 @@
     <body>
         <div class="ink-container">
 
-        <h2>chan Boss Raid (<?php echo $this->THREAD_ID ?>)</h2>
+        <h2>chan Boss Raid (<?php echo $this->THREAD_ID ?>)
+            <small><a target="_blank" href="/info">More info</a></small>
+        </h2>
         <div class="ink-row">
             <div class="ink-gutter">
                 <div class="ink-l40">
