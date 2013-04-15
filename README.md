@@ -22,7 +22,7 @@ Your last 2 digits represent the damage you do
 if KNIGHT Roll ends in 5 or 0 you do DOUBLE DAMAGE
 If you roll under 11 you DIE! (your posts will no longer do damage)
 HEALERS can revive fallen soldiers by targeting them and rolling 0 or 5
-HEALERS can avenge fallen soldiers by targeting them and rolling 0 or 5
+KNIGHTS can avenge fallen soldiers by targeting them and rolling 0 or 5
 you can be avenged/revived 3 times max
 If you roll 00 or 69 you REVIVE everyone! their damage will count again! 
 The boss will enrage bellow 20% HP, the minimum roll will be 22. however, he will no longer heal himself 
