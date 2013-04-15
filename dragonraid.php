@@ -81,12 +81,20 @@
                 if($post->roll>99){
                     $this->damage($post,false);
                     $this->massResurection($post); 
+                    if($this->bossIsDead()){
+                        $this->WINNER = $post;
+                        $this->log('winrar',$post);
+                    }
                     continue;
                 }
 
                 //mass resurection but no damage
                 if($post->roll==69){
                     $this->massResurection($post);
+                    if($this->bossIsDead()){
+                        $this->WINNER = $post;
+                        $this->log('winrar',$post);
+                    }
                     continue; 
                 }
 
