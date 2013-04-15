@@ -11,8 +11,8 @@
         var $OP;
         var $OPost;
 
-        var $DragonHP;
-        var $DragonHP_MAX;
+        var $BossHP;
+        var $BossHP_MAX;
 
         var $WINNER = array();
         var $deadPlayers = array();
@@ -24,8 +24,8 @@
         TODO: config vars
 
         var $config = array(
-                'dragon_hp_factor'   => 200,
-                'dragon_heal_factor' => 100,
+                'boss_hp_factor'   => 200,
+                'boss_heal_factor' => 100,
                 'critical_hit_ratio' => 2,
                 'critical_hit_mod'   => 5,
             );
@@ -41,10 +41,10 @@
             $this->OP = $this->OPost->id;
             $this->THREAD_ID = $this->OPost->no;
 
-            //dragon status
-            $this->DragonIMG = "http://0.thumbs.4chan.org/b/thumb/".$this->OPost->tim."s".$this->OPost->ext;
-            $this->DragonHP_MAX = self::roll($this->OPost->no)*200;
-            $this->DragonHP = $this->DragonHP_MAX;
+            //boss status
+            $this->BossIMG = "http://0.thumbs.4chan.org/b/thumb/".$this->OPost->tim."s".$this->OPost->ext;
+            $this->BossHP_MAX = self::roll($this->OPost->no)*200;
+            $this->BossHP = $this->BossHP_MAX;
 
         }
 
@@ -61,24 +61,31 @@
                 //ignore dead knights
                 if(in_array($post->id, $this->deadPlayers)) continue;
 
-                //dragon is dead!
-                if($this->DragonHP<=0) continue;
+                //boss is dead!
+                if($this->BossHP<=0) continue;
 
 
                 //add link to this roll
                 $post->link= "http://boards.4chan.org/b/res/".$this->THREAD_ID."#p".$post->no;
+                $post->class = self::getPlayerClass($post->id);
 
                 //GET THE CURRENT ROLL
                 $post->roll = self::roll($post->no,2);
 
-                //mass resurection
-                if($post->roll>99 || $post->roll==69){
+                //mass resurection and damage
+                if($post->roll>99){
                     $this->damage($post,false);
-                    $this->massResurection();
+                    $this->massResurection($post);
                     continue;
                 }
 
-                if($this->dragonIsEnraged()){
+                //mass resurection but no damage
+                if($post->roll==69){
+                    $this->massResurection($post);
+                    continue;
+                }
+
+                if($this->bossIsEnraged()){
                     $this->min_roll = $this->min_roll_enraged;
                     $this->log('enrage',$post);
                 }
@@ -92,31 +99,52 @@
                 //regular hit
                 $this->damage($post);
 
-                if($this->dragonIsDead()){
+                if($this->bossIsDead()){
                     $this->WINNER = $post;
                     $this->log('winrar',$post);
                 }
 
-                //special hit target
-                $_targets = self::getTargetPosts($post->com);
-                foreach($_targets as $_id){
-                    //TODO: special target stuff
+                //special hit with target
+                if(self::isCriticalHit($post->roll)){
+                    $_targets = self::getTargetPosts($post->com);
+                    foreach($_targets as $_id){
+                        if($post->class=='K'){
+                            //knight
+                            if(in_array($_id, $this->deadPlayers)){
+                                $this->damage($post);
+                                $this->log('avenge',$post);
+                            }
+                        }
+                        if($post->class=='H'){
+                            //Healer
+                            if(in_array($_id, $this->deadPlayers)){
+                               //Revive target
+                               //TODO:
+                            }
+                        }
+                    }
                 }
 
             }
 
         }
 
+
+        static function getPlayerClass($post_id){
+            //return "H";
+            return "K";
+        }
+
         function damage($post,$canCritical=true){
             //define damage
-            if($canCritical && self::isCriticalHit($post->roll)){
+            if($post->class=='K' && $canCritical && self::isCriticalHit($post->roll)){
                 $post->damage = $post->roll*2;
             }else{
                 $post->damage = $post->roll;
             }
 
             //take the damage
-            $this->DragonHP-=$post->damage;
+            $this->BossHP-=$post->damage;
 
             //log the hit
             $this->log('damage',$post);
@@ -134,13 +162,13 @@
             //add player to the dead player poll
             $this->deadPlayers[] = $post->id;
 
-            if(!$this->dragonIsEnraged()){
-                //heal the dragon
-                $this->DragonHP+=($post->roll*100);
-                $this->log('dragonheal',$post);
+            if(!$this->bossIsEnraged()){
+                //heal the boss
+                $this->BossHP+=($post->roll*100);
+                $this->log('bossheal',$post);
                 //limit the heal
-                if($this->DragonHP>$this->DragonHP_MAX){
-                    $this->DragonHP = $this->DragonHP_MAX;
+                if($this->BossHP>$this->BossHP_MAX){
+                    $this->BossHP = $this->BossHP_MAX;
                 }
             }
 
@@ -155,6 +183,7 @@
                     'post'   => $post->no,
                     'id'     => $post->id,
                     'roll'   => $post->roll,
+                    'class'  => $post->class,
                     'action' => $action,
                     'damage' => isset($post->damage) ? $post->damage : 0,
                 );
@@ -186,12 +215,12 @@
             //include();
         }
 
-        function dragonIsDead(){
-            return (bool)($this->DragonHP<=0);
+        function bossIsDead(){
+            return (bool)($this->BossHP<=0);
         }
 
-        function dragonIsEnraged(){
-            return (bool)($this->DragonHP<=$this->DragonHP_MAX*0.2);
+        function bossIsEnraged(){
+            return (bool)($this->BossHP<=$this->BossHP_MAX*0.2);
         }
         //**********************************************************
         // STATIC CALLS
