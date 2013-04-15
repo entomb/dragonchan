@@ -63,7 +63,7 @@
         <?php
         if($this->WINNER){
             echo "<h1 class='hero'>";
-            echo "WINRAR!!! Hail the new dragon slayer!";
+            echo "WINRAR!!! Hail the new monster slayer!";
             echo "<br/>";
             echo '<a target="_blank" href="'.$this->WINNER->link.'">';
             echo " &gt;&gt;".$this->WINNER->no;
@@ -131,6 +131,9 @@
                                         break; 
                                         case 'massrevive':
                                             echo "<span class='ink-label success'>REVIVES EVERYONE!</span>";
+                                        break;
+                                        case 'winrar':
+                                            echo "<span class='ink-label success'>IS THE NEW HERO!</span>";
                                         break;
                                     }
 
