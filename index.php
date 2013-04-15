@@ -48,6 +48,19 @@ function isCrit($num){
 
 }
 
+function getTargetsPosts($text){
+    $preg = preg_match_all('/>>(\d+){9}/i', $text,$raw);
+    $match = array();
+    if(isset($raw[0])){
+        foreach ($raw[0] as $key => $value) {
+            $match[$key] = str_replace(">", '', $value);
+        }
+    }
+
+    $match = array_unique($match);
+    return $match;
+}
+
 foreach($THREAD->posts as $post){
     if($post->id==$OP) continue;
     if(in_array($post->id, $deadKnights)) continue;
