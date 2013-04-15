@@ -21,6 +21,7 @@ otherwise you are a KNIGHT
 Your last 2 digits represent the damage you do
 if KNIGHT Roll ends in 5 or 0 you do DOUBLE DAMAGE
 If you roll under 11 you DIE! (your posts will no longer do damage)
+The dragon heals a small amouth every time he kills someone
 HEALERS can revive fallen soldiers by targeting them and rolling 0 or 5
 KNIGHTS can avenge fallen soldiers by targeting them and rolling 0 or 5
 you can be avenged/revived 3 times max
