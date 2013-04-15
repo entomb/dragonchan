@@ -2,7 +2,7 @@
 //4chan dragon raid
 error_reporting(E_ALL);
 
-$thread_id = 472864774;//(int)$_GET['id'];
+$thread_id = 472866841;//(int)$_GET['id'];
 $api_url   = "http://api.4chan.org/b/res/$thread_id.json";
 
 try{
@@ -21,6 +21,7 @@ include("dragonraid.php");
 $Raid = new DragonRaid($THREAD);
 $Raid->play();
 $Raid->display();
+
 exit();
 
 

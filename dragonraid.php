@@ -16,20 +16,21 @@
 
         var $WINNER = array();
         var $deadPlayers = array();
+        var $revivedStack = array();
+        var $avengedStack = array();
 
+
+        /**
+         * CONFIGS
+         */
         var $min_roll = 11;
         var $min_roll_enraged = 22;
+        var $max_revive_times = 3;
+        var $max_avenge_times = 3;
+        var $boss_hp_factor     = 200;
+        var $boss_heal_factor   = 100;
+        var $critical_hit_ratio = 2;
 
-        /*
-        TODO: config vars
-
-        var $config = array(
-                'boss_hp_factor'   => 200,
-                'boss_heal_factor' => 100,
-                'critical_hit_ratio' => 2,
-                'critical_hit_mod'   => 5,
-            );
-        */
 
         /**
          * Init functions
@@ -43,7 +44,7 @@
 
             //boss status
             $this->BossIMG = "http://0.thumbs.4chan.org/b/thumb/".$this->OPost->tim."s".$this->OPost->ext;
-            $this->BossHP_MAX = self::roll($this->OPost->no)*200;
+            $this->BossHP_MAX = self::roll($this->OPost->no)*$this->boss_hp_factor;
             $this->BossHP = $this->BossHP_MAX;
 
         }
@@ -59,7 +60,7 @@
                 if($post->id==$this->OP) continue;
 
                 //ignore dead knights
-                if(in_array($post->id, $this->deadPlayers)) continue;
+                if($this->isDeadPlayer($post->id)) continue;
 
                 //boss is dead!
                 if($this->BossHP<=0) continue;
@@ -106,20 +107,25 @@
 
                 //special hit with target
                 if(self::isCriticalHit($post->roll)){
-                    $_targets = self::getTargetPosts($post->com);
-                    foreach($_targets as $_id){
+                    $_targets = $this->getTargetPosts($post->com);
+                    foreach($_targets as $_target_post_id => $_target_id){
+
+                        if(self::roll($_target_post_id)>=$this->min_roll) continue;
+
                         if($post->class=='K'){
                             //knight
-                            if(in_array($_id, $this->deadPlayers)){
+                            if($this->isDeadPlayer($_target_id) && $this->canAvenge($_target_id)){
+                                echo "avenge!";
                                 $this->damage($post);
+                                $this->avengePlayer($_target_id);
                                 $this->log('avenge',$post);
                             }
                         }
                         if($post->class=='H'){
                             //Healer
-                            if(in_array($_id, $this->deadPlayers)){
-                               //Revive target
-                               //TODO:
+                            if($this->isDeadPlayer($_target_id) && $this->canRevive($_target_id)){
+                                $this->revivePlayer($_target_id);
+                                $this->log('revive',$post);
                             }
                         }
                     }
@@ -129,16 +135,22 @@
 
         }
 
+        function isDeadPlayer($_id){
+            return in_array($_id, $this->deadPlayers);
+        }
+
 
         static function getPlayerClass($post_id){
-            //return "H";
+            if(in_array($post_id[0],array('0','1','2','3','4','5','6','7','8','9'))){
+                return "H";
+            }
             return "K";
         }
 
         function damage($post,$canCritical=true){
             //define damage
             if($post->class=='K' && $canCritical && self::isCriticalHit($post->roll)){
-                $post->damage = $post->roll*2;
+                $post->damage = $post->roll*$this->critical_hit_ratio;
             }else{
                 $post->damage = $post->roll;
             }
@@ -164,7 +176,7 @@
 
             if(!$this->bossIsEnraged()){
                 //heal the boss
-                $this->BossHP+=($post->roll*100);
+                $this->BossHP+=($post->roll*$this->boss_heal_factor);
                 $this->log('bossheal',$post);
                 //limit the heal
                 if($this->BossHP>$this->BossHP_MAX){
@@ -174,6 +186,46 @@
 
             //log the death
             $this->log('death',$post);
+        }
+
+        function avengePlayer($avenge_target){
+            if(!isset($this->avengedStack[$avenge_target])){
+                $this->avengedStack[$avenge_target] = 0;
+            }
+            $this->avengedStack[$avenge_target]++;
+        }
+
+
+        function revivePlayer($revive_target){
+             foreach($this->deadPlayers as $key => $_id){
+                if($_id == $revive_target){
+                    if(!isset($this->revivedStack[$revive_target])){
+                        $this->revivedStack[$revive_target] = 0;
+                    }
+                    $this->revivedStack[$revive_target]++;
+                    $this->deadPlayers[$key] = null;
+                    unset($this->deadPlayers[$key]);
+                }
+             }
+        }
+
+
+        function canRevive($revive_target){
+            if(isset($this->revivedStack[$revive_target])){
+                return (bool)($this->revivedStack[$revive_target]>=$this->max_revive_times);
+            }else{
+                $this->revivedStack[$revive_target]=0;
+                return true;
+            }
+        }
+
+        function canAvenge($avenge_target){
+            if(isset($this->avengedStack[$avenge_target])){
+                return (bool)($this->avengedStack[$avenge_target]>=$this->max_avenge_times);
+            }else{
+                $this->avengedStack[$avenge_target]=0;
+                return true;
+            }
         }
 
 
@@ -243,12 +295,12 @@
 
         /**
          * Gets the roll critical status.
-         * will return true for numbers ending in 5 or 0
+         * will return true for numbers ending in 5 or 0 (defined by $this->critical_hit_mod)
          * @param  int $num Roll digits from self::roll()
          * @return bool
          */
         static function isCriticalHit($num){
-            if($num%5 == 0){
+            if($num%5== 0){
                 return true;
             }else{
                 return false;
@@ -260,7 +312,8 @@
          * @param  string $text post text
          * @return array post numbers
          */
-        static function getTargetPosts($text){
+        function getTargetPosts($text){
+            $text = html_entity_decode($text);
             $preg = preg_match_all('/>>(\d+){9}/i', $text,$raw);
             $match = array();
             if(isset($raw[0])){
@@ -270,7 +323,13 @@
             }
 
             $match = array_unique($match);
-            return $match;
+            $players = array();
+            foreach($match as $_post_id){
+                $players[$_post_id]= $this->getPostAuthor($_post_id);
+            }
+
+            $players = array_unique($players);
+            return $players;
         }
 
         /**
@@ -278,9 +337,9 @@
          * @param  int $post_number Post number to search
          * @return string post author unique ID
          */
-        static function getPostAuthor($post_number){
-            foreach($THREAD->posts as $post){
-                if($post->num==$post_number){
+        function getPostAuthor($post_number){
+            foreach($this->THREAD->posts as $post){
+                if($post->no==$post_number){
                     return $post->id;
                 }
             }
