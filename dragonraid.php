@@ -1,6 +1,8 @@
 <?php
 
-
+    /**
+     * Chan Boss Raid main class
+     */
     Class DragonRaid{
 
         var $THREAD_ID;
@@ -28,7 +30,8 @@
         var $max_revive_times = 3;
         var $max_avenge_times = 3;
         var $boss_hp_factor     = 200;
-        var $boss_heal_factor   = 100;
+        var $boss_heal_factor   = 30;
+        var $boss_enrage_percent = 0.5;
         var $critical_hit_ratio = 2;
 
 
@@ -72,21 +75,22 @@
 
                 //GET THE CURRENT ROLL
                 $post->roll = self::roll($post->no,2);
+                $post->com = isset($post->com) ? $post->com : "";
 
                 //mass resurection and damage
                 if($post->roll>99){
                     $this->damage($post,false);
-                    $this->massResurection($post);
+                    $this->massResurection($post); 
                     continue;
                 }
 
                 //mass resurection but no damage
                 if($post->roll==69){
                     $this->massResurection($post);
-                    continue;
+                    continue; 
                 }
 
-                if($this->bossIsEnraged()){
+                if($this->bossIsEnraged() &&  $this->min_roll!=$this->min_roll_enraged){
                     $this->min_roll = $this->min_roll_enraged;
                     $this->log('enrage',$post);
                 }
@@ -95,14 +99,6 @@
                 if($post->roll<$this->min_roll){
                     $this->killPlayer($post);
                     continue;
-                }
-
-                //regular hit
-                $this->damage($post);
-
-                if($this->bossIsDead()){
-                    $this->WINNER = $post;
-                    $this->log('winrar',$post);
                 }
 
                 //special hit with target
@@ -115,21 +111,32 @@
                         if($post->class=='K'){
                             //knight
                             if($this->isDeadPlayer($_target_id) && $this->canAvenge($_target_id)){
-                                echo "avenge!";
-                                $this->damage($post);
+                                $this->damage($post,true,false);
                                 $this->avengePlayer($_target_id);
+                                $post->_target = $_target_id; 
                                 $this->log('avenge',$post);
                             }
                         }
                         if($post->class=='H'){
                             //Healer
                             if($this->isDeadPlayer($_target_id) && $this->canRevive($_target_id)){
+                                $post->_target = $_target_id;
                                 $this->revivePlayer($_target_id);
                                 $this->log('revive',$post);
                             }
                         }
                     }
                 }
+
+                //regular hit
+                $this->damage($post);
+
+                if($this->bossIsDead()){
+                    $this->WINNER = $post;
+                    $this->log('winrar',$post);
+                }
+
+                
 
             }
 
@@ -147,7 +154,7 @@
             return "K";
         }
 
-        function damage($post,$canCritical=true){
+        function damage($post,$canCritical=true,$reportDamage=true){
             //define damage
             if($post->class=='K' && $canCritical && self::isCriticalHit($post->roll)){
                 $post->damage = $post->roll*$this->critical_hit_ratio;
@@ -159,7 +166,9 @@
             $this->BossHP-=$post->damage;
 
             //log the hit
-            $this->log('damage',$post);
+            if($reportDamage){
+                $this->log('damage',$post);
+            }
         }
 
         function massResurection($post){
@@ -176,8 +185,9 @@
 
             if(!$this->bossIsEnraged()){
                 //heal the boss
-                $this->BossHP+=($post->roll*$this->boss_heal_factor);
-                $this->log('bossheal',$post);
+                $_heal = ($post->roll*$this->boss_heal_factor);
+                $this->BossHP+=$_heal;
+                $post->damage=-$_heal;
                 //limit the heal
                 if($this->BossHP>$this->BossHP_MAX){
                     $this->BossHP = $this->BossHP_MAX;
@@ -237,6 +247,7 @@
                     'roll'   => $post->roll,
                     'class'  => $post->class,
                     'action' => $action,
+                    'target' => isset($post->_target) ? $post->_target : 0,
                     'damage' => isset($post->damage) ? $post->damage : 0,
                 );
         }
@@ -262,17 +273,17 @@
         function display(){
             $DPS = $this->getTopDPS();
             $BATTLE = &$this->LOG;
-            print_r($BATTLE);
+            $BATTLE = array_reverse($BATTLE);
             //template goes here
-            //include();
+            include("fight.tpl");
         }
 
         function bossIsDead(){
             return (bool)($this->BossHP<=0);
         }
 
-        function bossIsEnraged(){
-            return (bool)($this->BossHP<=$this->BossHP_MAX*0.2);
+        function bossIsEnraged(){ 
+            return (bool)($this->BossHP<=$this->BossHP_MAX*$this->boss_enrage_percent);
         }
         //**********************************************************
         // STATIC CALLS
@@ -299,7 +310,7 @@
          * @param  int $num Roll digits from self::roll()
          * @return bool
          */
-        static function isCriticalHit($num){
+        static function isCriticalHit($num){ 
             if($num%5== 0){
                 return true;
             }else{
