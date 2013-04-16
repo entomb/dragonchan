@@ -90,11 +90,7 @@
 
                 //mass resurection but no damage
                 if($post->roll==69){
-                    $this->massResurection($post);
-                    if($this->bossIsDead()){
-                        $this->WINNER = $post;
-                        $this->log('winrar',$post);
-                    }
+                    $this->massResurection($post); 
                     continue; 
                 }
 
@@ -230,7 +226,7 @@
 
         function canRevive($revive_target){
             if(isset($this->revivedStack[$revive_target])){
-                return (bool)($this->revivedStack[$revive_target]>=$this->max_revive_times);
+                return (bool)($this->revivedStack[$revive_target]<$this->max_revive_times);
             }else{
                 $this->revivedStack[$revive_target]=0;
                 return true;
@@ -239,7 +235,7 @@
 
         function canAvenge($avenge_target){
             if(isset($this->avengedStack[$avenge_target])){
-                return (bool)($this->avengedStack[$avenge_target]>=$this->max_avenge_times);
+                return (bool)($this->avengedStack[$avenge_target]<$this->max_avenge_times);
             }else{
                 $this->avengedStack[$avenge_target]=0;
                 return true;
