@@ -283,6 +283,9 @@
         }
 
         function bossIsDead(){
+            if($this->BossHP<0){
+                $this->BossHP = 0;
+            }
             return (bool)($this->BossHP<=0);
         }
 
