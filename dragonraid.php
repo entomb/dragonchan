@@ -27,11 +27,11 @@
          */
         var $min_roll = 11;
         var $min_roll_enraged = 22;
-        var $max_revive_times = 3;
-        var $max_avenge_times = 3;
+        var $max_revive_times = 4;
+        var $max_avenge_times = 4;
         var $boss_hp_factor     = 200;
         var $boss_heal_factor   = 30;
-        var $boss_enrage_percent = 0.5;
+        var $boss_enrage_percent = 0.2;
         var $critical_hit_ratio = 2;
 
 
