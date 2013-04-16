@@ -260,12 +260,12 @@
         function getTopDPS(){
             $DPS = array();
             foreach($this->LOG as $_hit){
-                if($_hit['action']!='damage') continue;
-
-                if(!isset($DPS[$_hit['id']])){
-                    $DPS[$_hit['id']] = 0;
-                }
-                $DPS[$_hit['id']]+= (int)$_hit['damage'];
+                if($_hit['action']=='damage' || $_hit['action']=='avenge'){
+                    if(!isset($DPS[$_hit['id']])){
+                        $DPS[$_hit['id']] = 0;
+                    }
+                    $DPS[$_hit['id']]+= (int)$_hit['damage'];
+                } 
             }
 
             arsort($DPS);
