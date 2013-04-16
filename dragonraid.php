@@ -27,9 +27,9 @@
          */
         var $min_roll = 11;
         var $min_roll_enraged = 22;
-        var $max_revive_times = 4;
-        var $max_avenge_times = 4;
-        var $boss_hp_factor     = 200;
+        var $max_revive_times = 3;
+        var $max_avenge_times = 3;
+        var $boss_hp_factor     = 250;
         var $boss_heal_factor   = 30;
         var $boss_enrage_percent = 0.2;
         var $critical_hit_ratio = 2;
@@ -80,7 +80,7 @@
                 //mass resurection and damage
                 if($post->roll>99){
                     $this->damage($post,false);
-                    $this->massResurection($post); 
+                    $this->massResurection($post);
                     if($this->bossIsDead()){
                         $this->WINNER = $post;
                         $this->log('winrar',$post);
@@ -90,8 +90,8 @@
 
                 //mass resurection but no damage
                 if($post->roll==69){
-                    $this->massResurection($post); 
-                    continue; 
+                    $this->massResurection($post);
+                    continue;
                 }
 
                 if($this->bossIsEnraged() &&  $this->min_roll!=$this->min_roll_enraged){
@@ -106,7 +106,7 @@
                 }
 
                 //special hit with target
-                if(self::isCriticalHit($post->roll)){
+                if($post->roll%2==0){
                     $_targets = $this->getTargetPosts($post->com);
                     foreach($_targets as $_target_post_id => $_target_id){
 
@@ -117,7 +117,7 @@
                             if($this->isDeadPlayer($_target_id) && $this->canAvenge($_target_id)){
                                 $this->damage($post,true,false);
                                 $this->avengePlayer($_target_id);
-                                $post->_target = $_target_id; 
+                                $post->_target = $_target_id;
                                 $this->log('avenge',$post);
                             }
                         }
@@ -140,7 +140,7 @@
                     $this->log('winrar',$post);
                 }
 
-                
+
 
             }
 
@@ -265,7 +265,7 @@
                         $DPS[$_hit['id']] = 0;
                     }
                     $DPS[$_hit['id']]+= (int)$_hit['damage'];
-                } 
+                }
             }
 
             arsort($DPS);
@@ -289,7 +289,7 @@
             return (bool)($this->BossHP<=0);
         }
 
-        function bossIsEnraged(){ 
+        function bossIsEnraged(){
             return (bool)($this->BossHP<=$this->BossHP_MAX*$this->boss_enrage_percent);
         }
         //**********************************************************
@@ -317,7 +317,7 @@
          * @param  int $num Roll digits from self::roll()
          * @return bool
          */
-        static function isCriticalHit($num){ 
+        static function isCriticalHit($num){
             if($num%5== 0){
                 return true;
             }else{
