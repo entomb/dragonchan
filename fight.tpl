@@ -33,7 +33,7 @@
         <div class="ink-container">
 
         <h2>chan Boss Raid (<?php echo $this->THREAD_ID ?>)
-            <small><a target="_blank" href="/info">More info</a></small>
+            <small><a target="_blank" href="/info">version 1.1 (More Info)</a></small>
         </h2>
         <div class="ink-row">
             <div class="ink-gutter">
@@ -48,8 +48,8 @@
                         <li>Your last 2 digits represent the damage you do</li>
                         <li>if <b>Knight</b> Roll ends in 5 or 0 you do DOUBLE DAMAGE</li>
                         <li>If you roll under 11 you DIE! <i style="font-size:11px;">(your posts will no longer do damage)</i></li>
-                        <li><b>Healers</b> can revive fallen soldiers by targeting them and rolling 0 or 5</li>
-                        <li><b>Knights</b> can avenge fallen soldiers by targeting them and rolling 0 or 5</li>
+                        <li><b>Healers</b> can revive fallen soldiers by targeting them and rolling a PAIR number</li>
+                        <li><b>Knights</b> can avenge fallen soldiers by targeting them and rolling a PAIR number</li>
                         <li>you can be avenged/revived 3 times max</li>
                         <li>If you roll 00 or 69 you REVIVE everyone! their damage will count again! </li>
                         <li>The boss will enrage bellow 20% HP, the minimum roll will be 22. however, he will no longer heal himself </li>
@@ -107,7 +107,7 @@
                                     <?php echo $_row['id']; ?>
                                 </span>
                             </td>
-                            
+
                             <td class="<?php echo($_row['action']) ?>">
                                 <?php
                                     $_damage = $_row['damage'];
@@ -121,14 +121,14 @@
                                                 echo "dies by rolling $_roll";
                                             }else{
                                                 echo "dies by rolling $_roll. the boss heals for <span class='ink-label warning'>".(-$_damage)." HP</span>";
-                                            } 
-                                        break; 
+                                            }
+                                        break;
                                         case 'avenge':
                                             echo "Avenges <b>".$_row['target']."</b> for extra damage <span class='ink-label caution'>$_damage HP</span>";
                                         break;
                                         case 'revive':
                                             echo "Revives <b>".$_row['target']."</b> by rolling $_roll";
-                                        break; 
+                                        break;
                                         case 'massrevive':
                                             echo "<span class='ink-label success'>REVIVES EVERYONE!</span>";
                                         break;
@@ -157,8 +157,8 @@
                      echo "&#x271D;";
                      echo " <i>".$_row."</i>";
                      echo "<br/>";
-                     } ?> 
- 
+                     } ?>
+
                 </div>
             </div>
         </div>

@@ -32,7 +32,7 @@
     <body>
         <div class="ink-container">
 
-        <h2>chan Boss Raid <small>version 1</small></h2>
+        <h2>chan Boss Raid <small>version 1.1</small></h2>
         <div class="ink-row">
             <div class="ink-gutter">
                 <div class="ink-l40">
@@ -45,16 +45,16 @@
                         <a target="_blank" href="https://github.com/entomb">entomb</a>
                     </p>
 
-                        
+
                     <p> New Ideas and game mechanics:<br/>
                         Bryan
                     </p>
-                    
-                    
+
+
 
                     <p> CSS framework: <a target="_blank" href="http://ink.sapo.pt/">Ink</a><p>
                     <p> Hosting: <a target="_blank" href="https://www.appfog.com/">AppFog</a><p>
-                            
+
                 </div>
                 <div class="ink-l60">
                     <h1>Rules</h1>
@@ -64,8 +64,8 @@
                         <li>Your last 2 digits represent the damage you do</li>
                         <li>if <b>Knight</b> Roll ends in 5 or 0 you do DOUBLE DAMAGE</li>
                         <li>If you roll under 11 you DIE! <i style="font-size:11px;">(your posts will no longer do damage)</i></li>
-                        <li><b>Healers</b> can revive fallen soldiers by targeting them and rolling 0 or 5</li>
-                        <li><b>Knights</b> can avenge fallen soldiers by targeting them and rolling 0 or 5</li>
+                        <li><b>Healers</b> can revive fallen soldiers by targeting them and rolling a PAIR number</li>
+                        <li><b>Knights</b> can avenge fallen soldiers by targeting them and rolling a PAIR number</li>
                         <li>you can be avenged/revived 3 times max</li>
                         <li>If you roll 00 or 69 you REVIVE everyone! their damage will count again! </li>
                         <li>The boss will enrage bellow 20% HP, the minimum roll will be 22. however, he will no longer heal himself </li>
@@ -75,10 +75,15 @@
         </div>
 
         <hr/>
- 
+
         <div class="ink-row">
-            <div class="ink-gutter"> 
+            <div class="ink-gutter">
                 <h3>Changelog</h3>
+                <h4>v1.1 - 16-04-2013</h4>
+                    <ul>
+                        <li>Incresed chance of avenge/revive</li>
+                        <li>Incresed Boss total HP ratio</li>
+                    </ul>
                 <h4>v1 - 15-04-2013</h4>
                     <ul>
                     <li>Class system. Knights and Healers</li>
