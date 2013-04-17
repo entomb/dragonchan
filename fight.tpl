@@ -49,7 +49,7 @@
                         <li>if <b>Knight</b> Roll ends in 5 or 0 you do DOUBLE DAMAGE</li>
                         <li>If you roll under 11 you DIE! <i style="font-size:11px;">(your posts will no longer do damage)</i></li>
                         <li><b>Healers</b> revive fallen soldiers by targeting them and rolling an EVEN number</li>
-                        <li><b>Knights</b> avenge fallen soldiers by targeting them and rolling an EVEN number</li>
+                        <li><b>Knights</b> avenge fallen soldiers by targeting them and rolling an EVEN number. Avenging does more damage for the glory of the fallen mate.</li>
                         <li>you can be avenged/revived 3 times max</li>
                         <li>If you roll 00 or 69 you REVIVE everyone! their damage will count again! </li>
                         <li>The boss will enrage bellow 20% HP, the minimum roll will be 22. however, he will no longer heal himself </li>
