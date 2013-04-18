@@ -59,8 +59,8 @@
         function play(){
 
             foreach($this->THREAD->posts as $post){
-                //ignore OP posts
-                if($post->id==$this->OP) continue;
+                //ignore OP first post
+                if($post->no==$this->THREAD_ID) continue;
 
                 //ignore dead knights
                 if($this->isDeadPlayer($post->id)) continue;
