@@ -20,6 +20,8 @@
         var $deadPlayers = array();
         var $revivedStack = array();
         var $avengedStack = array();
+        var $bardBuffs = array();
+        var $bardBonusValue = 0;
 
 
         /**
@@ -27,8 +29,9 @@
          */
         var $min_roll = 11;
         var $min_roll_enraged = 22;
-        var $max_revive_times = 3;
-        var $max_avenge_times = 3;
+        var $max_revive_times = 6;
+        var $max_avenge_times = 6;
+        var $bard_buff_duration = 3;
         var $boss_hp_factor     = 250;
         var $boss_heal_factor   = 30;
         var $boss_enrage_percent = 0.2;
@@ -47,7 +50,7 @@
 
             //boss status
             $this->BossIMG = "http://0.thumbs.4chan.org/b/thumb/".$this->OPost->tim."s".$this->OPost->ext;
-            $this->BossHP_MAX = self::roll($this->OPost->no)*$this->boss_hp_factor;
+            $this->BossHP_MAX = 3000+self::roll($this->OPost->no)*$this->boss_hp_factor;
             $this->BossHP = $this->BossHP_MAX;
 
         }
@@ -68,6 +71,8 @@
                 //boss is dead!
                 if($this->BossHP<=0) continue;
 
+                //gets the current bard buff value
+                $this->bardBonusValue = $this->calculateBardBonus();
 
                 //add link to this roll
                 $post->link= "http://boards.4chan.org/b/res/".$this->THREAD_ID."#p".$post->no;
@@ -76,6 +81,7 @@
                 //GET THE CURRENT ROLL
                 $post->roll = self::roll($post->no,2);
                 $post->com = isset($post->com) ? $post->com : "";
+
 
                 //mass resurection and damage
                 if($post->roll>99){
@@ -105,14 +111,27 @@
                     continue;
                 }
 
+
+                //regular hit
+                $this->damage($post);
+
                 //special hit with target
                 if($post->roll%2==0){
+
+                    //bard buff!
+                    if($post->class=='B' && isset($post->filename)){
+                       $this->addBardBuff($post);
+                    }
+
+                    //avenges and revives
                     $_targets = $this->getTargetPosts($post->com);
                     foreach($_targets as $_target_post_id => $_target_id){
 
+                        //only dead target's post
                         if(self::roll($_target_post_id)>=$this->min_roll) continue;
 
-                        if($post->class=='K'){
+                        //avenger!
+                        if($post->class=='K' || $post->class=='P'){
                             //knight
                             if($this->isDeadPlayer($_target_id) && $this->canAvenge($_target_id)){
                                 $this->damage($post,true,false);
@@ -121,19 +140,21 @@
                                 $this->log('avenge',$post);
                             }
                         }
-                        if($post->class=='H'){
+
+                        //Reviver!
+                        if($post->class=='H' || $post->class=='P'){
                             //Healer
                             if($this->isDeadPlayer($_target_id) && $this->canRevive($_target_id)){
                                 $post->_target = $_target_id;
                                 $this->revivePlayer($_target_id);
                                 $this->log('revive',$post);
                             }
-                        }
+                        } 
                     }
                 }
 
-                //regular hit
-                $this->damage($post);
+
+
 
                 if($this->bossIsDead()){
                     $this->WINNER = $post;
@@ -155,19 +176,53 @@
             if(in_array($post_id[0],array('0','1','2','3','4','5','6','7','8','9'))){
                 return "H";
             }
+            if(in_array($post_id[0],array('A','E','I','O','U','Y','a','e','i','o','u','y'))){
+                return "B";
+            }
+            if(in_array($post_id[0],array('+','/'))){
+                return "P";
+            }
             return "K";
+        }
+
+        function calculateBardBonus(){
+            $bonus = 0;
+            foreach($this->bardBuffs as $k => $buff){
+                if(0>$this->bardBuffs[$k]['duration']--){
+                    $this->bardBuffs[$k]['duration']=0;
+                }
+                if($this->bardBuffs[$k]['duration']>0){
+                    $bonus+=$this->bardBuffs[$k]['value'];
+                }
+            }
+
+            return $bonus;
+        }
+
+        function addBardBuff($post){
+            $post->bonus = ceil($post->roll/3);
+            $this->bardBuffs[] = array(
+                                'duration' => $this->bard_buff_duration+1,
+                                'value'    => $post->bonus,
+                                'buffer'   => $post,
+                            );
+            $this->log('buff',$post);
         }
 
         function damage($post,$canCritical=true,$reportDamage=true){
             //define damage
-            if($post->class=='K' && $canCritical && self::isCriticalHit($post->roll)){
+            if(($post->class=='K') && $canCritical && self::isCriticalHit($post->roll)){
                 $post->damage = $post->roll*$this->critical_hit_ratio;
             }else{
                 $post->damage = $post->roll;
+            } 
+
+            if($post->roll<=99){
+                $post->bonus = $this->bardBonusValue;
             }
 
             //take the damage
-            $this->BossHP-=$post->damage;
+            $this->BossHP-= ($post->damage+$post->bonus);
 
             //log the hit
             if($reportDamage){
@@ -176,11 +231,16 @@
         }
 
         function massResurection($post){
-           //clean dead players!
-           $this->deadPlayers = array();
+            //clean dead players!
+            foreach($this->deadPlayers as $_target_id){
+                $post->_target = $_target_id;
+                $this->log('revive',$post);
+            }
 
-           //log the hit
-           $this->log('massrevive',$post);
+            $this->deadPlayers = array();
+
+            //log the hit
+            $this->log('massrevive',$post);
         }
 
         function killPlayer($post){
@@ -253,29 +313,65 @@
                     'action' => $action,
                     'target' => isset($post->_target) ? $post->_target : 0,
                     'damage' => isset($post->damage) ? $post->damage : 0,
+                    'bonus'  => isset($post->bonus) ? $post->bonus : 0,
                 );
         }
 
 
-        function getTopDPS(){
-            $DPS = array();
+        function getTopDamage(){
+            $TOP = array();
             foreach($this->LOG as $_hit){
                 if($_hit['action']=='damage' || $_hit['action']=='avenge'){
-                    if(!isset($DPS[$_hit['id']])){
-                        $DPS[$_hit['id']] = 0;
+                    if(!isset($TOP[$_hit['id']])){
+                        $TOP[$_hit['id']] = 0;
                     }
-                    $DPS[$_hit['id']]+= (int)$_hit['damage'];
+                    $TOP[$_hit['id']]+= (int)$_hit['damage']+$_hit['bonus'];
                 }
             }
 
-            arsort($DPS);
-            $DPS = array_slice($DPS,0,10,true);
-            return $DPS;
+            arsort($TOP);
+            $TOP = array_slice($TOP,0,10,true);
+            return $TOP;
+        }
+
+        function getTopRevive(){
+            $TOP = array();
+            foreach($this->LOG as $_hit){
+                if($_hit['action']=='revive'){
+                    if(!isset($TOP[$_hit['id']])){
+                        $TOP[$_hit['id']] = 0;
+                    }
+                    $TOP[$_hit['id']]++;
+                }
+            }
+
+            arsort($TOP);
+            //$TOP = array_slice($TOP,0,10,true);
+            return $TOP;
+        }
+
+        function getTopAvenge(){
+            $TOP = array();
+            foreach($this->LOG as $_hit){
+                if($_hit['action']=='avenge'){
+                    if(!isset($TOP[$_hit['id']])){
+                        $TOP[$_hit['id']] = 0;
+                    }
+                    $TOP[$_hit['id']]++;
+                }
+            }
+
+            arsort($TOP);
+            //$TOP = array_slice($TOP,0,10,true);
+            return $TOP;
         }
 
 
         function display(){
-            $DPS = $this->getTopDPS();
+            $topDamage = $this->getTopDamage();
+            $topRevive = $this->getTopRevive();
+            $topAvenge = $this->getTopAvenge();
+
             $BATTLE = &$this->LOG;
             $BATTLE = array_reverse($BATTLE);
             //template goes here
