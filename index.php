@@ -1,5 +1,5 @@
 <?php
-//chan Boss Raid v1
+//chan Boss Raid v1.3
 error_reporting(0);
 if($_GET['id']==="info"){
     include 'info.php';
