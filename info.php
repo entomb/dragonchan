@@ -42,7 +42,7 @@
     <body>
         <div class="ink-container">
 
-        <h2>chan Boss Raid <small>version 1.3</small></h2>
+        <h2>chan Boss Raid <small>version 1.3.1</small></h2>
         <div class="ink-row">
             <div class="ink-gutter">
                 <div class="ink-l40">
@@ -93,6 +93,10 @@
         <div class="ink-row">
             <div class="ink-gutter">
                 <h3>Changelog</h3>
+                <h4>v1.3.1 - 19-04-2013</h4>
+                    <ul>
+                        <li>added a json export of the current game <i>$THREADID/json</i></li>
+                    </ul>
                 <h4>v1.3 - 19-04-2013</h4>
                     <ul>
                         <li>New classes: "Paladin" and "Bard"</li>

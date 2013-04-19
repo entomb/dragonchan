@@ -149,7 +149,7 @@
                                 $this->revivePlayer($_target_id);
                                 $this->log('revive',$post);
                             }
-                        } 
+                        }
                     }
                 }
 
@@ -215,7 +215,7 @@
                 $post->damage = $post->roll*$this->critical_hit_ratio;
             }else{
                 $post->damage = $post->roll;
-            } 
+            }
 
             if($post->roll<=99){
                 $post->bonus = $this->bardBonusValue;
@@ -376,6 +376,25 @@
             $BATTLE = array_reverse($BATTLE);
             //template goes here
             include("fight.tpl");
+        }
+
+        /**
+         * Prints a complete json string with all game informaion.
+         * @return [type] [description]
+         */
+        function jsonAPI(){
+            $topDamage = $this->getTopDamage();
+            $topRevive = $this->getTopRevive();
+            $topAvenge = $this->getTopAvenge();
+
+            $BATTLE = &$this->LOG;
+            $BATTLE = array_reverse($BATTLE);
+
+            header('Cache-Control: no-cache, must-revalidate');
+            header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+            header('Content-type: application/json');
+
+            echo json_encode(&$this);
         }
 
         function bossIsDead(){

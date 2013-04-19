@@ -47,7 +47,7 @@
         <div class="ink-container">
 
         <h2>chan Boss Raid (<?php echo $this->THREAD_ID ?>)
-            <small><a target="_blank" href="/info">version 1.3 (More Info)</a></small>
+            <small><a target="_blank" href="/info">version 1.3.1 (More Info)</a></small>
         </h2>
         <div class="ink-row">
             <div class="ink-gutter">
@@ -149,9 +149,9 @@
                                         break;
                                         case 'avenge':
                                             if($_bonus>0){
-                                                echo "Avenges <b>".$_row['target']."</b> for extra damage <span class='ink-label caution'>".($_damage+$_bonus)." <small>(+$_bonus)</small> HP</span>";                                                
+                                                echo "Avenges <b>".$_row['target']."</b> for extra damage <span class='ink-label caution'>".($_damage+$_bonus)." <small>(+$_bonus)</small> HP</span>";
                                             }else{
-                                                echo "Avenges <b>".$_row['target']."</b> for extra damage <span class='ink-label caution'>$_damage HP</span>";                                                
+                                                echo "Avenges <b>".$_row['target']."</b> for extra damage <span class='ink-label caution'>$_damage HP</span>";
                                             }
 
                                         break;

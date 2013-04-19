@@ -40,6 +40,9 @@ I have a webpage to track things, I will post a link to it here.
 
 Changelog
 =========
+__version 1.3.1 - 19-04-2013__
+  - added a json export of the current game `$THREADID/json`
+
 __version 1.3 - 19-04-2013__
   - New classes: "Paladin" and "Bard"
   - New global bonus damage mechanic (Bard Buff)
@@ -58,7 +61,7 @@ __version 1.1 - 16-04-2013__
 
 __version 1 - 15-04-2013__
   - Class system. Knights and Healers
-  - New target systems. 
+  - New target systems.
   - knights target for more damage
   - Healers target for revive
   - Max 3 targets
