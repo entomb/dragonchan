@@ -25,7 +25,7 @@ otherwise you are a Knight
 Your last 2 digits represent the damage you do
 if Knight Roll ends in 5 or 0 you do DOUBLE DAMAGE
 If you roll under 11 you DIE! (your posts will no longer do damage)
-Bard are here to motive troops! each time they post an image the next 3 posts will do bonus damage!
+Bards are here to motive troops! each time they post an image the next 3 posts will do bonus damage!
 Healers revive fallen soldiers by targeting them and rolling an EVEN number
 Knights avenge fallen soldiers by targeting them and rolling an EVEN number. Avenging does more damage for the glory of the fallen mate.
 Paladins can avenge AND revive!

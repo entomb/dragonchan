@@ -76,7 +76,7 @@
                         <li>Your last 2 digits represent the damage you do</li>
                         <li>if <b>Knight</b> Roll ends in 5 or 0 you do DOUBLE DAMAGE</li>
                         <li>If you roll under 11 you DIE! <i style="font-size:11px;">(your posts will no longer do damage)</i></li>
-                        <li><b>Bard</b> are here to motive troops! each time they post an image the next 3 posts will do bonus damage!</li>
+                        <li><b>Bards</b> are here to motive troops! each time they post an image the next 3 posts will do bonus damage!</li>
                         <li><b>Healers</b> revive fallen soldiers by targeting them and rolling an EVEN number</li>
                         <li><b>Knights</b> avenge fallen soldiers by targeting them and rolling an EVEN number. Avenging does more damage for the glory of the fallen mate.</li>
                         <li><b>Paladins</b> can avenge AND revive!</li>
