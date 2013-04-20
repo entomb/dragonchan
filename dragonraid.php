@@ -1,4 +1,14 @@
 <?php
+/**
+ * DragonRaid - A prototype script to transform any /b/ thread into a dragon slaying match.
+ *
+ * @author Jonathan Tavares <the.entomb@gmail.com>
+ * @license GNU General Public License, version 3
+ * @link https://github.com/entomb/dragonchan GitHub Source
+ * @filesource
+ *
+ *
+*/
 
     /**
      * Chan Boss Raid main class
@@ -48,6 +58,7 @@
             $this->OP = $this->OPost->id;
             $this->THREAD_ID = $this->OPost->no;
 
+
             //boss status
             $this->BossIMG = "http://0.thumbs.4chan.org/b/thumb/".$this->OPost->tim."s".$this->OPost->ext;
             $this->BossHP_MAX = 3000+self::roll($this->OPost->no)*$this->boss_hp_factor;
@@ -58,6 +69,9 @@
 
         /**
          * main function cycle
+         * Does all combat checks and assigns
+         * Skips invalid posts
+         * @return void
          */
         function play(){
 
@@ -115,13 +129,13 @@
                 //regular hit
                 $this->damage($post);
 
+                //bard buff!
+                if($post->class=='B' && isset($post->filename)){
+                   $this->addBardBuff($post);
+                }
+
                 //special hit with target
                 if($post->roll%2==0){
-
-                    //bard buff!
-                    if($post->class=='B' && isset($post->filename)){
-                       $this->addBardBuff($post);
-                    }
 
                     //avenges and revives
                     $_targets = $this->getTargetPosts($post->com);
@@ -167,24 +181,21 @@
 
         }
 
+
+        /**
+         * Checks if a player is dead
+         * @param  string $_id Player ID
+         * @return boolean
+         */
         function isDeadPlayer($_id){
             return in_array($_id, $this->deadPlayers);
         }
 
 
-        static function getPlayerClass($post_id){
-            if(in_array($post_id[0],array('0','1','2','3','4','5','6','7','8','9'))){
-                return "H";
-            }
-            if(in_array($post_id[0],array('A','E','I','O','U','Y','a','e','i','o','u','y'))){
-                return "B";
-            }
-            if(in_array($post_id[0],array('+','/'))){
-                return "P";
-            }
-            return "K";
-        }
-
+        /**
+         * Calculates and returns the current bard bonus
+         * @return int Bard damage bonus
+         */
         function calculateBardBonus(){
             $bonus = 0;
             foreach($this->bardBuffs as $k => $buff){
@@ -199,6 +210,11 @@
             return $bonus;
         }
 
+
+        /**
+         * Adds a bard buff to the stack
+         * @param object $post the full post object
+         */
         function addBardBuff($post){
             $post->bonus = ceil($post->roll/3);
             $this->bardBuffs[] = array(
@@ -209,6 +225,14 @@
             $this->log('buff',$post);
         }
 
+
+        /**
+         * Applies damage to the boss
+         * @param  object  $post         the full post object
+         * @param  boolean $canCritical  if this attack can critical
+         * @param  boolean $reportDamage if this damage should be reported
+         * @return void
+         */
         function damage($post,$canCritical=true,$reportDamage=true){
             //define damage
             if(($post->class=='K') && $canCritical && self::isCriticalHit($post->roll)){
@@ -230,6 +254,12 @@
             }
         }
 
+
+        /**
+         * Does a mass resurection
+         * @param  object $post the full post object
+         * @return void
+         */
         function massResurection($post){
             //clean dead players!
             foreach($this->deadPlayers as $_target_id){
@@ -243,6 +273,12 @@
             $this->log('massrevive',$post);
         }
 
+
+        /**
+         * Kills a user and heals the boss
+         * @param  object $post the full post object
+         * @return void
+         */
         function killPlayer($post){
             //add player to the dead player poll
             $this->deadPlayers[] = $post->id;
@@ -262,6 +298,12 @@
             $this->log('death',$post);
         }
 
+
+        /**
+         * Avenges a user
+         * @param  string $avenge_target Dead user id
+         * @return void
+         */
         function avengePlayer($avenge_target){
             if(!isset($this->avengedStack[$avenge_target])){
                 $this->avengedStack[$avenge_target] = 0;
@@ -270,6 +312,11 @@
         }
 
 
+        /**
+         * Revives a user
+         * @param  string $revive_target the dead user ID
+         * @return bool
+         */
         function revivePlayer($revive_target){
              foreach($this->deadPlayers as $key => $_id){
                 if($_id == $revive_target){
@@ -284,6 +331,11 @@
         }
 
 
+        /**
+         * Checks if a target can be revived
+         * @param  string $avenge_target the dead user ID
+         * @return bool
+         */
         function canRevive($revive_target){
             if(isset($this->revivedStack[$revive_target])){
                 return (bool)($this->revivedStack[$revive_target]<$this->max_revive_times);
@@ -293,6 +345,12 @@
             }
         }
 
+
+        /**
+         * Checks if a target can be avenged
+         * @param  string $avenge_target the dead user ID
+         * @return bool
+         */
         function canAvenge($avenge_target){
             if(isset($this->avengedStack[$avenge_target])){
                 return (bool)($this->avengedStack[$avenge_target]<$this->max_avenge_times);
@@ -303,6 +361,12 @@
         }
 
 
+        /**
+         * Logs an action
+         * @param  string $action the type of action ('damage','revive','massrevive',etc)
+         * @param  object $post   the full post object
+         * @return void
+         */
         function log($action,$post){
             $this->LOG[] = array(
                     'link'   => $post->link,
@@ -318,6 +382,10 @@
         }
 
 
+        /**
+         * Calculates and returns the top 10 damage dealers
+         * @return array
+         */
         function getTopDamage(){
             $TOP = array();
             foreach($this->LOG as $_hit){
@@ -334,6 +402,11 @@
             return $TOP;
         }
 
+
+        /**
+         * Calculates and returns the top revivers list
+         * @return array
+         */
         function getTopRevive(){
             $TOP = array();
             foreach($this->LOG as $_hit){
@@ -350,6 +423,11 @@
             return $TOP;
         }
 
+
+        /**
+         * Calculates and returs the top avengers list
+         * @return array
+         */
         function getTopAvenge(){
             $TOP = array();
             foreach($this->LOG as $_hit){
@@ -367,6 +445,10 @@
         }
 
 
+        /**
+         * Calls the main fight template
+         * @return void
+         */
         function display(){
             $topDamage = $this->getTopDamage();
             $topRevive = $this->getTopRevive();
@@ -378,25 +460,30 @@
             include("fight.tpl");
         }
 
+
         /**
          * Prints a complete json string with all game informaion.
          * @return [type] [description]
          */
         function jsonAPI(){
-            $topDamage = $this->getTopDamage();
-            $topRevive = $this->getTopRevive();
-            $topAvenge = $this->getTopAvenge();
+            $this->topDamage = $this->getTopDamage();
+            $this->topRevive = $this->getTopRevive();
+            $this->topAvenge = $this->getTopAvenge();
 
-            $BATTLE = &$this->LOG;
-            $BATTLE = array_reverse($BATTLE);
+            $this->LOG = array_reverse($this->LOG);
 
             header('Cache-Control: no-cache, must-revalidate');
             header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
             header('Content-type: application/json');
 
-            echo json_encode(&$this);
+            echo json_encode($this);
         }
 
+
+        /**
+         * Checks if the boss is dead
+         * @return bool
+         */
         function bossIsDead(){
             if($this->BossHP<0){
                 $this->BossHP = 0;
@@ -404,9 +491,17 @@
             return (bool)($this->BossHP<=0);
         }
 
+
+        /**
+         * Checks if the boss is enrages depending on self::boss_enrage_percent
+         * @return bool
+         */
         function bossIsEnraged(){
             return (bool)($this->BossHP<=$this->BossHP_MAX*$this->boss_enrage_percent);
         }
+
+
+
         //**********************************************************
         // STATIC CALLS
         //**********************************************************
@@ -424,6 +519,24 @@
                 $r = (int)substr($post_number, strlen($post_number)-$num++,strlen($post_number));
             }
             return $r;
+        }
+
+        /**
+         * Gets the class of a player based on his ID
+         * @param  string $post_id Player ID
+         * @return string ['H','B','P','K']
+         */
+        static function getPlayerClass($post_id){
+            if(in_array($post_id[0],array('0','1','2','3','4','5','6','7','8','9'))){
+                return "H";
+            }
+            if(in_array($post_id[0],array('A','E','I','O','U','Y','a','e','i','o','u','y'))){
+                return "B";
+            }
+            if(in_array($post_id[0],array('+','/'))){
+                return "P";
+            }
+            return "K";
         }
 
         /**

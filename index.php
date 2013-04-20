@@ -1,6 +1,18 @@
 <?php
-//chan Boss Raid v1.3.1
-error_reporting(0);
+/**
+ * DragonRaid - A prototype script to transform any /b/ thread into a dragon slaying match.
+ *
+ * @version  1.3.1
+ * @author Jonathan Tavares <the.entomb@gmail.com>
+ * @license GNU General Public License, version 3
+ * @link https://github.com/entomb/dragonchan GitHub Source
+ * @filesource
+ *
+ *
+*/
+
+
+error_reporting(E_ALL);
 
 
 /**
