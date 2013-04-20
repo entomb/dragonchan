@@ -131,7 +131,7 @@
                     <li>Healers target for revive</li>
                     <li>Max 3 targets</li>
                     <li>boss will enrage when bellow 20% HP</li>
-                    <li>boll will heal for every kill he does</li>
+                    <li>boss will heal for every kill he does</li>
                     <li>69 added to the lucky mass revive roll</li>
                     </ul>
                 <h4>v0 - 14-04-2013</h4>
