@@ -52,7 +52,7 @@
                         _gaq.push(['_trackEvent', 'Status', 'Call']);
 
                         var newHP = parseInt($('#bossHP').html()); 
-                        if(newHP<oldHP){
+                        if(newHP!=oldHP){
                             interval = 1;
                             $('#bossHP').css({color:'red'}).fadeOut(function(){$(this).fadeIn().css({color:''})});
                         }else{

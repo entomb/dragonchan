@@ -1,3 +1,11 @@
+/**
+ * This is the bookmarklet that should open an iframe on 4chan
+ *
+ * I don't usualy code JS so help me god.
+ *
+ */
+
+
 (function(){
 
     var s = window.location.toString().split('http://boards.4chan.org/b/res/')
@@ -25,11 +33,15 @@
         div.style.overflow = "hidden";
 
         var iframe = document.createElement("IFRAME");
-            iframe.src = "http://dragonslayer.eu01.aws.af.cm/"+THREAD_ID+"/status"; 
+            iframe.src = "http://dragonslayer.eu01.aws.af.cm/"+THREAD_ID+"/status";
             iframe.style.width = "110%";
             iframe.style.height = "200px";
             iframe.style.border = "none;";
         div.appendChild(iframe);
+
+    var style = document.createElement('style'); 
+        style.innerHTML = '.fitToScreen{margin-top:100px;}'; 
+    document.body.appendChild(style);
     document.body.appendChild(div);
     document.body.style.paddingTop="100px";
     document.getElementById('quickReply').style.zIndex = 1001;
