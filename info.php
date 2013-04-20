@@ -2,6 +2,7 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="http://css.ink.sapo.pt/v1/css/ink.css" />
+        <title>About this page</title>
         <style type="text/css">
         td.death{
             color:#FF706C;
@@ -42,7 +43,7 @@
     <body>
         <div class="ink-container">
 
-        <h2>chan Boss Raid <small>version 1.3.1</small></h2>
+        <h2>chan Boss Raid <small>version 1.4</small></h2>
         <div class="ink-row">
             <div class="ink-gutter">
                 <div class="ink-l40">

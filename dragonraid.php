@@ -14,6 +14,7 @@
      * Chan Boss Raid main class
      */
     Class DragonRaid{
+        var $_version = "1.4";
 
         var $THREAD_ID;
         var $THREAD;
@@ -60,7 +61,7 @@
 
 
             //boss status
-            $this->BossIMG = "http://0.thumbs.4chan.org/b/thumb/".$this->OPost->tim."s".$this->OPost->ext;
+            $this->BossIMG = "http://thumbs.4chan.org/b/thumb/".$this->OPost->tim."s.jpg";
             $this->BossHP_MAX = 3000+self::roll($this->OPost->no)*$this->boss_hp_factor;
             $this->BossHP = $this->BossHP_MAX;
 
@@ -243,6 +244,8 @@
 
             if($post->roll<=99){
                 $post->bonus = $this->bardBonusValue;
+            }else{
+                $post->bonus = 0;
             }
 
             //take the damage
@@ -386,7 +389,7 @@
          * Calculates and returns the top 10 damage dealers
          * @return array
          */
-        function getTopDamage(){
+        function getTopDamage($max=10){
             $TOP = array();
             foreach($this->LOG as $_hit){
                 if($_hit['action']=='damage' || $_hit['action']=='avenge'){
@@ -398,7 +401,7 @@
             }
 
             arsort($TOP);
-            $TOP = array_slice($TOP,0,10,true);
+            $TOP = array_slice($TOP,0,$max,true);
             return $TOP;
         }
 
@@ -407,7 +410,7 @@
          * Calculates and returns the top revivers list
          * @return array
          */
-        function getTopRevive(){
+        function getTopRevive($max=10){
             $TOP = array();
             foreach($this->LOG as $_hit){
                 if($_hit['action']=='revive'){
@@ -419,7 +422,7 @@
             }
 
             arsort($TOP);
-            //$TOP = array_slice($TOP,0,10,true);
+            $TOP = array_slice($TOP,0,$max,true);
             return $TOP;
         }
 
@@ -428,7 +431,7 @@
          * Calculates and returs the top avengers list
          * @return array
          */
-        function getTopAvenge(){
+        function getTopAvenge($max=10){
             $TOP = array();
             foreach($this->LOG as $_hit){
                 if($_hit['action']=='avenge'){
@@ -440,7 +443,7 @@
             }
 
             arsort($TOP);
-            //$TOP = array_slice($TOP,0,10,true);
+            $TOP = array_slice($TOP,0,$max,true);
             return $TOP;
         }
 
@@ -458,6 +461,36 @@
             $BATTLE = array_reverse($BATTLE);
             //template goes here
             include("fight.tpl");
+        }
+
+        /**
+         * Calls the status iframe template
+         * @return void
+         */
+        function displayStatus(){
+            $topDamage = $this->getTopDamage(3);
+            $topRevive = $this->getTopRevive(3);
+            $topAvenge = $this->getTopAvenge(3);
+
+            $BATTLE = &$this->LOG;
+            $BATTLE = array_reverse($BATTLE);
+            //template goes here
+            include("status.tpl");
+        }
+        /**
+         * Calls the status iframe template
+         * @return void
+         */
+        function displayStatusAjax(){
+            $topDamage = $this->getTopDamage(3);
+            $topRevive = $this->getTopRevive(3);
+            $topAvenge = $this->getTopAvenge(3);
+
+            $BATTLE = &$this->LOG;
+            $BATTLE = array_reverse($BATTLE);
+
+            //template goes here
+            include("status_core.tpl");
         }
 
 

@@ -78,6 +78,19 @@ if(isset($_GET['id']) && strpos($_GET['id'],'/json')>0){
      * loads the fight HTML template
      */
     $Raid->jsonAPI();
+
+}elseif(isset($_GET['id']) && strpos($_GET['id'],'/status')>0){
+    /**
+     * loads the status iframe
+     */
+    $Raid->displayStatus();
+
+}elseif(isset($_GET['id']) && strpos($_GET['id'],'/ajax')>0){
+    /**
+     * loads the status iframe
+     */
+    $Raid->displayStatusAjax();
+
 }else{
     /**
      * loads the fight json feed
