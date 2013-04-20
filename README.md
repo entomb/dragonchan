@@ -40,6 +40,11 @@ I have a webpage to track things, I will post a link to it here.
 
 Changelog
 =========
+__version 1.4 - 20-04-2013__
+   - Added an ajax self updating status panel
+   - JS Bookmarklet that opens the status panel on any /b/ thread
+   - Fixed bug with bard buff only working on pair number roll
+
 __version 1.3.1 - 19-04-2013__
   - added a json export of the current game `$THREADID/json`
 
