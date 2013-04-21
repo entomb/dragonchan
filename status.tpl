@@ -57,11 +57,11 @@
                             $('#bossHP').css({color:'red'}).fadeOut(function(){$(this).fadeIn().css({color:''})});
                         }else{
                             interval++;
-                            if(interval>7){
-                                interval = 7;
+                            if(interval>5){
+                                interval = 5;
                             }
                         }
-                        setTimeout('refreshData()',1200*interval);
+                        setTimeout('refreshData()',1000*interval);
                     });
                 }
                  setTimeout('refreshData()',1000)

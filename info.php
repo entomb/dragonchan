@@ -43,7 +43,7 @@
     <body>
         <div class="ink-container">
 
-        <h2>chan Boss Raid <small>version 1.4</small></h2>
+        <h2>chan Boss Raid <small>version 1.4.1</small></h2>
         <div class="ink-row">
             <div class="ink-gutter">
                 <div class="ink-l40">
@@ -94,11 +94,17 @@
         <div class="ink-row">
             <div class="ink-gutter">
                 <h3>Changelog</h3>
+                <h4>v1.4.1- 21-04-2013</h4>
+                    <ul>
+                        <li>added: Top deaths stats</li> 
+                        <li>added: Top bard buff stats</li> 
+                        <li>adjustments to the fight template</li> 
+                    </ul>
                 <h4>v1.4- 20-04-2013</h4>
                     <ul>
-                        <li>Added an ajax self updating status panel</i></li>
-                        <li>JS Bookmarklet that opens the status panel on any /b/ thread</i></li>
-                        <li>Fixed bug with bard buff only working on pair number roll</i></li>
+                        <li>Added an ajax self updating status panel</li>
+                        <li>JS Bookmarklet that opens the status panel on any /b/ thread</li>
+                        <li>Fixed bug with bard buff only working on pair number roll</li>
                     </ul>
                 <h4>v1.3.1 - 19-04-2013</h4>
                     <ul>

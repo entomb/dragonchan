@@ -237,6 +237,7 @@
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-37723000-2']);
   _gaq.push(['_trackPageview']);
+  _gaq.push(['_trackEvent', 'Log', 'Refresh']);
 
   (function() {
     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;

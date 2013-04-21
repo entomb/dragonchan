@@ -14,7 +14,7 @@
      * Chan Boss Raid main class
      */
     Class DragonRaid{
-        var $_version = "1.4";
+        var $_version = "1.4.1";
 
         var $THREAD_ID;
         var $THREAD;

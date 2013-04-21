@@ -40,6 +40,11 @@ I have a webpage to track things, I will post a link to it here.
 
 Changelog
 =========
+__version 1.4.1 - 21-04-2013__
+   - added: Top deaths stats
+   - added: Top bard buff stats
+   - adjustments to the fight template
+
 __version 1.4 - 20-04-2013__
    - Added an ajax self updating status panel
    - JS Bookmarklet that opens the status panel on any /b/ thread
