@@ -40,13 +40,19 @@
             background-color: #EA80D8;
         }
 
+        .sidebar span.ink-label{
+            padding:1px 6px;
+            font-size:.8em;
+            font-weight: normal;
+        }
         .sidebar h3{
             padding-top:15px;
+            font-size:1.3em;
         }
         </style>
     </head>
     <body>
-        <div class="ink-container">
+        <div class="ink-container" style="width:90%;">
 
         <h2>chan Boss Raid (<?php echo $this->THREAD_ID ?>)
             <small><a target="_blank" href="/info">version <?php echo $this->_version;?> (More Info)</a></small>
@@ -121,7 +127,7 @@
                             </td>
                             <td style="font-size:13px;">
                                 <span class="ink-label class-<?php echo $_row['class']; ?>"><?php echo $_row['class']; ?></span>
-                                <span class="ink-label info">
+                                <span class="ink-label class-<?php echo $_row['class']; ?>">
                                     <?php echo $_row['id']; ?>
                                 </span>
                             </td>
@@ -177,23 +183,23 @@
 
                 </div>
                 <div class="ink-gutter ink-l20 sidebar">
-                    <h3>TOP DAMAGE</h3>
+                    <h3>Top Damage</h3>
                      <?php foreach($topDamage as $_id => $_damage){
                      echo "<span class='ink-label caution'>".$_damage." HP</span>";
                      echo "&nbsp;<b>".$_id."</b>";
                      echo "<br/>";
                      } ?>
 
-                    <h3>Top Healers</h3>
+                    <h3>Top Revives</h3>
                      <?php foreach($topRevive as $_id => $_revives){
-                     echo "<span class='ink-label success'>".$_revives." revives</span>";
+                     echo "<span class='ink-label success'>".$_revives."</span>";
                      echo "&nbsp;<b>".$_id."</b>";
                      echo "<br/>";
                      } ?>
 
                     <h3>Top Avengers</h3>
                      <?php foreach($topAvenge as $_id => $_avenges){
-                     echo "<span class='ink-label info'>".$_avenges." strikes </span>";
+                     echo "<span class='ink-label info'>".$_avenges."</span>";
                      echo "&nbsp;<b>".$_id."</b>";
                      echo "<br/>";
                      } ?>
@@ -202,6 +208,21 @@
                      <?php foreach($this->deadPlayers as $_row){
                      echo "&#x271D;";
                      echo " <i>".$_row."</i>";
+                     echo "<br/>";
+                     } ?>
+
+                    <h3>Most Deaths</h3>
+                     <?php foreach($topDeaths as $_id => $_count){
+                     echo " <i>".$_count."</i>";
+                     echo "&nbsp;&#x271D;";
+                     echo " <i>".$_id."</i>";
+                     echo "<br/>";
+                     } ?>
+
+                    <h3>Top Bards</h3>
+                     <?php foreach($topBuffs as $_id => $_count){
+                     echo "<span class='ink-label caution' style='background-color:#F49D9D'>+".$_count."</span>"; 
+                     echo " <b>".$_id."</b>";
                      echo "<br/>";
                      } ?>
                 </div>

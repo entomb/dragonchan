@@ -375,6 +375,7 @@
                     'link'   => $post->link,
                     'post'   => $post->no,
                     'id'     => $post->id,
+                    'color'  => self::getPostColor($post->id),
                     'roll'   => $post->roll,
                     'class'  => $post->class,
                     'action' => $action,
@@ -447,6 +448,47 @@
             return $TOP;
         }
 
+        /**
+         * Calculates and returs the top avengers list
+         * @return array
+         */
+        function getTopDeaths($max=10){
+            $TOP = array();
+            foreach($this->LOG as $_hit){
+                if($_hit['action']=='death'){
+                    if(!isset($TOP[$_hit['id']])){
+                        $TOP[$_hit['id']] = 0;
+                    }
+                    $TOP[$_hit['id']]++;
+                }
+            }
+
+            arsort($TOP);
+            $TOP = array_slice($TOP,0,$max,true);
+            return $TOP;
+        }
+
+
+        /**
+         * Calculates and returs the top avengers list
+         * @return array
+         */
+        function getTopBuffs($max=10){
+            $TOP = array();
+            foreach($this->LOG as $_hit){
+                if($_hit['action']=='buff'){
+                    if(!isset($TOP[$_hit['id']])){
+                        $TOP[$_hit['id']] = 0;
+                    }
+                    $TOP[$_hit['id']]+=($_hit['bonus']*$this->bard_buff_duration);
+                }
+            }
+
+            arsort($TOP);
+            $TOP = array_slice($TOP,0,$max,true);
+            return $TOP;
+        }
+
 
         /**
          * Calls the main fight template
@@ -456,6 +498,8 @@
             $topDamage = $this->getTopDamage();
             $topRevive = $this->getTopRevive();
             $topAvenge = $this->getTopAvenge();
+            $topDeaths = $this->getTopDeaths();
+            $topBuffs  = $this->getTopBuffs();
 
             $BATTLE = &$this->LOG;
             $BATTLE = array_reverse($BATTLE);
@@ -468,9 +512,7 @@
          * @return void
          */
         function displayStatus(){
-            $topDamage = $this->getTopDamage(3);
-            $topRevive = $this->getTopRevive(3);
-            $topAvenge = $this->getTopAvenge(3);
+            $topDamage = $this->getTopDamage(3); 
 
             $BATTLE = &$this->LOG;
             $BATTLE = array_reverse($BATTLE);
@@ -482,9 +524,7 @@
          * @return void
          */
         function displayStatusAjax(){
-            $topDamage = $this->getTopDamage(3);
-            $topRevive = $this->getTopRevive(3);
-            $topAvenge = $this->getTopAvenge(3);
+            $topDamage = $this->getTopDamage(3); 
 
             $BATTLE = &$this->LOG;
             $BATTLE = array_reverse($BATTLE);
@@ -502,6 +542,8 @@
             $this->topDamage = $this->getTopDamage();
             $this->topRevive = $this->getTopRevive();
             $this->topAvenge = $this->getTopAvenge();
+            $this->topDeaths = $this->getTopDeaths();
+            $this->topBuffs  = $this->getTopBuffs();
 
             $this->LOG = array_reverse($this->LOG);
 
@@ -625,6 +667,15 @@
 
             //not found
             return false;
+        }
+
+        static function getPostColor($id){
+            $md5 = md5($id);
+            $r = substr($md5, 0,2);
+            $g = substr($md5, 5,2);
+            $b = substr($md5, 10,2);
+
+            return "#".$r.$g.$b;
         }
 
 
