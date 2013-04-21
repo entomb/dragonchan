@@ -41,9 +41,10 @@
         </style>
     </head>
     <body>
+        <a target="_blank" href="https://github.com/entomb/dragonchan"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
         <div class="ink-container">
 
-        <h2>chan Boss Raid <small>version 1.4.1</small></h2>
+        <h2>chan Boss Raid <wb><small>version 1.4.1</small></h2>
         <div class="ink-row">
             <div class="ink-gutter">
                 <div class="ink-l40">
@@ -58,13 +59,17 @@
 
 
                     <p> New Ideas and game mechanics:<br/>
-                        Bryan
+                        <ul>
+                            <li>Bryan</li>
+                            <li><a target="_blank" href="https://github.com/RobertsOma">RobertsOma</a></li>
+                        </ul>
                     </p>
 
 
 
-                    <p> CSS framework: <a target="_blank" href="http://ink.sapo.pt/">Ink</a><p>
-                    <p> Hosting: <a target="_blank" href="https://www.appfog.com/">AppFog</a><p>
+                    <p> CSS framework: <a target="_blank" href="http://ink.sapo.pt/">Ink</a></p>
+                    <p> Hosting: <a target="_blank" href="https://www.appfog.com/">AppFog</a></p>
+                    <p> 4chan API: <a target="_blank" href="https://github.com/4chan/4chan-API">Github repo</a></p>
 
                 </div>
                 <div class="ink-l60">
