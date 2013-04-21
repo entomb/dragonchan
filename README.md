@@ -7,6 +7,13 @@ hosted on appfog:
 `http://dragonslayer.eu01.aws.af.cm/$THREADID`
 
 
+Disclaimer
+==========
+I`m not posting this threads, random people have been doing that. I have no control over it. If you have complains about the spam, sage the threads yourself.
+
+If you have complains about being banned for posting too many dragon threads in one day, well, its not my fault either.
+
+Please don`t spam with dragon threads or you will end up ruining it for other people.
 
 
 Thread Template:
