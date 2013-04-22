@@ -1,4 +1,3 @@
-
 <div class="ink-row">
     <div class="ink-gutter">
         <div class="ink-l30">
@@ -30,10 +29,10 @@
                 echo '</a>';
                 echo "</h3>";
                 } ?>
-                <a target="_blank" class="ink-button" href="http://dragonslayer.eu01.aws.af.cm/<?php echo $this->THREAD_ID;?>">
+                <a target="_blank" class="ink-button" href="../<?php echo $this->THREAD_ID;?>">
                     see the full battle log
                 </a>
-                <a target="_blank" class="ink-button" href="http://dragonslayer.eu01.aws.af.cm/info">
+                <a target="_blank" class="ink-button" href="../info">
                     see the rules
                 </a>
             </div>

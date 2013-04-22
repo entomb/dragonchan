@@ -62,6 +62,7 @@
                         <ul>
                             <li>Bryan</li>
                             <li><a target="_blank" href="https://github.com/RobertsOma">RobertsOma</a></li>
+                            <li>Q4-Bi.</li>
                         </ul>
                     </p>
 
