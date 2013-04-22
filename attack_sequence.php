@@ -1,14 +1,3 @@
-<?php
-if($_row['action']=="enrage"){
-echo "<tr>";
-echo "<td colspan='3' style='text-align:center; font-size:22px;'>";
-echo "<span class='ink-label caution'>THE BOSS HAS ENRAGED!</span>";
-echo "<br/><small>Every roll under $this->min_roll will result in death!!</small>";
-echo "</td>";
-echo "</tr>";
-continue;
-}
-?>
 <tr>
     <td>
         <a target="_blank" href="<?php echo $_row['link']; ?>">
