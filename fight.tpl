@@ -39,6 +39,17 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
                         <div class="health-remaining-text">HP: <?php echo number_format($this->BossHP); ?> / <?php echo number_format($this->BossHP_MAX); ?></div>
                     </div>
 
+                    <?php if($this->bossIsEnraged()) { ?>
+
+                        <table class="ink-table">
+                            <tr>
+                                <td colspan='3' style=' font-size:22px;'>
+                                    <span class='ink-label caution'>THE BOSS HAS ENRAGED!</span> <small>Every roll under <?php echo $this->min_roll; ?> will result in death!!</small>
+                                </td>
+                            </tr>
+                        </table>
+
+                    <?php } ?>
                     <h3>Latest Hit</h3>
                     <table class="ink-table">
                         <?php $_row =  $BATTLE[0]; ?>
@@ -100,7 +111,22 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
                     <h3>Battle Log</h3>
                     <table class="ink-table ink-zebra">
                     <?php foreach($BATTLE as $_row){ ?>
-                        <?php include('attack_sequence.php'); ?>
+                        <?php
+
+                        if($_row['action']=="enrage"){
+                            echo "<tr>";
+                                echo "<td colspan='3' style='text-align:center; font-size:22px;'>";
+                                    echo "<span class='ink-label caution'>THE BOSS HAS ENRAGED!</span>";
+                                    echo "<br/><small>Every roll under $this->min_roll will result in death!!</small>";
+                                echo "</td>";
+                            echo "</tr>";
+                            break;
+                        }
+                        else {
+                            include('attack_sequence.php');
+                        }
+
+                        ?>
                     <?php } ?>
                     </table>
 
