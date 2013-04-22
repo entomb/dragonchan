@@ -158,6 +158,13 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
                      echo "<br/>";
                      } ?>
 
+                    <h3>Top Bards</h3>
+                     <?php foreach($topBuffs as $_id => $_count){
+                     echo "<span class='ink-label caution' style='background-color:#F49D9D'>+".$_count."</span>";
+                     echo " <b>".$_id."</b>";
+                     echo "<br/>";
+                     } ?>
+
                     <h3>Fallen Soldiers</h3>
                      <?php foreach($this->deadPlayers as $_row){
                      echo "&#x271D;";
@@ -173,12 +180,6 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
                      echo "<br/>";
                      } ?>
 
-                    <h3>Top Bards</h3>
-                     <?php foreach($topBuffs as $_id => $_count){
-                     echo "<span class='ink-label caution' style='background-color:#F49D9D'>+".$_count."</span>";
-                     echo " <b>".$_id."</b>";
-                     echo "<br/>";
-                     } ?>
                 </div>
             </div>
         </div>
