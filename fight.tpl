@@ -15,7 +15,7 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
         <a target="_blank" href="https://github.com/entomb/dragonchan"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
         <div class="ink-container" style="width:90%;">
 
-        <h2>chan Boss Raid <span class="small"><a href="https://boards.4chan.org/b/res/<?php echo $this->THREAD_ID; ?>">#<?php echo $this->THREAD_ID; ?></a></span>
+        <h2>chan Boss Raid <span class="small"><a href="http://boards.4chan.org/b/res/<?php echo $this->THREAD_ID; ?>">#<?php echo $this->THREAD_ID; ?></a></span>
             <small><a target="_blank" href="/info">version <?php echo $this->_version; ?> (More Info)</a></small>
         </h2>
         <br />
@@ -117,16 +117,18 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
                         <?php
 
                         if($_row['action']=="enrage"){
+                          //enrage notice
                             echo "<tr>";
-                                echo "<td colspan='3' style='text-align:center; font-size:22px;'>";
+                                echo "<td colspan='3' style='text-align:center; font-size:24px;'>";
+                                  echo "<div class='ink-vspace'>";
                                     echo "<span class='ink-label caution'>THE BOSS HAS ENRAGED!</span>";
                                     echo "<br/><small>Every roll under $this->min_roll will result in death!!</small>";
+                                  echo "</div>";
                                 echo "</td>";
                             echo "</tr>";
-                            break;
-                        }
-                        else {
-                            include('attack_sequence.php');
+                        } else {
+                          //combat log
+                          include('attack_sequence.php');
                         }
 
                         ?>
