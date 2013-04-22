@@ -5,7 +5,9 @@ A prototype script to transform any /b/ thread into a dragon slaying match.
 
 Hosted on AppFog: `http://dragonslayer.eu01.aws.af.cm/$THREADID`
 
-Hosted on VentraIP: `http://slayer.pw/$THREADID` `http://dragon.slayer.pw/$THREADID`
+Hosted on VentraIP: `http://slayer.pw/$THREADID`
+
+Hosted on VentraIP: `http://dragon.slayer.pw/$THREADID`
 
 
 Disclaimer
@@ -48,6 +50,12 @@ I have a webpage to track things, I will post a link to it here.
 
 Changelog
 =========
+__version 1.4.5 - 22-04-2013__
+   - Massive interface changes
+   - new domain: `http://slayer.pw/$THREADID`
+   - new domain: `http://dragon.slayer.pw/$THREADID`
+
+
 __version 1.4.1 - 21-04-2013__
    - added: Top deaths stats
    - added: Top bard buff stats
