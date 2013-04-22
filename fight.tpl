@@ -59,30 +59,33 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
 
                 </div>
             </div>
-            <div class="clear"></div>
-            <br /><br />
+        </div>
+        <div class="clear ink-vspace"></div>
+        <div class="ink-row">
             <div class="ink-gutter">
-                <div class="ink-l100">
-                    <div class="ink-l40">
-                        <h4>Bookmarklet!</h4>
-                        <p>Drag this link to your bookmark bar and use it on any /b/ thread to get a real time update on the fight! <em>(this is beta so it might not work very well)</em>.                         <a class="ink-button success" href='javascript:(function(){var e=window.location.toString().split("http://boards.4chan.org/b/res/");if(e.length!=2){alert("this is not a valid 4chan thread.");return}if(document.getElementById("dragonraid")){return}var t=e[1].split("#")[0];var n=document.createElement("DIV");n.id="dragonraid";n.style.padding="0px;";n.style.margin="0px;";n.style.position="fixed";n.style.top="0px";n.style.left="0px";n.style.width="100%";n.style.height="100px";n.style.zIndex="1";n.style.overflow="hidden";var r=document.createElement("IFRAME");r.src="http://dragonslayer.eu01.aws.af.cm/"+t+"/status";r.style.width="110%";r.style.height="200px";r.style.border="none;";n.appendChild(r);var i=document.createElement("style");i.innerHTML=".fitToScreen{margin-top:100px;}";document.body.appendChild(i);document.body.appendChild(n);document.body.style.paddingTop="100px";document.getElementById("quickReply").style.zIndex=1001})();'>DragonChan</a>
-                        </p>
-                    </div>
-                    <div class="ink-l60">
-                        <h4>Rules</strong></h4>
-                        <ul>
-                            <li>If your ID starts with a number you are a <b>Healer</b>.</li>
-                            <li>If your ID starts with a vowel you are a <b>Bard</b>.</li>
-                            <li>If your ID starts with a "/" or "+" you are a <b>Paladin</b>.</li>
-                            <li>otherwise you are a <b>Knight</b></li>
-                            <li>Your last 2 digits represent the damage you do</li>
-                            <li><a target="_blank" href="/info">(see the full rules)</a></li>
-                        </ul>
-                    </div>
+              <div class="ink-l40">
+                <div class="ink-l90">
+                  <h4>Bookmarklet!</h4>
+                  <p>Drag this link to your bookmark bar and use it on any /b/ thread to get a real time update on the fight!
+                    <br/>
+                     <a class="ink-button success" href='javascript:(function(){var e=window.location.toString().split("http://boards.4chan.org/b/res/");if(e.length!=2){alert("this is not a valid 4chan thread.");return}if(document.getElementById("dragonraid")){return}var t=e[1].split("#")[0];var n=document.createElement("DIV");n.id="dragonraid";n.style.padding="0px;";n.style.margin="0px;";n.style.position="fixed";n.style.top="0px";n.style.left="0px";n.style.width="100%";n.style.height="100px";n.style.zIndex="1";n.style.overflow="hidden";var r=document.createElement("IFRAME");r.src="http://dragonslayer.eu01.aws.af.cm/"+t+"/status";r.style.width="110%";r.style.height="200px";r.style.border="none;";n.appendChild(r);var i=document.createElement("style");i.innerHTML=".fitToScreen{margin-top:100px;}";document.body.appendChild(i);document.body.appendChild(n);document.body.style.paddingTop="100px";document.getElementById("quickReply").style.zIndex=1001})();'>DragonChan</a>
+                    </br>
+                    <em>(this is beta so it might not work very well)</em>
+                  </p>
                 </div>
+              </div>
+              <div class="ink-l60">
+                <h4>Rules</h4>
+                <ul>
+                  <li>If your ID starts with a number you are a <b>Healer</b>.</li>
+                  <li>If your ID starts with a vowel you are a <b>Bard</b>.</li>
+                  <li>If your ID starts with a "/" or "+" you are a <b>Paladin</b>.</li>
+                  <li>otherwise you are a <b>Knight</b></li>
+                  <li>Your last 2 digits represent the damage you do</li>
+                  <li><a target="_blank" href="/info">(see the full rules)</a></li>
+                </ul>
+              </div>
             </div>
-
-
         </div>
 
         <hr/>
