@@ -1,0 +1,35 @@
+/*
+Additional CSS file to override ink's default styles.
+Let's give some eye-candy to our warriors.
+*/
+@font-face {
+font-family: "Visitor";
+src: url('fonts/visitor/visitor1.ttf');
+}
+.visitor {font-family: "Visitor";}
+h2 small {font-size:12px;}
+
+td.death{ color:#FF706C; }
+td.revive{ color:#59B407; }
+td.avenge{ color:#4395AF; }
+td{ padding:3px; }
+.hero{ background-color: #EEE; padding:10px; border:2px solid #FEFEFE; border-radius: 10px; }
+.ink-label small{ font-size:11px; color:#DDD; }
+span.ink-label.class-K{ background-color: #59A6AE; }
+span.ink-label.class-H{ background-color: #FAA57C; }
+span.ink-label.class-P{ background-color: #FCD349; }
+span.ink-label.class-B{ background-color: #EA80D8; }
+.sidebar span.ink-label{ padding:1px 6px; font-size:.8em; font-weight: normal; }
+.sidebar h3{ padding-top:15px; font-size:1.3em; }
+
+.clear {clear:both;}
+.hp-bar { position: relative; width:500px; font-family: "Tahoma"; font-size: 22px; margin-bottom: 30px;}
+.hp-bar .health {float:left; border:1px solid #999; border-radius:4px; width:100%; }
+.hp-bar .health-remaining {float:left; background:#247f00; height: 20px; }
+.hp-bar .health-remaining-text {text-align: center; letter-spacing: .1em; font-family: "Visitor"; margin-top: 10px;}
+.hp-bar .health-total-text { position:absolute; top:25px; right:3px; letter-spacing: .1em; font-family: "Visitor";}
+.hp-bar .health-total {float: left;  height:20px; }
+.hp-bar .red {background:#af0000;}
+.hp-bar .orange {background:#ea7900;}
+.hp-bar .yellow {background:#eacc00;}
+.red {color:#af0000;}
