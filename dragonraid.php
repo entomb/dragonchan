@@ -92,7 +92,6 @@
                 //add link to this roll
                 $post->link= "http://boards.4chan.org/b/res/".$this->THREAD_ID."#p".$post->no;
                 $post->class = self::getPlayerClass($post->id);
-                $post->sprite = self::getPlayerSprite($post->id, $post->class);
 
                 //GET THE CURRENT ROLL
                 $post->roll = self::roll($post->no,2);
@@ -105,7 +104,10 @@
                     $this->massResurection($post);
                     if($this->bossIsDead()){
                         $this->WINNER = $post;
-                        $this->log('winrar',$post);
+                        $action = 'winrar';
+                        $post->action = $action;
+                        $post->sprite = self::getPlayerSprite($post);
+                        $this->log($action,$post);
                     }
                     continue;
                 }
@@ -118,11 +120,17 @@
 
                 if($this->bossIsEnraged() &&  $this->min_roll!=$this->min_roll_enraged){
                     $this->min_roll = $this->min_roll_enraged;
-                    $this->log('enrage',$post);
+                    $action = 'enrage';
+                    $post->action = $action;
+                    $post->sprite = self::getPlayerSprite($post);
+                    $this->log($action,$post);
                 }
 
                 //death roll!
                 if($post->roll<$this->min_roll){
+                    $action = "kill";
+                    $post->action = $action;
+                    $post->sprite = self::getPlayerSprite($post);
                     $this->killPlayer($post);
                     continue;
                 }
@@ -153,7 +161,10 @@
                                 $this->damage($post,true,false);
                                 $this->avengePlayer($_target_id);
                                 $post->_target = $_target_id;
-                                $this->log('avenge',$post);
+                                $action = 'avenge';
+                                $post->action = $action;
+                                $post->sprite = self::getPlayerSprite($post);
+                                $this->log($action,$post);
                             }
                         }
 
@@ -163,23 +174,26 @@
                             if($this->isDeadPlayer($_target_id) && $this->canRevive($_target_id)){
                                 $post->_target = $_target_id;
                                 $this->revivePlayer($_target_id);
-                                $this->log('revive',$post);
+                                $action = 'revive';
+                                $post->action = $action;
+                                $post->sprite = self::getPlayerSprite($post);
+                                $this->log($action,$post);
                             }
                         }
                     }
                 }
 
-
-
-
                 if($this->bossIsDead()){
+                    $action = 'winrar';
                     $this->WINNER = $post;
-                    $this->log('winrar',$post);
+                    $post->action = $action;
+                    $post->sprite = self::getPlayerSprite($post);
+                    $this->log($action,$post);
                 }
 
 
-
             }
+
 
         }
 
@@ -224,7 +238,10 @@
                                 'value'    => $post->bonus,
                                 'buffer'   => $post,
                             );
-            $this->log('buff',$post);
+            $action = 'buff';
+            $post->action = $action;
+            $post->sprite = self::getPlayerSprite($post);
+            $this->log($action,$post);
         }
 
 
@@ -254,7 +271,10 @@
 
             //log the hit
             if($reportDamage){
-                $this->log('damage',$post);
+                $action = 'damage';
+                $post->action = $action;
+                $post->sprite = self::getPlayerSprite($post);
+                $this->log($action,$post);
             }
         }
 
@@ -268,13 +288,19 @@
             //clean dead players!
             foreach($this->deadPlayers as $_target_id){
                 $post->_target = $_target_id;
-                $this->log('revive',$post);
+                $action = 'revive';
+                $post->action = $action;
+                $post->sprite = self::getPlayerSprite($post);
+                $this->log($action,$post);
             }
 
             $this->deadPlayers = array();
 
             //log the hit
-            $this->log('massrevive',$post);
+            $action = 'massrevive';
+            $post->action = $action;
+            $post->sprite = self::getPlayerSprite($post);
+            $this->log($action,$post);
         }
 
 
@@ -299,7 +325,10 @@
             }
 
             //log the death
-            $this->log('death',$post);
+            $action = 'death';
+            $post->action = $action;
+            $post->sprite = self::getPlayerSprite($post);
+            $this->log($action,$post);
         }
 
 
@@ -621,75 +650,106 @@
          * @param  string $post_id Player ID
          * @return string ['H','B','P','K']
          */
-        static function getPlayerSprite($post_id, $class){
-
+        static function getPlayerSprite($post){
             // ** There's a better way to do this, but let's slap something neat together for now.
 
             // Let's set some variables we can expect later
             $sprite = "";
             $segment = "1";
             $gender = "male";
+            $class = $post->class;
+            $post_id = $post->id;
+
+            // 64 variations
+            $range = array('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",'0','1','2','3','4','5','6','7','8','9','+','/');
 
             // Knight
             if($class == "K"){
 
-                if(in_array($post_id[0],array('0','1','2','3','4','5','6','A','E','I','O','U','Y','7','8','9'))) {
+                // Currently 9 available sprites, 6 male, 3 female
+                // 64 / 9 ~= 7, so we'll chunk it into pieces of 7
+                $segment_range = array_chunk($range, 7);
+
+                // @@TODO: Can we make this simplier?
+                if( in_array( $post_id[0], $segment_range[0] ) ) {
                     $gender = "male";
-                    if(in_array($post_id[0], array('0','1', 'U'))) {
-                        $segment = "1";
-                    }
-                    if(in_array($post_id[0], array('2','3', '7'))) {
-                        $segment = "2";
-                    }
-                    if(in_array($post_id[0], array('4','5', '9', 'O'))) {
-                        $segment = "3";
-                    }
-                    if(in_array($post_id[0], array('6','A', 'Y'))) {
-                        $segment = "4";
-                    }
-                    if(in_array($post_id[0], array('E','I', '8'))) {
-                        $segment = "5";
-                    }
+                    $segment = "1";
+                }
+                if( in_array($post_id[0], $segment_range[1] ) ) {
+                    $gender = "male";
+                    $segment = "2";
+                }
+                if( in_array($post_id[0], $segment_range[2] ) ) {
+                    $gender = "male";
+                    $segment = "3";
+                }
+                if( in_array($post_id[0], $segment_range[3] ) ) {
+                    $gender = "male";
+                    $segment = "4";
+                }
+                if( in_array($post_id[0], $segment_range[4] ) ) {
+                    $gender = "male";
+                    $segment = "5";
+                }
+                if( in_array($post_id[0], $segment_range[5] ) ) {
+                    $gender = "male";
+                    $segment = "6";
                 }
 
-                if(in_array($post_id[0],array("+","/",'a','e','i','o','u','y'))) {
+
+                if( in_array( $post_id[0], $segment_range[6] ) ) {
                     $gender = "female";
-                    if(in_array($post_id[0], array('+','/', 'a'))) {
-                        $segment = "1";
-                    }
-                    if(in_array($post_id[0], array('e','i', 'o'))) {
-                        $segment = "2";
-                    }
-                    if(in_array($post_id[0], array('u','y'))) {
-                        $segment = "3";
-                    }
+                    $segment = "1";
                 }
-
+                if( in_array($post_id[0], $segment_range[7] ) ) {
+                    $gender = "female";
+                    $segment = "2";
+                }
+                if( in_array($post_id[0], $segment_range[8] ) ) {
+                    $gender = "female";
+                    $segment = "3";
+                }
 
             }
 
             // Healer
             if($class == "H"){
 
-                if(in_array($post_id[0],array('0','1','2','3','4','5','6','A','E','I','O','U','Y','7','8','9'))) {
+                $segment_range = array_chunk($range, 7);
+
+                // @@TODO: Can we make this simplier?
+                if( in_array( $post_id[0], $segment_range[0] ) ) {
                     $gender = "female";
-                    if(in_array($post_id[0], array('0','1','U','8'))) {
-                        $segment = "1";
-                    }
-                    if(in_array($post_id[0], array('2','3','7',"I"))) {
-                        $segment = "2";
-                    }
-                    if(in_array($post_id[0], array('4','5','9','O'))) {
-                        $segment = "3";
-                    }
-                    if(in_array($post_id[0], array('6','A','Y',"E"))) {
-                        $segment = "4";
-                    }
+                    $segment = "1";
+                }
+                if( in_array($post_id[0], $segment_range[1] ) ) {
+                    $gender = "female";
+                    $segment = "2";
+                }
+                if( in_array($post_id[0], $segment_range[2] ) ) {
+                    $gender = "female";
+                    $segment = "3";
+                }
+                if( in_array($post_id[0], $segment_range[3] ) ) {
+                    $gender = "female";
+                    $segment = "4";
+                }
+                if( in_array($post_id[0], $segment_range[4] ) ) {
+                    $gender = "female";
+                    $segment = "5";
                 }
 
-                if(in_array($post_id[0],array("+","/",'a','e','i','o','u','y'))) {
+                if( in_array( $post_id[0], $segment_range[6] ) ) {
                     $gender = "male";
                     $segment = "1";
+                }
+                if( in_array($post_id[0], $segment_range[7] ) ) {
+                    $gender = "male";
+                    $segment = "2";
+                }
+                if( in_array($post_id[0], $segment_range[8] ) ) {
+                    $gender = "male";
+                    $segment = "3";
                 }
 
             }
@@ -697,17 +757,80 @@
             // Bard
             if($class == "B"){
 
-                if(in_array($post_id[0],array('0','1','2','3','4','5','6','A','E','I','O','U'))) {
+                $segment_range = array_chunk($range, 7);
+
+                // @@TODO: Can we make this simplier?
+                if( in_array( $post_id[0], $segment_range[0] ) ) {
+                    $gender = "male";
+                    $segment = "1";
+                }
+                if( in_array($post_id[0], $segment_range[1] ) ) {
+                    $gender = "male";
+                    $segment = "2";
+                }
+                if( in_array($post_id[0], $segment_range[2] ) ) {
+                    $gender = "male";
+                    $segment = "3";
+                }
+                if( in_array($post_id[0], $segment_range[3] ) ) {
+                    $gender = "male";
+                    $segment = "4";
+                }
+
+                if( in_array( $post_id[0], $segment_range[4] ) ) {
+                    $gender = "female";
+                    $segment = "1";
+                }
+                if( in_array($post_id[0], $segment_range[5] ) ) {
+                    $gender = "female";
+                    $segment = "2";
+                }
+                if( in_array($post_id[0], $segment_range[6] ) ) {
+                    $gender = "female";
+                    $segment = "3";
+                }
+                if( in_array($post_id[0], $segment_range[7] ) ) {
+                    $gender = "female";
+                    $segment = "4";
+                }
+                if( in_array($post_id[0], $segment_range[8] ) ) {
+                    $gender = "female";
+                    $segment = "5";
+                }
+
+
+            }
+
+            // Bard
+            if($class == "P"){
+
+                $segment_range = array_chunk($range, 21);
+
+                // @@TODO: Can we make this simplier?
+                if( in_array( $post_id[0], $segment_range[0] ) ) {
+                    $gender = "male";
+                    $segment = "1";
+                }
+                if( in_array($post_id[0], $segment_range[1] ) ) {
+                    $gender = "male";
+                    $segment = "2";
+                }
+                if( in_array($post_id[0], $segment_range[2] ) ) {
                     $gender = "female";
                     $segment = "1";
                 }
 
-                if(in_array($post_id[0],array("+","/",'a','e','i','o','u','y','Y','7','8','9'))) {
-                    $gender = "male";
-                    $segment = "1";
-                }
 
             }
+
+            /*
+            @@ TODO: Better revive sequence
+            if(isset($post->action) && $post->action == "revive") {
+                $gender = "female";
+                $class = "reviver";
+                $segment = "1";
+            }
+            */
 
             $sprite .= $gender . "_" . $class . "_" . $segment . ".png";
 
