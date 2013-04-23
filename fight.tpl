@@ -203,6 +203,15 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
   _gaq.push(['_trackPageview']);
   _gaq.push(['_trackEvent', 'Log', 'Refresh']);
 
+  <?php
+  //log the cached status
+  if($this->cache_status){
+    echo "_gaq.push(['_trackEvent', 'Cache', 'hit']);";
+  }else{
+    echo "_gaq.push(['_trackEvent', 'Cache', 'miss']);";
+  }
+  ?>
+
   (function() {
     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';

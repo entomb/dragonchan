@@ -11,8 +11,8 @@
  *
 */
 
-
-error_reporting(E_ALL);
+//no errors on production please
+error_reporting(0);
 
 
 /**
@@ -45,8 +45,35 @@ $api_url   = "http://api.4chan.org/b/res/$thread_id.json";
 if($thread_id > 0) {
     try
     {
-        $JSON = file_get_contents($api_url);
-        $THREAD = json_decode($JSON);
+        /**
+         * MEMCACHE implementation
+         */
+        if(getenv("MEMCACHIER_SERVERS")){
+            include('lib/MemcacheSASL.php');
+            $server_pieces = explode(':', getenv("MEMCACHIER_SERVERS"));
+            $m = new MemcacheSASL;
+            $m->addServer($server_pieces[0], $server_pieces[1]);
+            $m->setSaslAuthData(getenv("MEMCACHIER_USERNAME"), getenv("MEMCACHIER_PASSWORD"));
+
+            $thread_cache_key = "4chan_thread_$thread_id";
+
+            if(!($THREAD = $m->get($thread_cache_key))){
+                $_is_cached_request = false;
+                //no cache is set
+                $JSON = file_get_contents($api_url);
+                $THREAD = json_decode($JSON);
+                $m->add($thread_cache_key,$THREAD,getenv("MEMCACHIER_EXPIRE"));
+            }else{
+                $_is_cached_request = true;
+            }
+        }else{
+            $_is_cached_request = false;
+            //no cache servers are set (localhost?)
+            $JSON = file_get_contents($api_url);
+            $THREAD = json_decode($JSON);
+        }
+
+
     }
     catch(Exeption $e){
         /**
@@ -75,6 +102,7 @@ include("dragonraid.php");
  * @var Raid
  */
 $Raid = new DragonRaid($THREAD);
+$Raid->cache_status = isset($_is_cached_request) ? $_is_cached_request : false;
 
 //process the game rules
 $Raid->play();
