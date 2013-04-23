@@ -15,10 +15,12 @@ td.avenge{ color:#4395AF; }
 td{ padding:3px; }
 .hero{ background-color: #EEE; padding:10px; border:2px solid #FEFEFE; border-radius: 10px; }
 .ink-label small{ font-size:11px; color:#DDD; }
-span.ink-label.class-K{ background-color: #59A6AE; }
-span.ink-label.class-H{ background-color: #FAA57C; }
-span.ink-label.class-P{ background-color: #FCD349; }
-span.ink-label.class-B{ background-color: #EA80D8; }
+span.ink-label.class-K{  background-color: #C79C6E;  color: #FFF; }
+span.ink-label.class-H{  background-color: #ABD473;  color: #FFF; }
+span.ink-label.class-P{  background-color: #FCD349;  color: #FFF; }
+span.ink-label.class-B{  background-color: #69CCF0;  color: #FFF; }
+span.ink-label.class-DK{ background-color: #666666;  color: #FFF; }
+span.ink-label.class-W{  background-color: #9482C9;  color: #FFF; }
 .sidebar span.ink-label{ padding:1px 6px; font-size:.8em; font-weight: normal; }
 .sidebar h3{ padding-top:15px; font-size:1.3em; }
 
