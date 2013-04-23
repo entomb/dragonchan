@@ -4,6 +4,10 @@
             &gt;&gt;<?php echo $_row['post']; ?>
         </a>
     </td>
+
+    <td class="class-<?php echo $_row['class']; ?>-sprite">
+        <img src="images/sprites/<?php echo $_row['sprite']; ?>" />
+    </td>
     <td style="font-size:13px;">
         <span class="ink-label class-<?php echo $_row['class']; ?>"><?php echo $_row['class']; ?></span>
         <span class="ink-label class-<?php echo $_row['class']; ?>">
