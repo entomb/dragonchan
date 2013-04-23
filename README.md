@@ -5,12 +5,14 @@ A prototype script to transform any /b/ thread into a dragon slaying match.
 
 Set up (or hijack) any thread using the template below and copy paste it's ID into this URL:
 
+# Offical Domain
+- Hosted on AppFog: `http://dragonslayer.eu01.aws.af.cm/[thread_id]/`
 
-#`http://slayer.pw/{THREAD_ID}`#
-
-If that one doesn't work, use one of the following
-- Mirror on VentraIP: `http://dragon.slayer.pw/{THREAD_ID}`
-- Hosted on AppFog: `http://dragonslayer.eu01.aws.af.cm/{THREAD_ID}`
+# Domain Mirror's
+- `http://slayer.pw/[thread_id]/`
+- `http://dragon.slayer.pw/[thread_id]/`
+- `http://nigger.slayer.pw/[thread_id]/`
+- `http://mlp.pw/[thread_id]/`
 
 
 Disclaimer
