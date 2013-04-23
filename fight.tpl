@@ -9,7 +9,7 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
         <link rel="stylesheet" type="text/css" href="http://css.ink.sapo.pt/v1/css/ink.css" />
 
         <title>Chan Boss Raid</title>
-        <link href="./site.css" rel="stylesheet" type="text/css">
+        <link href="site.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <a target="_blank" href="https://github.com/entomb/dragonchan"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
@@ -42,7 +42,7 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
                     <?php if($this->bossIsDead()) { ?>
                         <table class="ink-table">
                             <tr>
-                                <td colspan='3' style='font-size:22px;'>
+                                <td colspan='4' style='font-size:22px;'>
                                     <span class='ink-label success'>THE BEAST HAS BEEN SLAIN!</span>
                                 </td>
                             </tr>
@@ -52,7 +52,7 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
 
                         <table class="ink-table">
                             <tr>
-                                <td colspan='3' style='font-size:22px;'>
+                                <td colspan='4' style='font-size:22px;'>
                                     <span class='ink-label caution'>THE BEAST HAS ENRAGED!</span> <small>Every roll under <?php echo $this->min_roll; ?> will result in death!!</small>
                                 </td>
                             </tr>
@@ -128,7 +128,7 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
                         if($_row['action']=="enrage"){
                           //enrage notice
                             echo "<tr>";
-                                echo "<td colspan='3' style='text-align:center; font-size:24px;'>";
+                                echo "<td colspan='4' style='text-align:center; font-size:24px;'>";
                                   echo "<div class='ink-vspace'>";
                                     echo "<span class='ink-label caution'>THE BEAST HAS ENRAGED!</span>";
                                     echo "<br/><small>Every roll under $this->min_roll will result in death!!</small>";

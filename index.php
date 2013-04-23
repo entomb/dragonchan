@@ -19,7 +19,7 @@ error_reporting(E_ALL);
  * @route /info
  * Load the "more info" page template
  */
-if($_GET['id']==="info"){
+if(isset($_GET['id']) && $_GET['id'] === "info" || !isset($_GET['id'])){
     include 'info.php';
     exit();
 }
@@ -28,7 +28,7 @@ if($_GET['id']==="info"){
  * The thread ID
  * @var int
  */
-$thread_id = (int)$_GET['id'];
+$thread_id = (isset($_GET['id']) ? (int)$_GET['id'] : 0);
 
 /**
  * the API url for the thread FEED
@@ -42,21 +42,27 @@ $api_url   = "http://api.4chan.org/b/res/$thread_id.json";
  * @try
  * decode the 4chan-api response.
  */
-try{
-    $JSON = file_get_contents($api_url);
-    $THREAD = json_decode($JSON);
-}catch(Exeption $e){
-    /**
-     * An error parsing the thread (possibly HTTP/404)
-     */
-    exit("that is not a valid 4chan thead id...");
+if($thread_id > 0) {
+    try
+    {
+        $JSON = file_get_contents($api_url);
+        $THREAD = json_decode($JSON);
+    }
+    catch(Exeption $e){
+        /**
+         * An error parsing the thread (possibly HTTP/404)
+         */
+        include("invalid_thread.php");
+        exit();
+    }
 }
 
 /**
  * Thread has no posts
  */
 if(!isset($THREAD->posts) || count($THREAD->posts)<1){
-    exit("that is not a valid 4chan thead id...");
+    include("invalid_thread.php");
+    exit();
 }
 
 

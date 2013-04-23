@@ -3,42 +3,7 @@
     <head>
         <link rel="stylesheet" type="text/css" href="http://css.ink.sapo.pt/v1/css/ink.css" />
         <title>About this page</title>
-        <style type="text/css">
-        td.death{
-            color:#FF706C;
-        }
-        td.revive{
-            color:#59B407;
-        }
-        td.avenge{
-            color:#4395AF;
-        }
-        td{
-            padding:3px;
-        }
-        .hero{
-            background-color: #EEE;
-            padding:10px;
-            border:2px solid #FEFEFE;
-            border-radius: 10px;
-        }
-        .ink-label small{
-            font-size:11px;
-            color:#DDD;
-        }
-        span.ink-label.class-K{
-            background-color: #59A6AE;
-        }
-        span.ink-label.class-H{
-            background-color: #FAA57C;
-        }
-        span.ink-label.class-P{
-            background-color: #FCD349;
-        }
-        span.ink-label.class-B{
-            background-color: #EA80D8;
-        }
-        </style>
+        <link href="site.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <a target="_blank" href="https://github.com/entomb/dragonchan"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
@@ -72,6 +37,7 @@
                     <p> CSS framework: <a target="_blank" href="http://ink.sapo.pt/">Ink</a></p>
                     <p> Hosting: <a target="_blank" href="https://www.appfog.com/">AppFog</a></p>
                     <p> 4chan API: <a target="_blank" href="https://github.com/4chan/4chan-API">Github repo</a></p>
+                    <p> Sprites: <a target="_blank" href="http://leon-murayami.deviantart.com/">Leon-Murayami</a></p>
 
                 </div>
                 <div class="ink-l60">

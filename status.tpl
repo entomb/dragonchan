@@ -3,31 +3,7 @@
     <head>
         <link rel="stylesheet" type="text/css" href="http://css.ink.sapo.pt/v1/css/ink.css" />
         <title>Status Panel</title>
-        <style type="text/css">
-        td.death{
-            color:#FF706C;
-        }
-        td.revive{
-            color:#59B407;
-        }
-        td.avenge{
-            color:#4395AF;
-        }
-        td{
-            padding:3px;
-        }
-        .hero{
-            background-color: #EEE;
-            padding:10px;
-            border:2px solid #FEFEFE;
-            border-radius: 10px;
-        }
-        .ink-label small{
-            font-size:11px;
-            color:#DDD;
-        } 
-        *{font-size:96%;} 
-        </style>
+        <link href="site.css" rel="stylesheet" type="text/css">
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     </head>
     <body>
@@ -48,10 +24,10 @@
 
                     $('#Core').load('/'+THREAD_ID+"/ajax",function(){
 
-                        
+
                         _gaq.push(['_trackEvent', 'Status', 'Call']);
 
-                        var newHP = parseInt($('#bossHP').html()); 
+                        var newHP = parseInt($('#bossHP').html());
                         if(newHP!=oldHP){
                             interval = 1;
                             $('#bossHP').css({color:'red'}).fadeOut(function(){$(this).fadeIn().css({color:''})});
