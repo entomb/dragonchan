@@ -92,6 +92,7 @@
                 //add link to this roll
                 $post->link= "http://boards.4chan.org/b/res/".$this->THREAD_ID."#p".$post->no;
                 $post->class = self::getPlayerClass($post->id);
+                $post->sprite = self::getPlayerSprite($post->id, $post->class);
 
                 //GET THE CURRENT ROLL
                 $post->roll = self::roll($post->no,2);
@@ -378,6 +379,7 @@
                     'color'  => self::getPostColor($post->id),
                     'roll'   => $post->roll,
                     'class'  => $post->class,
+                    'sprite' => $post->sprite,
                     'action' => $action,
                     'target' => isset($post->_target) ? $post->_target : 0,
                     'damage' => isset($post->damage) ? $post->damage : 0,
@@ -612,6 +614,104 @@
                 return "P";
             }
             return "K";
+        }
+
+        /**
+         * Gets the sprite of a player based on his ID
+         * @param  string $post_id Player ID
+         * @return string ['H','B','P','K']
+         */
+        static function getPlayerSprite($post_id, $class){
+
+            // ** There's a better way to do this, but let's slap something neat together for now.
+
+            // Let's set some variables we can expect later
+            $sprite = "";
+            $segment = "1";
+            $gender = "male";
+
+            // Knight
+            if($class == "K"){
+
+                if(in_array($post_id[0],array('0','1','2','3','4','5','6','A','E','I','O','U','Y','7','8','9'))) {
+                    $gender = "male";
+                    if(in_array($post_id[0], array('0','1', 'U'))) {
+                        $segment = "1";
+                    }
+                    if(in_array($post_id[0], array('2','3', '7'))) {
+                        $segment = "2";
+                    }
+                    if(in_array($post_id[0], array('4','5', '9', 'O'))) {
+                        $segment = "3";
+                    }
+                    if(in_array($post_id[0], array('6','A', 'Y'))) {
+                        $segment = "4";
+                    }
+                    if(in_array($post_id[0], array('E','I', '8'))) {
+                        $segment = "5";
+                    }
+                }
+
+                if(in_array($post_id[0],array("+","/",'a','e','i','o','u','y'))) {
+                    $gender = "female";
+                    if(in_array($post_id[0], array('+','/', 'a'))) {
+                        $segment = "1";
+                    }
+                    if(in_array($post_id[0], array('e','i', 'o'))) {
+                        $segment = "2";
+                    }
+                    if(in_array($post_id[0], array('u','y'))) {
+                        $segment = "3";
+                    }
+                }
+
+
+            }
+
+            // Healer
+            if($class == "H"){
+
+                if(in_array($post_id[0],array('0','1','2','3','4','5','6','A','E','I','O','U','Y','7','8','9'))) {
+                    $gender = "female";
+                    if(in_array($post_id[0], array('0','1','U','8'))) {
+                        $segment = "1";
+                    }
+                    if(in_array($post_id[0], array('2','3','7',"I"))) {
+                        $segment = "2";
+                    }
+                    if(in_array($post_id[0], array('4','5','9','O'))) {
+                        $segment = "3";
+                    }
+                    if(in_array($post_id[0], array('6','A','Y',"E"))) {
+                        $segment = "4";
+                    }
+                }
+
+                if(in_array($post_id[0],array("+","/",'a','e','i','o','u','y'))) {
+                    $gender = "male";
+                    $segment = "1";
+                }
+
+            }
+
+            // Bard
+            if($class == "B"){
+
+                if(in_array($post_id[0],array('0','1','2','3','4','5','6','A','E','I','O','U'))) {
+                    $gender = "female";
+                    $segment = "1";
+                }
+
+                if(in_array($post_id[0],array("+","/",'a','e','i','o','u','y','Y','7','8','9'))) {
+                    $gender = "male";
+                    $segment = "1";
+                }
+
+            }
+
+            $sprite .= $gender . "_" . $class . "_" . $segment . ".png";
+
+            return $sprite;
         }
 
         /**
