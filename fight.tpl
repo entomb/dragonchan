@@ -15,7 +15,7 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
         <a target="_blank" href="https://github.com/entomb/dragonchan"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
         <div class="ink-container" style="width:90%;">
 
-        <h2>chan Boss Raid <span class="small"><a href="https://boards.4chan.org/b/res/<?php echo $this->THREAD_ID; ?>">#<?php echo $this->THREAD_ID; ?></a></span>
+        <h2>chan Boss Raid <span class="small"><a href="http://boards.4chan.org/b/res/<?php echo $this->THREAD_ID; ?>">#<?php echo $this->THREAD_ID; ?></a></span>
             <small><a target="_blank" href="/info">version <?php echo $this->_version; ?> (More Info)</a></small>
         </h2>
         <br />
@@ -39,12 +39,21 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
                         <div class="health-remaining-text">HP: <?php echo number_format($this->BossHP); ?> / <?php echo number_format($this->BossHP_MAX); ?></div>
                     </div>
 
-                    <?php if($this->bossIsEnraged()) { ?>
+                    <?php if($this->bossIsDead()) { ?>
+                        <table class="ink-table">
+                            <tr>
+                                <td colspan='3' style='font-size:22px;'>
+                                    <span class='ink-label success'>THE BEAST HAS BEEN SLAIN!</span>
+                                </td>
+                            </tr>
+                        </table>
+
+                    <?php }elseif($this->bossIsEnraged()) { ?>
 
                         <table class="ink-table">
                             <tr>
-                                <td colspan='3' style=' font-size:22px;'>
-                                    <span class='ink-label caution'>THE BOSS HAS ENRAGED!</span> <small>Every roll under <?php echo $this->min_roll; ?> will result in death!!</small>
+                                <td colspan='3' style='font-size:22px;'>
+                                    <span class='ink-label caution'>THE BEAST HAS ENRAGED!</span> <small>Every roll under <?php echo $this->min_roll; ?> will result in death!!</small>
                                 </td>
                             </tr>
                         </table>
@@ -117,16 +126,18 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
                         <?php
 
                         if($_row['action']=="enrage"){
+                          //enrage notice
                             echo "<tr>";
-                                echo "<td colspan='3' style='text-align:center; font-size:22px;'>";
-                                    echo "<span class='ink-label caution'>THE BOSS HAS ENRAGED!</span>";
+                                echo "<td colspan='3' style='text-align:center; font-size:24px;'>";
+                                  echo "<div class='ink-vspace'>";
+                                    echo "<span class='ink-label caution'>THE BEAST HAS ENRAGED!</span>";
                                     echo "<br/><small>Every roll under $this->min_roll will result in death!!</small>";
+                                  echo "</div>";
                                 echo "</td>";
                             echo "</tr>";
-                            break;
-                        }
-                        else {
-                            include('attack_sequence.php');
+                        } else {
+                          //combat log
+                          include('attack_sequence.php');
                         }
 
                         ?>
@@ -156,6 +167,13 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
                      echo "<br/>";
                      } ?>
 
+                    <h3>Top Bards</h3>
+                     <?php foreach($topBuffs as $_id => $_count){
+                     echo "<span class='ink-label caution' style='background-color:#F49D9D'>+".$_count."</span>";
+                     echo " <b>".$_id."</b>";
+                     echo "<br/>";
+                     } ?>
+
                     <h3>Fallen Soldiers</h3>
                      <?php foreach($this->deadPlayers as $_row){
                      echo "&#x271D;";
@@ -171,12 +189,6 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
                      echo "<br/>";
                      } ?>
 
-                    <h3>Top Bards</h3>
-                     <?php foreach($topBuffs as $_id => $_count){
-                     echo "<span class='ink-label caution' style='background-color:#F49D9D'>+".$_count."</span>";
-                     echo " <b>".$_id."</b>";
-                     echo "<br/>";
-                     } ?>
                 </div>
             </div>
         </div>

@@ -44,7 +44,7 @@
         <a target="_blank" href="https://github.com/entomb/dragonchan"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
         <div class="ink-container">
 
-        <h2>chan Boss Raid <wb><small>version 1.4.1</small></h2>
+        <h2>chan Boss Raid <wb><small>version 1.4.5</small></h2>
         <div class="ink-row">
             <div class="ink-gutter">
                 <div class="ink-l40">
@@ -58,10 +58,11 @@
                     </p>
 
 
-                    <p> New Ideas and game mechanics:<br/>
+                    <p> New Ideas, game mechanics and code:<br/>
                         <ul>
                             <li>Bryan</li>
                             <li><a target="_blank" href="https://github.com/RobertsOma">RobertsOma</a></li>
+                            <li><a target="_blank" href="https://github.com/tselaty">tselaty</a></li>
                             <li>Q4-Bi.</li>
                         </ul>
                     </p>
@@ -100,11 +101,17 @@
         <div class="ink-row">
             <div class="ink-gutter">
                 <h3>Changelog</h3>
+                <h4>v1.4.5- 22-04-2013</h4>
+                    <ul>
+                        <li>Massive interface changes</li>
+                        <li>new domain: `http://slayer.pw/$THREADID`</li>
+                        <li>new domain: `http://dragon.slayer.pw/$THREADID`</li>
+                    </ul>
                 <h4>v1.4.1- 21-04-2013</h4>
                     <ul>
-                        <li>added: Top deaths stats</li> 
-                        <li>added: Top bard buff stats</li> 
-                        <li>adjustments to the fight template</li> 
+                        <li>added: Top deaths stats</li>
+                        <li>added: Top bard buff stats</li>
+                        <li>adjustments to the fight template</li>
                     </ul>
                 <h4>v1.4- 20-04-2013</h4>
                     <ul>

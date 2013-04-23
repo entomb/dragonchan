@@ -29,7 +29,7 @@
                     if($_damage==0){
                         echo "dies by rolling $_roll";
                     }else{
-                        echo "dies by rolling $_roll. the boss heals for <span class='ink-label warning'>".(-$_damage)." HP</span>";
+                        echo "dies by rolling $_roll. the beast heals for <span class='ink-label warning'>".(-$_damage)." HP</span>";
                     }
                 break;
                 case 'avenge':

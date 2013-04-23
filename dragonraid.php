@@ -14,7 +14,7 @@
      * Chan Boss Raid main class
      */
     Class DragonRaid{
-        var $_version = "1.4.1";
+        var $_version = "1.4.5";
 
         var $THREAD_ID;
         var $THREAD;
@@ -512,7 +512,7 @@
          * @return void
          */
         function displayStatus(){
-            $topDamage = $this->getTopDamage(3); 
+            $topDamage = $this->getTopDamage(3);
 
             $BATTLE = &$this->LOG;
             $BATTLE = array_reverse($BATTLE);
@@ -524,7 +524,7 @@
          * @return void
          */
         function displayStatusAjax(){
-            $topDamage = $this->getTopDamage(3); 
+            $topDamage = $this->getTopDamage(3);
 
             $BATTLE = &$this->LOG;
             $BATTLE = array_reverse($BATTLE);

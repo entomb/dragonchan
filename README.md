@@ -3,9 +3,14 @@ dragonchan
 
 A prototype script to transform any /b/ thread into a dragon slaying match.
 
-Hosted on AppFog: `http://dragonslayer.eu01.aws.af.cm/$THREADID`
+Set up (or hijack) any thread using the template below and copy paste it's ID into this URL:
 
-Hosted on VentraIP: `http://slayer.pw/$THREADID` `http://dragon.slayer.pw/$THREADID`
+
+#`http://slayer.pw/{THREAD_ID}`#
+
+If that one doesn't work, use one of the following
+- Mirror on VentraIP: `http://dragon.slayer.pw/{THREAD_ID}`
+- Hosted on AppFog: `http://dragonslayer.eu01.aws.af.cm/{THREAD_ID}`
 
 
 Disclaimer
@@ -19,6 +24,7 @@ Please don`t spam with dragon threads or you will end up ruining it for other pe
 
 Thread Template:
 ================
+_Allways check this page for the correct template before posting. rules will be updated as the game evolves_
 ```
 ITT: /b/ dragon slayer raid!
 
@@ -48,6 +54,12 @@ I have a webpage to track things, I will post a link to it here.
 
 Changelog
 =========
+__version 1.4.5 - 22-04-2013__
+   - Massive interface changes
+   - new domain: `http://slayer.pw/{THREAD_ID}`
+   - new domain: `http://dragon.slayer.pw/{THREAD_ID}`
+
+
 __version 1.4.1 - 21-04-2013__
    - added: Top deaths stats
    - added: Top bard buff stats
