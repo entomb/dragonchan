@@ -139,7 +139,7 @@
                 }
 
                 //death roll!
-                if($post->roll<$this->min_roll){
+                if($post->roll<$this->min_roll && !$this->isDeadPlayer($post->id)){
                     $action = "kill";
                     $post->action = $action;
                     $this->killPlayer($post);
@@ -678,7 +678,7 @@
             if(in_array($post_id[0],array('W','R','L','C','K'))){
                 return "W";
             }
-            if(strpos('+',$post_id)>0 || strpos('/',$post_id)>0){
+            if(strpos($post_id,'+')>0 || strpos($post_id,'/')>0){
                 return "DK";
             }
             return "K";
