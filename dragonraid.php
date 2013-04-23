@@ -106,7 +106,6 @@
                         $this->WINNER = $post;
                         $action = 'winrar';
                         $post->action = $action;
-                        $post->sprite = self::getPlayerSprite($post);
                         $this->log($action,$post);
                     }
                     continue;
@@ -122,7 +121,6 @@
                     $this->min_roll = $this->min_roll_enraged;
                     $action = 'enrage';
                     $post->action = $action;
-                    $post->sprite = self::getPlayerSprite($post);
                     $this->log($action,$post);
                 }
 
@@ -130,7 +128,6 @@
                 if($post->roll<$this->min_roll){
                     $action = "kill";
                     $post->action = $action;
-                    $post->sprite = self::getPlayerSprite($post);
                     $this->killPlayer($post);
                     continue;
                 }
@@ -163,7 +160,6 @@
                                 $post->_target = $_target_id;
                                 $action = 'avenge';
                                 $post->action = $action;
-                                $post->sprite = self::getPlayerSprite($post);
                                 $this->log($action,$post);
                             }
                         }
@@ -176,7 +172,6 @@
                                 $this->revivePlayer($_target_id);
                                 $action = 'revive';
                                 $post->action = $action;
-                                $post->sprite = self::getPlayerSprite($post);
                                 $this->log($action,$post);
                             }
                         }
@@ -187,7 +182,6 @@
                     $action = 'winrar';
                     $this->WINNER = $post;
                     $post->action = $action;
-                    $post->sprite = self::getPlayerSprite($post);
                     $this->log($action,$post);
                 }
 
@@ -240,7 +234,6 @@
                             );
             $action = 'buff';
             $post->action = $action;
-            $post->sprite = self::getPlayerSprite($post);
             $this->log($action,$post);
         }
 
@@ -273,7 +266,6 @@
             if($reportDamage){
                 $action = 'damage';
                 $post->action = $action;
-                $post->sprite = self::getPlayerSprite($post);
                 $this->log($action,$post);
             }
         }
@@ -290,7 +282,6 @@
                 $post->_target = $_target_id;
                 $action = 'revive';
                 $post->action = $action;
-                $post->sprite = self::getPlayerSprite($post);
                 $this->log($action,$post);
             }
 
@@ -299,7 +290,6 @@
             //log the hit
             $action = 'massrevive';
             $post->action = $action;
-            $post->sprite = self::getPlayerSprite($post);
             $this->log($action,$post);
         }
 
@@ -327,7 +317,6 @@
             //log the death
             $action = 'death';
             $post->action = $action;
-            $post->sprite = self::getPlayerSprite($post);
             $this->log($action,$post);
         }
 
@@ -406,9 +395,9 @@
                     'post'   => $post->no,
                     'id'     => $post->id,
                     'color'  => self::getPostColor($post->id),
+                    'sprite' => self::getPlayerSprite($post),
                     'roll'   => $post->roll,
                     'class'  => $post->class,
-                    'sprite' => $post->sprite,
                     'action' => $action,
                     'target' => isset($post->_target) ? $post->_target : 0,
                     'damage' => isset($post->damage) ? $post->damage : 0,
