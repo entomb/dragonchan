@@ -47,6 +47,7 @@
         var $boss_heal_factor   = 30;
         var $boss_enrage_percent = 0.2;
         var $critical_hit_ratio = 2;
+        var $burst_hit_ratio    = 4;
 
 
         /**
@@ -78,24 +79,36 @@
 
             foreach($this->THREAD->posts as $post){
                 //ignore OP first post
-                if($post->no==$this->THREAD_ID) continue;
+                if($post->no==$this->THREAD_ID){
+                  continue;
+                }
 
-                //ignore dead knights
-                if($this->isDeadPlayer($post->id)) continue;
+                //boss is already dead!
+                if($this->BossHP<=0){
+                    continue;
+                }
 
-                //boss is dead!
-                if($this->BossHP<=0) continue;
+                //get the current player class
+                $post->class = self::getPlayerClass($post->id);
+
+                //ignore fallen players with the exeption of deadknights
+                if($this->isDeadPlayer($post->id) && $post->class!=="DK"){
+                    continue;
+                }
 
                 //gets the current bard buff value
                 $this->bardBonusValue = $this->calculateBardBonus();
 
                 //add link to this roll
                 $post->link= "http://boards.4chan.org/b/res/".$this->THREAD_ID."#p".$post->no;
-                $post->class = self::getPlayerClass($post->id);
 
                 //GET THE CURRENT ROLL
                 $post->roll = self::roll($post->no,2);
-                $post->com = isset($post->com) ? $post->com : "";
+
+                //mandatory data (that might not be on the API item)
+                $post->com      = isset($post->com) ? $post->com : "";
+                //$post->filename = isset($post->filename) ? $post->filename : "";
+                $post->tim      = isset($post->tim) ? $post->tim : "";
 
 
                 //mass resurection and damage
@@ -117,7 +130,8 @@
                     continue;
                 }
 
-                if($this->bossIsEnraged() &&  $this->min_roll!=$this->min_roll_enraged){
+                //enrage the boss (only once)
+                if($this->bossIsEnraged() && $this->min_roll!=$this->min_roll_enraged){
                     $this->min_roll = $this->min_roll_enraged;
                     $action = 'enrage';
                     $post->action = $action;
@@ -132,11 +146,10 @@
                     continue;
                 }
 
-
-                //regular hit
+                //calculate regular hit
                 $this->damage($post);
 
-                //bard buff!
+                //add bard buff!
                 if($post->class=='B' && isset($post->filename)){
                    $this->addBardBuff($post);
                 }
@@ -247,17 +260,38 @@
          */
         function damage($post,$canCritical=true,$reportDamage=true){
             //define damage
-            if(($post->class=='K') && $canCritical && self::isCriticalHit($post->roll)){
+            if( ($post->class=='K') && $canCritical && self::isCriticalHit($post->roll)){
                 $post->damage = $post->roll*$this->critical_hit_ratio;
             }else{
                 $post->damage = $post->roll;
             }
 
+
             if($post->roll<=99){
                 $post->bonus = $this->bardBonusValue;
+
+                //warlock pet damage
+                if($post->class=="W" && isset($post->filename)){
+
+                    $_pet_damage = self::roll($post->tim);
+
+                    //warlock burst (only if not 00)
+                    if($_pet_damage<99 && self::lastDigitMatch($post->no,$post->tim)){
+                        $_pet_damage = $_pet_damage*$this->burst_hit_ratio;
+                    }
+
+                    $post->bonus+=$_pet_damage;
+                }
+
+                //death knight death bonus
+                if($post->class=="DK" && $this->isDeadPlayer($post->id)){
+                    $post->bonus+= $post->damage;
+                }
+
             }else{
                 $post->bonus = 0;
             }
+
 
             //take the damage
             $this->BossHP-= ($post->damage+$post->bonus);
@@ -617,6 +651,16 @@
         }
 
         /**
+         * Checks if the last digit of 2 numbers match
+         * @param  int|string $num1 First Number
+         * @param  int|string $num2 Second Number
+         * @return bool
+         */
+        static function lastDigitMatch($num1,$num2){
+            return (bool)(substr((string)$num1,-1, 1) == substr((string)$num2,-1,1));
+        }
+
+        /**
          * Gets the class of a player based on his ID
          * @param  string $post_id Player ID
          * @return string ['H','B','P','K']
@@ -630,6 +674,12 @@
             }
             if(in_array($post_id[0],array('+','/'))){
                 return "P";
+            }
+            if(in_array($post_id[0],array('W','R','L','C','K'))){
+                return "W";
+            }
+            if(strpos('+',$post_id)>0 || strpos('/',$post_id)>0){
+                return "DK";
             }
             return "K";
         }
