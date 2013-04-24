@@ -57,7 +57,7 @@
                         <li><span class="ink-label class-K">Knights</span> avenge fallen soldiers by targeting them and rolling an EVEN number. Avenging does more damage for the glory of the fallen mate.</li>
                         <li><span class="ink-label class-P">Paladins</span> can avenge AND revive!</li>
                         <li><span class="ink-label class-W">Warlocks</span> can summon minions by posting an image. The last 2 digits of the image filename will be added to his damage. if his roll last digit matches his minion last digit he BURSTS massive damage.</li>
-                        <li><span class="ink-label class-DK">Death Knights</span> can continue attacking after they die. they will do double damage when dead but only half damage when alive.</li>
+                        <li><span class="ink-label class-DK">Death Knights</span> can continue attacking after they die. they will do x3 damage when dead but only 2/3 when alive.</li>
                         <li>you can be avenged/revived 6 times max</li>
                         <li>If you roll 00 or 69 you REVIVE everyone! their damage will count again! </li>
                         <li>The boss will enrage bellow 20% HP, the minimum roll will be 22. however, he will no longer heal himself </li>
