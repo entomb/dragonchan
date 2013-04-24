@@ -34,6 +34,9 @@
         var $bardBuffs = array();
         var $bardBonusValue = 0;
 
+        //internal caches
+        var $_cached_post_authors = array();
+
 
         /**
          * CONFIGS
@@ -78,6 +81,9 @@
         function play(){
 
             foreach($this->THREAD->posts as $post){
+                //save the post author for later
+                $this->_cached_post_authors[$post->no] = $post->id;
+
                 //ignore OP first post
                 if($post->no==$this->THREAD_ID){
                   continue;
@@ -925,18 +931,32 @@
 
         /**
          * returns the author of a post
+         * authors are var cached for speed
          * @param  int $post_number Post number to search
          * @return string post author unique ID
-         */
+         */ 
         function getPostAuthor($post_number){
+            if(isset($this->_cached_post_authors)){
+                return $_cached_post_authors[$post_number];
+            }
+
             foreach($this->THREAD->posts as $post){
                 if($post->no==$post_number){
+                    $_cached_post_authors[$post_number] = $post->id;
                     return $post->id;
                 }
             }
 
             //not found
             return false;
+        }
+
+
+        function getPostReplies($post_id){
+            $replies = array();
+            foreach($this->THREAD->posts as $post){
+
+            }
         }
 
         static function getPostColor($id){
