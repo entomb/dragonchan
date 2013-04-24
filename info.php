@@ -75,6 +75,8 @@
                     <ul>
                         <li>New Classes: 'Death Knight' and 'Warlock'</li>
                         <li>Added memcache so it doesn`t stress the api</li>
+                        <li>Replies to the killer blow now display bellow the winner notification</li>
+                        <li>Small fixes on the autoupdater CSS</li>
                     </ul>
                 <h4>v1.4.5- 22-04-2013</h4>
                     <ul>

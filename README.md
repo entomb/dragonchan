@@ -62,6 +62,12 @@ I have a webpage to track things, I will post a link to it here.
 
 Changelog
 =========
+__v1.5- 24-04-2013__
+   - New Classes: 'Death Knight' and 'Warlock'
+   - Added memcache so it doesn`t stress the api
+   - Replies to the killer blow now display bellow the winner notification
+   - Small fixes on the autoupdater CSS
+
 __version 1.4.5 - 22-04-2013__
    - Massive interface changes
    - new domain: `http://slayer.pw/{THREAD_ID}`
