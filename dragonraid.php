@@ -1116,6 +1116,8 @@
                 $targets = array_keys($targets);
 
                 $post->class = self::getPlayerClass($post->id);
+                $post->weapon = self::getPlayerWeapon($post);
+                $post->sprite = self::getPlayerSprite($post);
 
                 //clean the text, more or less
                 $post->text = html_entity_decode(strip_tags($post->com));
