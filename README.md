@@ -7,12 +7,12 @@ Set up (or hijack) any thread using the template below and copy paste it's ID in
 
 
 # Offical Domain
-- Hosted on AppFog: `http://dragonslayer.eu01.aws.af.cm/[thread_id]/`
+- Hosted on AppFog: `http://dragonslayer.eu01.aws.af.cm/[thread_id]`
 
 # Domain Mirror's
-- `http://slayer.pw/[thread_id]/`
-- `http://dragon.slayer.pw/[thread_id]/`
-- `http://mlp.pw/[thread_id]/`
+- `http://slayer.pw/[thread_id]`
+- `http://dragon.slayer.pw/[thread_id]`
+- `http://mlp.pw/[thread_id]`
 
 
 Disclaimer
