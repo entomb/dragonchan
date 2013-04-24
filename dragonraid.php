@@ -14,7 +14,7 @@
      * Chan Boss Raid main class
      */
     Class DragonRaid{
-        var $_version = "1.4.5";
+        var $_version = "1.5";
 
         var $THREAD_ID;
         var $THREAD;
@@ -34,6 +34,10 @@
         var $bardBuffs = array();
         var $bardBonusValue = 0;
 
+        //internal caches
+        var $_cached_post_authors = array();
+        var $_set_nicknames       = array();
+
 
         /**
          * CONFIGS
@@ -47,6 +51,7 @@
         var $boss_heal_factor   = 30;
         var $boss_enrage_percent = 0.2;
         var $critical_hit_ratio = 2;
+        var $burst_hit_ratio    = 4;
 
 
         /**
@@ -77,25 +82,40 @@
         function play(){
 
             foreach($this->THREAD->posts as $post){
+                //save the post author for later
+                $this->_cached_post_authors[$post->no] = $post->id;
+
                 //ignore OP first post
-                if($post->no==$this->THREAD_ID) continue;
+                if($post->no==$this->THREAD_ID){
+                  continue;
+                }
 
-                //ignore dead knights
-                if($this->isDeadPlayer($post->id)) continue;
+                //boss is already dead!
+                if($this->BossHP<=0){
+                    continue;
+                }
 
-                //boss is dead!
-                if($this->BossHP<=0) continue;
+                //get the current player class
+                $post->class = self::getPlayerClass($post->id);
+
+                //ignore fallen players with the exeption of deadknights
+                if($this->isDeadPlayer($post->id) && $post->class!=="DK"){
+                    continue;
+                }
 
                 //gets the current bard buff value
                 $this->bardBonusValue = $this->calculateBardBonus();
 
                 //add link to this roll
                 $post->link= "http://boards.4chan.org/b/res/".$this->THREAD_ID."#p".$post->no;
-                $post->class = self::getPlayerClass($post->id);
 
                 //GET THE CURRENT ROLL
                 $post->roll = self::roll($post->no,2);
-                $post->com = isset($post->com) ? $post->com : "";
+
+                //mandatory data (that might not be on the API item)
+                $post->com      = isset($post->com) ? $post->com : "";
+                //$post->filename = isset($post->filename) ? $post->filename : "";
+                $post->tim      = isset($post->tim) ? $post->tim : "";
 
 
                 //mass resurection and damage
@@ -106,7 +126,6 @@
                         $this->WINNER = $post;
                         $action = 'winrar';
                         $post->action = $action;
-                        $post->sprite = self::getPlayerSprite($post);
                         $this->log($action,$post);
                     }
                     continue;
@@ -118,28 +137,26 @@
                     continue;
                 }
 
-                if($this->bossIsEnraged() &&  $this->min_roll!=$this->min_roll_enraged){
+                //enrage the boss (only once)
+                if($this->bossIsEnraged() && $this->min_roll!=$this->min_roll_enraged){
                     $this->min_roll = $this->min_roll_enraged;
                     $action = 'enrage';
                     $post->action = $action;
-                    $post->sprite = self::getPlayerSprite($post);
                     $this->log($action,$post);
                 }
 
                 //death roll!
-                if($post->roll<$this->min_roll){
+                if($post->roll<$this->min_roll && !$this->isDeadPlayer($post->id)){
                     $action = "kill";
                     $post->action = $action;
-                    $post->sprite = self::getPlayerSprite($post);
                     $this->killPlayer($post);
                     continue;
                 }
 
-
-                //regular hit
+                //calculate regular hit
                 $this->damage($post);
 
-                //bard buff!
+                //add bard buff!
                 if($post->class=='B' && isset($post->filename)){
                    $this->addBardBuff($post);
                 }
@@ -163,7 +180,6 @@
                                 $post->_target = $_target_id;
                                 $action = 'avenge';
                                 $post->action = $action;
-                                $post->sprite = self::getPlayerSprite($post);
                                 $this->log($action,$post);
                             }
                         }
@@ -176,7 +192,6 @@
                                 $this->revivePlayer($_target_id);
                                 $action = 'revive';
                                 $post->action = $action;
-                                $post->sprite = self::getPlayerSprite($post);
                                 $this->log($action,$post);
                             }
                         }
@@ -187,7 +202,6 @@
                     $action = 'winrar';
                     $this->WINNER = $post;
                     $post->action = $action;
-                    $post->sprite = self::getPlayerSprite($post);
                     $this->log($action,$post);
                 }
 
@@ -240,7 +254,6 @@
                             );
             $action = 'buff';
             $post->action = $action;
-            $post->sprite = self::getPlayerSprite($post);
             $this->log($action,$post);
         }
 
@@ -254,17 +267,42 @@
          */
         function damage($post,$canCritical=true,$reportDamage=true){
             //define damage
-            if(($post->class=='K') && $canCritical && self::isCriticalHit($post->roll)){
+            if( ($post->class=='K') && $canCritical && self::isCriticalHit($post->roll)){
                 $post->damage = $post->roll*$this->critical_hit_ratio;
             }else{
                 $post->damage = $post->roll;
             }
 
+
             if($post->roll<=99){
                 $post->bonus = $this->bardBonusValue;
+
+                //warlock pet damage
+                if($post->class=="W" && isset($post->filename)){
+
+                    $_pet_damage = self::roll($post->tim);
+
+                    //warlock burst (only if not 00)
+                    if($_pet_damage<99 && self::lastDigitMatch($post->no,$post->tim)){
+                        $_pet_damage = $_pet_damage*$this->burst_hit_ratio;
+                    }
+
+                    $post->bonus+=$_pet_damage;
+                }
+
+                //death knight death bonus
+                if($post->class=="DK"){
+                    if($this->isDeadPlayer($post->id)){
+                        $post->bonus+= $post->damage;
+                    }else{
+                        $post->bonus-= floor($post->damage/2);
+                    }
+                }
+
             }else{
                 $post->bonus = 0;
             }
+
 
             //take the damage
             $this->BossHP-= ($post->damage+$post->bonus);
@@ -273,7 +311,6 @@
             if($reportDamage){
                 $action = 'damage';
                 $post->action = $action;
-                $post->sprite = self::getPlayerSprite($post);
                 $this->log($action,$post);
             }
         }
@@ -290,7 +327,6 @@
                 $post->_target = $_target_id;
                 $action = 'revive';
                 $post->action = $action;
-                $post->sprite = self::getPlayerSprite($post);
                 $this->log($action,$post);
             }
 
@@ -299,7 +335,6 @@
             //log the hit
             $action = 'massrevive';
             $post->action = $action;
-            $post->sprite = self::getPlayerSprite($post);
             $this->log($action,$post);
         }
 
@@ -327,7 +362,6 @@
             //log the death
             $action = 'death';
             $post->action = $action;
-            $post->sprite = self::getPlayerSprite($post);
             $this->log($action,$post);
         }
 
@@ -393,6 +427,43 @@
             }
         }
 
+        /**
+         * sets a nickname for a user
+         * @param  object $post   the full post object
+         
+        function setNickname(&$post){
+            if(isset($this->_set_nicknames[$post->id])){
+                //was already set
+                return false;
+            }
+
+            $post->email = strip_tags($post->email);
+            if(isset($post->email) && strlen($post->email)<100){
+                if(in_array($post->email,$this->_set_nicknames)){
+                    //was already used
+                    return false;
+                }
+                //set the nick
+                $this->_set_nicknames[$post->id] = $post->email;
+                return true;
+            }
+            return false;
+        }
+        */
+       
+        /**
+         * gets a previously set nickname
+         * @param  string $user_id the user to search for
+         * @return string the nickname to use
+       
+        function getNickname($user_id){
+            if(isset($this->_set_nicknames[$user_id])){
+                return $this->_set_nicknames[$user_id];
+            }else{
+                return $user_id;
+            }
+        }
+        */
 
         /**
          * Logs an action
@@ -406,9 +477,9 @@
                     'post'   => $post->no,
                     'id'     => $post->id,
                     'color'  => self::getPostColor($post->id),
+                    'sprite' => self::getPlayerSprite($post),
                     'roll'   => $post->roll,
                     'class'  => $post->class,
-                    'sprite' => $post->sprite,
                     'action' => $action,
                     'target' => isset($post->_target) ? $post->_target : 0,
                     'damage' => isset($post->damage) ? $post->damage : 0,
@@ -606,6 +677,7 @@
             return (bool)($this->BossHP<=$this->BossHP_MAX*$this->boss_enrage_percent);
         }
 
+        
 
 
         //**********************************************************
@@ -628,6 +700,16 @@
         }
 
         /**
+         * Checks if the last digit of 2 numbers match
+         * @param  int|string $num1 First Number
+         * @param  int|string $num2 Second Number
+         * @return bool
+         */
+        static function lastDigitMatch($num1,$num2){
+            return (bool)(substr((string)$num1,-1, 1) == substr((string)$num2,-1,1));
+        }
+
+        /**
          * Gets the class of a player based on his ID
          * @param  string $post_id Player ID
          * @return string ['H','B','P','K']
@@ -641,6 +723,12 @@
             }
             if(in_array($post_id[0],array('+','/'))){
                 return "P";
+            }
+            if(in_array($post_id[0],array('W','R','L','C','K','w','r','l','c','k'))){
+                return "W";
+            }
+            if(strpos($post_id,'+')>0 || strpos($post_id,'/')>0){
+                return "DK";
             }
             return "K";
         }
@@ -659,6 +747,10 @@
             $gender = "male";
             $class = $post->class;
             $post_id = $post->id;
+            
+            //this is a temp overwrite
+            if($class=='DK') $class = 'K';
+            if($class=='W')  $class = 'H';
 
             // 64 variations
             $range = array('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",'0','1','2','3','4','5','6','7','8','9','+','/');
@@ -878,18 +970,52 @@
 
         /**
          * returns the author of a post
+         * authors are var cached for speed
          * @param  int $post_number Post number to search
          * @return string post author unique ID
          */
         function getPostAuthor($post_number){
+            if(isset($this->_cached_post_authors[$post_number])){
+                return $this->_cached_post_authors[$post_number];
+            }
+
             foreach($this->THREAD->posts as $post){
                 if($post->no==$post_number){
+                    $this->_cached_post_authors[$post_number] = $post->id;
                     return $post->id;
                 }
             }
 
             //not found
             return false;
+        }
+
+        /**
+         * Gets the full API object from replies of a certain post.
+         * @param  string $post_id the post to target
+         * @return array
+         */
+        function getPostReplies($post_id){
+            $replies = array();
+            foreach($this->THREAD->posts as $post){
+                if(!isset($post->com)){
+                  continue;
+                }
+                
+                $targets = $this->getTargetPosts($post->com);
+                $targets = array_keys($targets);
+
+                $post->class = self::getPlayerClass($post->id);
+
+                //clean the text, more or less
+                $post->text = html_entity_decode(strip_tags($post->com));
+                $post->text = preg_replace('/>>(\d+){9}/i','',$post->text);
+
+                if(in_array($post_id,$targets)){
+                    $replies[] = $post;
+                }
+            }
+            return $replies;
         }
 
         static function getPostColor($id){

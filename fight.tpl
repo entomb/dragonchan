@@ -84,12 +84,14 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
                 </div>
               </div>
               <div class="ink-l60">
-                <h4>Rules</h4>
+                <h4>Classes</h4>
                 <ul>
-                  <li>If your ID starts with a number you are a <b>Healer</b>.</li>
-                  <li>If your ID starts with a vowel you are a <b>Bard</b>.</li>
-                  <li>If your ID starts with a "/" or "+" you are a <b>Paladin</b>.</li>
-                  <li>otherwise you are a <b>Knight</b></li>
+                  <li>If your ID starts with a number you are a <span class="ink-label class-H">Healer</span>.</li>
+                  <li>If your ID starts with a vowel you are a <span class="ink-label class-B">Bard</span>.</li>
+                  <li>If your ID starts with a "/" or "+" you are a <span class="ink-label class-P">Paladin</span>.</li>
+                  <li>If your ID starts with "W","R","L","C" or "K" you are a <span class="ink-label class-W">Warlock</span>.</li>
+                  <li>Otherwise you are a <span class="ink-label class-K">Knight</span></li>
+                  <li>BUT if you have a "+" or "/" in your ID you are a <span class="ink-label class-DK">Death Knight</span></li>
                   <li>Your last 2 digits represent the damage you do</li>
                   <li><a target="_blank" href="/info">(see the full rules)</a></li>
                 </ul>
@@ -101,20 +103,41 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
 
         <?php
         if($this->WINNER){
-            echo "<h1 class='hero'>";
+            $WINNER_praises =  $this->getPostReplies($this->WINNER->no); 
+            $WINNER_text = html_entity_decode(strip_tags($this->WINNER->com));
+            $WINNER_text = preg_replace('/>>(\d+){9}/i','',$WINNER_text);
+
+            echo "<h2 class='hero'>";
             echo "WINRAR!!! Hail the new monster slayer!";
             echo "<br/>";
             echo '<a target="_blank" href="'.$this->WINNER->link.'">';
             echo " &gt;&gt;".$this->WINNER->no;
             echo '</a>';
             echo "&nbsp;&nbsp;";
-            echo "<p style='color:#666;'>";
-            echo strip_tags($this->WINNER->com,'<br>');
-            echo "&nbsp; - <span class='ink-label info' style='font-size:17px;'>";
+            echo "<p style='color:#666;'> $WINNER_text &nbsp; - <span class='ink-label info' style='font-size:15px;'>";
             echo $this->WINNER->id;
             echo "</span>";
             echo "</p>";
-            echo "</h1>";
+            echo "</h2>";
+
+            if($WINNER_praises){
+               echo "<h1>The party praises the new hero!</h1>";
+               echo "<div class='ink-row'>";
+                echo "<div class='ink-gutter'>";
+                foreach($WINNER_praises as $_item){
+                    if(empty($_item->text)){
+                      continue;  
+                    } 
+                    echo "<div class='ink-l20 praise'>";
+                     echo "<h4 class='ink-label class-".$_item->class."'>".$_item->id." says:</h4>";
+                     echo $_item->text;
+                    echo "</div>";
+                } 
+
+                echo "</div>";
+               echo "</div>";
+               echo "<div class='ink-row ink-vspace'></div>";
+            }
         }
         ?>
         <div class="ink-row">
@@ -149,35 +172,35 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
                     <h3>Top Damage</h3>
                      <?php foreach($topDamage as $_id => $_damage){
                      echo "<span class='ink-label caution'>".$_damage." HP</span>";
-                     echo "&nbsp;<b>".$_id."</b>";
+                     echo "&nbsp;<span class='ink-label class-".self::getPlayerClass($_id)."'>".$_id."</span>";
                      echo "<br/>";
                      } ?>
 
                     <h3>Top Revives</h3>
                      <?php foreach($topRevive as $_id => $_revives){
                      echo "<span class='ink-label success'>".$_revives."</span>";
-                     echo "&nbsp;<b>".$_id."</b>";
+                     echo "&nbsp;<span class='ink-label class-".self::getPlayerClass($_id)."'>".$_id."</span>";
                      echo "<br/>";
                      } ?>
 
                     <h3>Top Avengers</h3>
                      <?php foreach($topAvenge as $_id => $_avenges){
                      echo "<span class='ink-label info'>".$_avenges."</span>";
-                     echo "&nbsp;<b>".$_id."</b>";
+                     echo "&nbsp;<span class='ink-label class-".self::getPlayerClass($_id)."'>".$_id."</span>";
                      echo "<br/>";
                      } ?>
 
                     <h3>Top Bards</h3>
                      <?php foreach($topBuffs as $_id => $_count){
                      echo "<span class='ink-label caution' style='background-color:#F49D9D'>+".$_count."</span>";
-                     echo " <b>".$_id."</b>";
+                     echo "&nbsp;<span class='ink-label class-".self::getPlayerClass($_id)."'>".$_id."</span>";
                      echo "<br/>";
                      } ?>
 
                     <h3>Fallen Soldiers</h3>
-                     <?php foreach($this->deadPlayers as $_row){
+                     <?php foreach($this->deadPlayers as $_id){
                      echo "&#x271D;";
-                     echo " <i>".$_row."</i>";
+                     echo "&nbsp;<span class='ink-label class-".self::getPlayerClass($_id)."'>".$_id."</span>";
                      echo "<br/>";
                      } ?>
 
@@ -185,7 +208,7 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
                      <?php foreach($topDeaths as $_id => $_count){
                      echo " <i>".$_count."</i>";
                      echo "&nbsp;&#x271D;";
-                     echo " <i>".$_id."</i>";
+                     echo "&nbsp;<span class='ink-label class-".self::getPlayerClass($_id)."'>".$_id."</span>";
                      echo "<br/>";
                      } ?>
 
@@ -197,18 +220,25 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
 
         </div>
         <script type="text/javascript">
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-37723000-2']);
+          _gaq.push(['_trackPageview']);
+          _gaq.push(['_trackEvent', 'Log', 'Refresh']);
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-37723000-2']);
-  _gaq.push(['_trackPageview']);
-  _gaq.push(['_trackEvent', 'Log', 'Refresh']);
+          <?php
+          //log the cached status
+          if($this->cache_status){
+            echo "_gaq.push(['_trackEvent', 'Cache', 'hit']);";
+          }else{
+            echo "_gaq.push(['_trackEvent', 'Cache', 'miss']);";
+          }
+          ?>
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })(); 
+        </script>
     </body>
 </html>
