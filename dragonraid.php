@@ -427,10 +427,10 @@
             }
         }
 
-        /**
+        /*
          * sets a nickname for a user
          * @param  object $post   the full post object
-         
+
         function setNickname(&$post){
             if(isset($this->_set_nicknames[$post->id])){
                 //was already set
@@ -450,12 +450,12 @@
             return false;
         }
         */
-       
-        /**
+
+        /*
          * gets a previously set nickname
          * @param  string $user_id the user to search for
          * @return string the nickname to use
-       
+
         function getNickname($user_id){
             if(isset($this->_set_nicknames[$user_id])){
                 return $this->_set_nicknames[$user_id];
@@ -478,6 +478,7 @@
                     'id'     => $post->id,
                     'color'  => self::getPostColor($post->id),
                     'sprite' => self::getPlayerSprite($post),
+                    'weapon' => self::getPlayerWeapon($post),
                     'roll'   => $post->roll,
                     'class'  => $post->class,
                     'action' => $action,
@@ -677,7 +678,7 @@
             return (bool)($this->BossHP<=$this->BossHP_MAX*$this->boss_enrage_percent);
         }
 
-        
+
 
 
         //**********************************************************
@@ -733,11 +734,14 @@
             return "K";
         }
 
-        /**
+
+        // Let's deprecate this for a more robust colorful version
+
+        /*
          * Gets the sprite of a player based on his ID
          * @param  string $post_id Player ID
-         * @return string ['H','B','P','K']
-         */
+         * @return string "male_knight_1.png"
+
         static function getPlayerSprite($post){
             // ** There's a better way to do this, but let's slap something neat together for now.
 
@@ -747,7 +751,7 @@
             $gender = "male";
             $class = $post->class;
             $post_id = $post->id;
-            
+
             //this is a temp overwrite
             if($class=='DK') $class = 'K';
             if($class=='W')  $class = 'H';
@@ -922,9 +926,115 @@
                 $class = "reviver";
                 $segment = "1";
             }
-            */
 
             $sprite .= $gender . "_" . $class . "_" . $segment . ".png";
+
+            return $sprite;
+        }
+        */
+
+        /*
+         * Gets the sprite of a player based on his ID
+         * @param  string $post_id Player ID
+         * @return string "male_knight_1.png"
+         */
+
+        static function getPlayerSprite($post){
+            // ** There's a better way to do this, but let's slap something neat together for now.
+
+            // Let's set some variables we can expect later
+            $sprite = "";
+            $segment = "1";
+            $class = $post->class;
+            $post_id = $post->id;
+
+            // 64 variations
+            $range = array('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",'0','1','2','3','4','5','6','7','8','9','+','/');
+
+            // Knight
+            if($class == "K"){
+                $segment_range = array_chunk($range, 2);
+            }
+
+            // Healer
+            if($class == "H"){
+                $segment_range = array_chunk($range, 2);
+            }
+
+            // Warlock
+            if($class == "W"){
+                $segment_range = array_chunk($range, 2);
+            }
+
+            // Bard
+            if($class == "B"){
+                $segment_range = array_chunk($range, 3);
+            }
+
+            // Paladin
+            if($class == "P"){
+                $segment_range = array_chunk($range, 2);
+            }
+
+            // Death knight
+            if($class == "DK"){
+                $segment_range = array_chunk($range, 32);
+            }
+
+            $segment = array_tree_search_key($segment_range, $post_id[0]);
+
+            $sprite .= $class . "/" . $class . "_" . $segment . ".png";
+
+            return $sprite;
+        }
+
+
+        static function getPlayerWeapon($post){
+            // ** There's a better way to do this, but let's slap something neat together for now.
+
+            // Let's set some variables we can expect later
+            $sprite = "";
+            $segment = "1";
+            $class = $post->class;
+            $post_id = $post->id;
+
+            // 64 variations
+            $range = array('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",'0','1','2','3','4','5','6','7','8','9','+','/');
+
+            // Knight
+            if($class == "K"){
+                $segment_range = array_chunk($range, 1);
+            }
+
+            // Healer
+            if($class == "H"){
+                $segment_range = array_chunk($range, 2);
+            }
+
+            // Warlock
+            if($class == "W"){
+                $segment_range = array_chunk($range, 3);
+            }
+
+            // Bard
+            if($class == "B"){
+                $segment_range = array_chunk($range, 5);
+            }
+
+            // Paladin
+            if($class == "P"){
+                $segment_range = array_chunk($range, 3);
+            }
+
+            // Death knight
+            if($class == "DK"){
+                $segment_range = array_chunk($range, 3);
+            }
+
+            // Last character of ID, instead of the first
+            $segment = array_tree_search_key($segment_range, $post_id[0]);
+
+            $sprite .= $class . "/" . $class . "_" . $segment . ".png";
 
             return $sprite;
         }
@@ -1001,7 +1111,7 @@
                 if(!isset($post->com)){
                   continue;
                 }
-                
+
                 $targets = $this->getTargetPosts($post->com);
                 $targets = array_keys($targets);
 
@@ -1031,6 +1141,14 @@
     }
 
 
-
+/* Some generic helper functions */
+function array_tree_search_key($a, $subkey) {
+    foreach($a as $k=>$v) {
+        if(in_array($subkey, $v)) {
+            return $k;
+        }
+    }
+    return 0;
+}
 
 ?>
