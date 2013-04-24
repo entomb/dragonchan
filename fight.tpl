@@ -103,7 +103,7 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
 
         <?php
         if($this->WINNER){
-            $WINNER_praises =  $this->getPostReplies($this->WINNER->no); 
+            $WINNER_praises =  $this->getPostReplies($this->WINNER->no);
             $WINNER_text = html_entity_decode(strip_tags($this->WINNER->com));
             $WINNER_text = preg_replace('/>>(\d+){9}/i','',$WINNER_text);
 
@@ -120,19 +120,23 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
             echo "</p>";
             echo "</h2>";
 
+            $i = 0;
             if($WINNER_praises){
                echo "<h1>The party praises the new hero!</h1>";
                echo "<div class='ink-row'>";
                 echo "<div class='ink-gutter'>";
                 foreach($WINNER_praises as $_item){
                     if(empty($_item->text)){
-                      continue;  
-                    } 
+                      continue;
+                    }
                     echo "<div class='ink-l20 praise'>";
-                     echo "<h4 class='ink-label class-".$_item->class."'>".$_item->id." says:</h4>";
+                     echo "<h4 class='ink-label class-".$_item->class."'>
+                     <img src='images/sprites/rpg/armor/" . $_row['sprite'] . "' />
+                     <img src='images/sprites/rpg/weapons/" . $_row['weapon'] . "' /> ".$_item->id." says:</h4>";
                      echo $_item->text;
                     echo "</div>";
-                } 
+                    if($i == 3) { $i = 0; echo "<div class='ink-row ink-vspace'></div>"; } else { $i++; }
+                }
 
                 echo "</div>";
                echo "</div>";
@@ -238,7 +242,7 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
             var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
             ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-          })(); 
+          })();
         </script>
     </body>
 </html>
