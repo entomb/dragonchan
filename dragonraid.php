@@ -36,6 +36,7 @@
 
         //internal caches
         var $_cached_post_authors = array();
+        var $_set_nicknames       = array();
 
 
         /**
@@ -426,6 +427,43 @@
             }
         }
 
+        /**
+         * sets a nickname for a user
+         * @param  object $post   the full post object
+         
+        function setNickname(&$post){
+            if(isset($this->_set_nicknames[$post->id])){
+                //was already set
+                return false;
+            }
+
+            $post->email = strip_tags($post->email);
+            if(isset($post->email) && strlen($post->email)<100){
+                if(in_array($post->email,$this->_set_nicknames)){
+                    //was already used
+                    return false;
+                }
+                //set the nick
+                $this->_set_nicknames[$post->id] = $post->email;
+                return true;
+            }
+            return false;
+        }
+        */
+       
+        /**
+         * gets a previously set nickname
+         * @param  string $user_id the user to search for
+         * @return string the nickname to use
+       
+        function getNickname($user_id){
+            if(isset($this->_set_nicknames[$user_id])){
+                return $this->_set_nicknames[$user_id];
+            }else{
+                return $user_id;
+            }
+        }
+        */
 
         /**
          * Logs an action
@@ -639,6 +677,7 @@
             return (bool)($this->BossHP<=$this->BossHP_MAX*$this->boss_enrage_percent);
         }
 
+        
 
 
         //**********************************************************
