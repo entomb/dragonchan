@@ -679,7 +679,7 @@
             if(in_array($post_id[0],array('+','/'))){
                 return "P";
             }
-            if(in_array($post_id[0],array('W','R','L','C','K'))){
+            if(in_array($post_id[0],array('W','R','L','C','K','w','r','l','c','k'))){
                 return "W";
             }
             if(strpos($post_id,'+')>0 || strpos($post_id,'/')>0){
