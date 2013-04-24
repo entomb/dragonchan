@@ -120,6 +120,7 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
             echo "</p>";
             echo "</h2>";
 
+            $i = 0;
             if($WINNER_praises){
                echo "<h1>The party praises the new hero!</h1>";
                echo "<div class='ink-row'>";
@@ -129,9 +130,12 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
                       continue;
                     }
                     echo "<div class='ink-l20 praise'>";
-                     echo "<h4 class='ink-label class-".$_item->class."'>".$_item->id." says:</h4>";
+                     echo "<h4 class='ink-label class-".$_item->class."'>
+                     <img src='images/sprites/rpg/armor/" . $_row['sprite'] . "' />
+                     <img src='images/sprites/rpg/weapons/" . $_row['weapon'] . "' /> ".$_item->id." says:</h4>";
                      echo $_item->text;
                     echo "</div>";
+                    if($i == 3) { $i = 0; echo "<div class='ink-row ink-vspace'></div>"; } else { $i++; }
                 }
 
                 echo "</div>";
