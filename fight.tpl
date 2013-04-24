@@ -84,12 +84,14 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
                 </div>
               </div>
               <div class="ink-l60">
-                <h4>Rules</h4>
+                <h4>Classes</h4>
                 <ul>
-                  <li>If your ID starts with a number you are a <b>Healer</b>.</li>
-                  <li>If your ID starts with a vowel you are a <b>Bard</b>.</li>
-                  <li>If your ID starts with a "/" or "+" you are a <b>Paladin</b>.</li>
-                  <li>otherwise you are a <b>Knight</b></li>
+                  <li>If your ID starts with a number you are a <span class="ink-label class-H">Healer</span>.</li>
+                  <li>If your ID starts with a vowel you are a <span class="ink-label class-B">Bard</span>.</li>
+                  <li>If your ID starts with a "/" or "+" you are a <span class="ink-label class-P">Paladin</span>.</li>
+                  <li>If your ID starts with "W","R","L","C" or "K" you are a <span class="ink-label class-W">Warlock</span>.</li>
+                  <li>Otherwise you are a <span class="ink-label class-K">Knight</span></li>
+                  <li>BUT if you have a "+" or "/" in your ID you are a <span class="ink-label class-DK">Death Knight</span></li>
                   <li>Your last 2 digits represent the damage you do</li>
                   <li><a target="_blank" href="/info">(see the full rules)</a></li>
                 </ul>
@@ -197,27 +199,25 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
 
         </div>
         <script type="text/javascript">
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-37723000-2']);
+          _gaq.push(['_trackPageview']);
+          _gaq.push(['_trackEvent', 'Log', 'Refresh']);
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-37723000-2']);
-  _gaq.push(['_trackPageview']);
-  _gaq.push(['_trackEvent', 'Log', 'Refresh']);
+          <?php
+          //log the cached status
+          if($this->cache_status){
+            echo "_gaq.push(['_trackEvent', 'Cache', 'hit']);";
+          }else{
+            echo "_gaq.push(['_trackEvent', 'Cache', 'miss']);";
+          }
+          ?>
 
-  <?php
-  //log the cached status
-  if($this->cache_status){
-    echo "_gaq.push(['_trackEvent', 'Cache', 'hit']);";
-  }else{
-    echo "_gaq.push(['_trackEvent', 'Cache', 'miss']);";
-  }
-  ?>
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })(); 
+        </script>
     </body>
 </html>

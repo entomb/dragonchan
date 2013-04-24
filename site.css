@@ -36,3 +36,7 @@ span.ink-label.class-W{  background-color: #9482C9;  color: #FFF; }
 .hp-bar .yellow {background:#eacc00;}
 .red {color:#af0000;}
 
+ul.rules{
+    font-size: .9em;
+}
+

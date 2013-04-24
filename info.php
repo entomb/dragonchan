@@ -9,7 +9,7 @@
         <a target="_blank" href="https://github.com/entomb/dragonchan"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
         <div class="ink-container">
 
-        <h2>chan Boss Raid <wb><small>version 1.4.5</small></h2>
+        <h2>chan Boss Raid <wb><small>version 1.5</small></h2>
         <div class="ink-row">
             <div class="ink-gutter">
                 <div class="ink-l40">
@@ -42,18 +42,22 @@
                 </div>
                 <div class="ink-l60">
                     <h1>Rules</h1>
-                    <ul>
-                        <li>If your ID starts with a number you are a <b>Healer</b>.</li>
-                        <li>If your ID starts with a vowel you are a <b>Bard</b>.</li>
-                        <li>If your ID starts with a "/" or "+" you are a <b>Paladin</b>.</li>
-                        <li>otherwise you are a <b>Knight</b></li>
+                    <ul class="rules">
+                        <li>If your ID starts with a number you are a <span class="ink-label class-H">Healer</span>.</li>
+                        <li>If your ID starts with a vowel you are a <span class="ink-label class-B">Bard</span>.</li>
+                        <li>If your ID starts with a "/" or "+" you are a <span class="ink-label class-P">Paladin</span>.</li>
+                        <li>If your ID starts with "W","R","L","C" or "K" you are a <span class="ink-label class-W">Warlock</span>.</li>
+                        <li>Otherwise you are a <span class="ink-label class-K">Knight</span></li>
+                        <li>BUT if you have a "+" or "/" in your ID you are a <span class="ink-label class-DK">Death Knight</span></li>
                         <li>Your last 2 digits represent the damage you do</li>
-                        <li>if <b>Knight</b> Roll ends in 5 or 0 you do DOUBLE DAMAGE</li>
                         <li>If you roll under 11 you DIE! <i style="font-size:11px;">(your posts will no longer do damage)</i></li>
-                        <li><b>Bards</b> are here to motive troops! each time they post an image the next 3 posts will do bonus damage!</li>
-                        <li><b>Healers</b> revive fallen soldiers by targeting them and rolling an EVEN number</li>
-                        <li><b>Knights</b> avenge fallen soldiers by targeting them and rolling an EVEN number. Avenging does more damage for the glory of the fallen mate.</li>
-                        <li><b>Paladins</b> can avenge AND revive!</li>
+                        <li><span class="ink-label class-H">Healers</span> revive fallen soldiers by targeting them and rolling an EVEN number</li>
+                        <li><span class="ink-label class-B">Bards</span> are here to motive troops! each time they post an image the next 3 posts will do bonus damage!</li>
+                        <li><span class="ink-label class-K">Knights</span> can critical hit by rolling 5 or 0</li>
+                        <li><span class="ink-label class-K">Knights</span> avenge fallen soldiers by targeting them and rolling an EVEN number. Avenging does more damage for the glory of the fallen mate.</li>
+                        <li><span class="ink-label class-P">Paladins</span> can avenge AND revive!</li>
+                        <li><span class="ink-label class-W">Warlocks</span> can summon minions by posting an image. The last 2 digits of the image filename will be added to his damage. if his roll last digit matches his minion last digit he BURSTS massive damage.</li>
+                        <li><span class="ink-label class-DK">Death Knights</span> can continue attacking after they die. they will do double damage when dead but only half damage when alive.</li>
                         <li>you can be avenged/revived 6 times max</li>
                         <li>If you roll 00 or 69 you REVIVE everyone! their damage will count again! </li>
                         <li>The boss will enrage bellow 20% HP, the minimum roll will be 22. however, he will no longer heal himself </li>
@@ -67,6 +71,11 @@
         <div class="ink-row">
             <div class="ink-gutter">
                 <h3>Changelog</h3>
+                <h4>v1.5- 24-04-2013</h4>
+                    <ul>
+                        <li>New Classes: 'Death Knight' and 'Warlock'</li>
+                        <li>Added memcache so it doesn`t stress the api</li>
+                    </ul>
                 <h4>v1.4.5- 22-04-2013</h4>
                     <ul>
                         <li>Massive interface changes</li>

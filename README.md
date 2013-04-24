@@ -34,17 +34,23 @@ Rules:
 This huge motherfucking dragon appears out of nowhere.
 This thread last 2 digits x250 define its HP (plus a flat 3000)
 
-If your ID starts with a number you are a Healer.
-If your ID starts with a vowel you are a Bard.
-If your ID starts with a "/" or "+" you are a Paladin.
-otherwise you are a Knight
+If your ID starts with a number you are a HEALER.
+If your ID starts with a vowel you are a BARD.
+If your ID starts with a "/" or "+" you are a PALADIN.
+If your ID starts with "W","R","L","C" or "K" you are a WARLOCK.
+Otherwise you are a KNIGHT
+BUT if you have a "+" or "/" in your ID you are a DEATH KNIGHT
+
 Your last 2 digits represent the damage you do
-if Knight Roll ends in 5 or 0 you do DOUBLE DAMAGE
 If you roll under 11 you DIE! (your posts will no longer do damage)
-Bards are here to motive troops! each time they post an image the next 3 posts will do bonus damage!
-Healers revive fallen soldiers by targeting them and rolling an EVEN number
-Knights avenge fallen soldiers by targeting them and rolling an EVEN number. Avenging does more damage for the glory of the fallen mate.
-Paladins can avenge AND revive!
+
+HEALERS revive fallen soldiers by targeting them and rolling an EVEN number
+BARDS are here to motive troops! each time they post an image the next 3 posts will do bonus damage!
+KNIGHTS can critical hit by rolling 5 or 0
+KNIGHTS avenge fallen soldiers by targeting them and rolling an EVEN number. Avenging does more damage for the glory of the fallen mate.
+PALADINS can avenge AND revive!
+WARLOCKS can summon minions by posting an image. The last 2 digits of the image filename will be added to his damage. if his roll last digit matches his minion last digit he BURSTS massive damage.
+DEATH KNIGHTS can continue attacking after they die. they will do double  damage when dead but only half damage when alive.
 you can be avenged/revived 6 times max
 If you roll 00 or 69 you REVIVE everyone! their damage will count again!
 The boss will enrage bellow 20% HP, the minimum roll will be 22. however, he will no longer heal himself
