@@ -5,6 +5,18 @@
         <title>Status Panel</title>
         <link href="site.css" rel="stylesheet" type="text/css">
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+        <style type="text/css">
+    
+        .ink-row{
+            font-size:.8em;
+        }
+        h3{
+            font-size:1.2em;
+        }
+        .ink-button{
+            font-size:1.2em;
+        }
+        </style>
     </head>
     <body>
         <div class="ink-container" style="width:90%">
