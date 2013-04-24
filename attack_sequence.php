@@ -25,11 +25,7 @@
             switch ($_row['action']) {
                 case 'damage':
                     if($_bonus>0){
-                        if($_class=='W'){
-                            echo "<i>rolls $_roll</i> and his minion hit for <span class='ink-label caution'>".($_damage+$_bonus)." <small>(+$_bonus)</small> HP</span>";
-                        }else{
-                            echo "<i>rolls $_roll</i> and damages the beast for <span class='ink-label caution'>".($_damage+$_bonus)." <small>(+$_bonus)</small> HP</span>";
-                        }
+                        echo "<i>rolls $_roll</i> and damages the beast for <span class='ink-label caution'>".($_damage+$_bonus)." <small>(+$_bonus)</small> HP</span>";
                     }elseif($_bonus<0){
                         echo "<i>rolls $_roll</i> and damages the beast for <span class='ink-label caution'>".($_damage+$_bonus)." <small>($_bonus)</small> HP</span>";
                     }else{
