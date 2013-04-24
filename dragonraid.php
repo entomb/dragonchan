@@ -951,6 +951,34 @@
             return false;
         }
 
+        /**
+         * Gets the full API object from replies of a certain post.
+         * @param  string $post_id the post to target
+         * @return array
+         */
+        function getPostReplies($post_id){
+            $replies = array();
+            foreach($this->THREAD->posts as $post){
+                if(!isset($post->com)){
+                  continue;
+                }
+                
+                $targets = $this->getTargetPosts($post->com);
+                $targets = array_keys($targets);
+
+                $post->class = self::getPlayerClass($post->id);
+
+                //clean the text, more or less
+                $post->text = html_entity_decode(strip_tags($post->com));
+                $post->text = preg_replace('/>>(\d+){9}/i','',$post->text);
+
+                if(in_array($post_id,$targets)){
+                    $replies[] = $post;
+                }
+            }
+            return $replies;
+        }
+
         static function getPostColor($id){
             $md5 = md5($id);
             $r = substr($md5, 0,2);

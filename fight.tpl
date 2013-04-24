@@ -103,20 +103,41 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
 
         <?php
         if($this->WINNER){
-            echo "<h1 class='hero'>";
+            $WINNER_praises =  $this->getPostReplies($this->WINNER->no); 
+            $WINNER_text = html_entity_decode(strip_tags($this->WINNER->com));
+            $WINNER_text = preg_replace('/>>(\d+){9}/i','',$WINNER_text);
+
+            echo "<h2 class='hero'>";
             echo "WINRAR!!! Hail the new monster slayer!";
             echo "<br/>";
             echo '<a target="_blank" href="'.$this->WINNER->link.'">';
             echo " &gt;&gt;".$this->WINNER->no;
             echo '</a>';
             echo "&nbsp;&nbsp;";
-            echo "<p style='color:#666;'>";
-            echo strip_tags($this->WINNER->com,'<br>');
-            echo "&nbsp; - <span class='ink-label info' style='font-size:17px;'>";
+            echo "<p style='color:#666;'> $WINNER_text &nbsp; - <span class='ink-label info' style='font-size:15px;'>";
             echo $this->WINNER->id;
             echo "</span>";
             echo "</p>";
-            echo "</h1>";
+            echo "</h2>";
+
+            if($WINNER_praises){
+               echo "<h1>The party praises the new hero!</h1>";
+               echo "<div class='ink-row'>";
+                echo "<div class='ink-gutter'>";
+                foreach($WINNER_praises as $_item){
+                    if(empty($_item->text)){
+                      continue;  
+                    } 
+                    echo "<div class='ink-l20 praise'>";
+                     echo "<h4 class='ink-label class-".$_item->class."'>".$_item->id." says:</h4>";
+                     echo $_item->text;
+                    echo "</div>";
+                } 
+
+                echo "</div>";
+               echo "</div>";
+               echo "<div class='ink-row ink-vspace'></div>";
+            }
         }
         ?>
         <div class="ink-row">
