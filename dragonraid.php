@@ -47,7 +47,7 @@
         var $max_revive_times = 6;
         var $max_avenge_times = 6;
         var $bard_buff_duration = 3;
-        var $boss_hp_factor     = 250;
+        var $boss_hp_factor     = 300;
         var $boss_heal_factor   = 30;
         var $boss_enrage_percent = 0.2;
         var $critical_hit_ratio = 2;
@@ -293,9 +293,9 @@
                 //death knight death bonus
                 if($post->class=="DK"){
                     if($this->isDeadPlayer($post->id)){
-                        $post->bonus+= $post->damage;
+                        $post->bonus+= $post->damage*$this->critical_hit_ratio;
                     }else{
-                        $post->bonus-= floor($post->damage/2);
+                        $post->bonus-= floor($post->damage/3);
                     }
                 }
 
