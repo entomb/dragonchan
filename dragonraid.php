@@ -284,8 +284,12 @@
                 }
 
                 //death knight death bonus
-                if($post->class=="DK" && $this->isDeadPlayer($post->id)){
-                    $post->bonus+= $post->damage;
+                if($post->class=="DK"){
+                    if($this->isDeadPlayer($post->id)){
+                        $post->bonus+= $post->damage;
+                    }else{
+                        $post->bonus-= floor($post->damage/2);
+                    }
                 }
 
             }else{
