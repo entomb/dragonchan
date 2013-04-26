@@ -60,10 +60,13 @@
             <div class="tutorialPage" id="t_id">
                 <h2>What is my ID?</h2>
                 <p>
-                    Your ID is a randomly generated hash that 4chan gives you. this hash is thread-persistet meaning it will change from thread to thread but not for every post in the same thread. this way the script can detect exactly who you are and what have you posted in a thread, threacking the damage for each diferent ID.
+                    Your ID is a randomly generated hash that 4chan gives you.
                 </p>
                 <p>
-                    Your ID determinates your class. its not fully random but its a near random hash, using some paramenters we give you a class and becouse IDs are persistent only inside the same thread this class will change the next dragonraid thread you enter.
+                    This hash is unique for every thread you enter meaning it will change from thread to thread but from post to post.This way the script can detect exactly who you are and what have you posted in a thread, thracking the damage for each ID.
+                </p>
+                <p>
+                    Your ID determinates your class. The script assigns you a class and becouse IDs are persistent only inside the same thread this class will change the next dragonraid thread you enter.
                 </p>
                 <p>
                     All classes are balanced, or at least we try to make them balanced, but some are more common then others. This does not mean some classes suck and others dont. Its just the way the game was designed, making the classes more or less needed.
