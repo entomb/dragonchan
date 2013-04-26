@@ -2,6 +2,7 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="http://css.ink.sapo.pt/v1/css/ink.css" />
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
         <title>About this page</title>
         <link href="site.css" rel="stylesheet" type="text/css">
     </head>
@@ -68,6 +69,8 @@
         </div>
 
         <hr/>
+
+        <?php include('tutorial.tpl'); ?>
 
         <div class="ink-row">
             <div class="ink-gutter">

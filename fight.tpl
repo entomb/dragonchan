@@ -8,6 +8,7 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
     <head>
         <link rel="stylesheet" type="text/css" href="http://css.ink.sapo.pt/v1/css/ink.css" />
 
+
         <title>Chan Boss Raid</title>
         <link href="site.css" rel="stylesheet" type="text/css">
     </head>
