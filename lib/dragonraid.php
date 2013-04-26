@@ -206,9 +206,12 @@
                         //only dead target's post
                         if(self::roll($_target_post_id)>=$this->min_roll) continue;
 
+                        //only if poster is alive (DVK)
+                        if($this->isDeadPlayer($post->id)) continue;
+
                         //avenger!
-                        if($post->class=='K' || $post->class=='P'){
-                            //knight
+                        if(in_array($post->class,array('K','P','DVK'))){
+                            //knight, paladin and dragonborn
                             if($this->isDeadPlayer($_target_id) && $this->canAvenge($_target_id)){
                                 $this->damage($post,true,false);
                                 $this->avengePlayer($_target_id);
@@ -220,8 +223,8 @@
                         }
 
                         //Reviver!
-                        if($post->class=='H' || $post->class=='P'){
-                            //Healer
+                        if(in_array($post->class,array('H','P','DVK'))){
+                            //Healer, paladin and dragonborn
                             if($this->isDeadPlayer($_target_id) && $this->canRevive($_target_id)){
                                 $post->_target = $_target_id;
                                 $this->revivePlayer($_target_id);
@@ -393,12 +396,12 @@
                         // If the element is the same as the boss, make him resistant
                         $_pet_damage = $_pet_damage * .5;
                     }
-
+                    $post->_pet_damage = $_pet_damage;
                     $post->bonus+=$_pet_damage;
                 }
 
                 //death knight death bonus
-                if($post->class=="DK"){
+                if($post->class=="DK" || $post->class=="DVK"){
                     if($this->isDeadPlayer($post->id)){
                         $post->bonus+= $post->damage;
                     }else{
@@ -586,6 +589,7 @@
                     'sprite' => self::getPlayerSprite($post),
                     'weapon' => self::getPlayerWeapon($post),
                     'chosen_element' => $post->chosen_element,
+                    '_pet_damage'    => isset($post->_pet_damage) ? $post->_pet_damage : false,
                     'roll'   => $post->roll,
                     'class'  => $post->class,
                     'action' => $action,
@@ -823,21 +827,37 @@
          * @return string ['H','B','P','K']
          */
         static function getPlayerClass($post_id){
+            //healer
             if(in_array($post_id[0],array('0','1','2','3','4','5','6','7','8','9'))){
                 return "H";
             }
+
+            //bard
             if(in_array($post_id[0],array('A','E','I','O','U','Y','a','e','i','o','u','y'))){
                 return "B";
             }
+
+            //dragonborn
+            if(in_array($post_id[0],array('+','/')) && in_array($post_id[7],array('+','/'))){
+                return "DVK";
+            }
+
+            //paladin
             if(in_array($post_id[0],array('+','/'))){
                 return "P";
             }
+
+            //death knight
+            if(in_array($post_id[7],array('+','/'))){
+                return "DK";
+            }
+
+            //warlock
             if(in_array($post_id[0],array('W','R','L','C','K','w','r','l','c','k'))){
                 return "W";
             }
-            if(strpos($post_id,'+')>0 || strpos($post_id,'/')>0){
-                return "DK";
-            }
+
+            //knight
             return "K";
         }
 
@@ -893,6 +913,12 @@
                 $segment_range = array_chunk($range, 32);
             }
 
+            // Dragonborn
+            if($class == "DVK"){
+                $class == "DK"; //temp
+                $segment_range = array_chunk($range, 32);
+            }
+
             $segment = array_tree_search_key($segment_range, $post_id[0]);
 
             $sprite .= $class . "/" . $class . "_" . $segment . ".png";
@@ -940,6 +966,12 @@
 
             // Death knight
             if($class == "DK"){
+                $segment_range = array_chunk($range, 3);
+            }
+
+            // Dragonborn
+            if($class == "DVK"){
+                $class = "DK"; //temp
                 $segment_range = array_chunk($range, 3);
             }
 
@@ -1063,6 +1095,12 @@ function array_tree_search_key($a, $subkey) {
         }
     }
     return 0;
+}
+
+
+function sprite($filename){
+    $src=str_replace("//", "/", "images/sprites/rpg/".$filename);
+    echo "<img src='$src' align='absmiddle'/> ";
 }
 
 ?>
