@@ -52,7 +52,7 @@ KNIGHTS avenge fallen soldiers by targeting them and rolling an EVEN number. Ave
 PALADINS can avenge AND revive!
 WARLOCKS can summon minions by posting an image. The last 2 digits of the image filename will be added to his damage. if his roll last digit matches his minion last digit he BURSTS massive damage.
 DEATH KNIGHTS can continue attacking after they die. they will do x3 damage when dead but only 2/3 when alive.
-DRAGONBORN will can avenge and revive when alive, and will transform into a Death knight after death. this is the ultimate class!
+DRAGONBORN can avenge and revive when alive, and will transform into a Death knight after death. this is the ultimate class!
 you can be avenged/revived 6 times max
 If you roll 00 or 69 you REVIVE everyone! their damage will count again!
 The boss will enrage bellow 20% HP, the minimum roll will be 22. however, he will no longer heal himself

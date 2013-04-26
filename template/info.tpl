@@ -54,7 +54,7 @@
                         <li><span class="ink-label class-P">Paladins</span> can avenge AND revive!</li>
                         <li><span class="ink-label class-W">Warlocks</span> can summon minions by posting an image. The last 2 digits of the image filename will be added to his damage. if his roll last digit matches his minion last digit he BURSTS massive damage. If the Warlock types the words "ice", "fire", "water", "electric", or "earth" in their post, they can summon a minion of the specific element for 1.5x additional minion damage if the Beast is weak to the element. If the element is the same as the Beast, the additional minion damage will do .5x the damage instead.</li>
                         <li><span class="ink-label class-DK">Death Knights</span> can continue attacking after they die. they will do x2 damage when dead but only 2/3 when alive.</li>
-                        <li><span class="ink-label class-DVK">DragonBorn</span> will can avenge and revive when alive, and will transform into a Death knight after death. this is the ultimate class!</li>
+                        <li><span class="ink-label class-DVK">DragonBorn</span> can avenge and revive when alive, and will transform into a Death knight after death. this is the ultimate class!</li>
                         <li>you can be avenged/revived 6 times max</li>
                         <li>The elemental grid is: Earth is weak to Ice, Water is weak to Electric, Fire is weak to Water, Electric is weak to Earth, Ice is weak to Fire.</li>
                         <li>If you roll 00 or 69 you REVIVE everyone! their damage will count again! </li>
