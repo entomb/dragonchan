@@ -47,3 +47,6 @@ ul.rules{ font-size: .9em; }
 ul.menu ul{
      box-shadow:none;
 }
+.ink-navigation ul.menu li.active li a{
+    background-color:#FFF !important;
+}

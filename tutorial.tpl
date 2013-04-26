@@ -7,19 +7,21 @@
                 <ul class="menu vertical tutorialMenu">
                     <li><h3>How to play</h3></li>
                     <li><a href="#t_main">Main Goal</a></li>
+                    <li><a href="#t_basic">Basic Mechanics</a></li>
                     <li><a href="#t_roll">What is a Roll?</a></li>
                     <li><a href="#t_id">What is my ID?</a></li>
+                    <!--
                     <li><a href="#t_classes">Classes</a>
                         <ul style="padding-left:20px;">
-                            <li><a href="#c_knigh"><span class="ink-label class-K">Knight</span></a></li>
                             <li><a href="#c_healer"><span class="ink-label class-H">Healer</span></a></li>
                             <li><a href="#c_bard"><span class="ink-label class-B">Bard</span></a></li>
-                            <li><a href="#c_paladin"><span class="ink-label class-P">Paladin</span></a></li>
                             <li><a href="#c_warlock"><span class="ink-label class-W">Warlock</span></a></li>
+                            <li><a href="#c_knigh"><span class="ink-label class-K">Knight</span></a></li>
+                            <li><a href="#c_paladin"><span class="ink-label class-P">Paladin</span></a></li>
                             <li><a href="#c_deathknigh"><span class="ink-label class-DK">Death Knight</span></a></li>
                         </ul>
                     </li>
-                    <li><a href="#skills">Skills</a>
+                    <li><a>Skills</a>
                         <ul style="padding-left:20px;">
                             <li><a href="#s_taget">How to target</a></li>
                             <li><a href="#s_avenging">Avenge</a></li>
@@ -30,6 +32,7 @@
                             <li><a href="#s_special">Special Rolls</a></li>
                         </ul>
                     </li>
+                -->
                 </ul>
             </nav>
         </div>
@@ -63,7 +66,7 @@
                     Your ID is a randomly generated hash that 4chan gives you.
                 </p>
                 <p>
-                    This hash is unique for every thread you enter meaning it will change from thread to thread but from post to post.This way the script can detect exactly who you are and what have you posted in a thread, thracking the damage for each ID.
+                    This hash is unique for every thread you enter meaning it will change from thread to thread but not from post to post.This way the script can detect exactly who you are and what have you posted in a thread, thracking the damage for each ID.
                 </p>
                 <p>
                     Your ID determinates your class. The script assigns you a class and becouse IDs are persistent only inside the same thread this class will change the next dragonraid thread you enter.
@@ -97,7 +100,7 @@
                 </ul>
                 <h4>Damage</h4>
                 <ul>
-                    <li><span class="ink-label class-W">Warlock</span> can summon diferent creatures to give aditional damage</li>
+                    <li><span class="ink-label class-W">Warlock</span> can summon diferent creatures for aditional damage</li>
                     <li><span class="ink-label class-K">Knight</span> can avenge fallen soldiers for extra damage</li>
                 </ul>
                 <h4>Special (rare)</h4>
@@ -121,22 +124,82 @@
                     <li>Otherwise you are a <span class="ink-label class-K">Knight</span></li>
                 </ul>
             </div>
+            <div class="tutorialPage" id="t_basic">
+                <h2>Basic Mechanics</h2>
+                <p>The game is very simple. Find a dragonslayer thead and post stuff on it.</p>
+                <p>you can use this webpage to track the party damage, but placing the 4chan thread id on this URL</p>
+                <div>
+                    <img class="ink-l100 ink-m90 ink-s90" src="/images/howtostart.jpg"/>
+                </div>
+                <h2>Starting a thead</h2>
+                <p>
+                    To start a new dragon slayer thread <a href="">copy/paste the thead template from the github</a> repo and start a new thead.
+                    <br/>
+                    Its recomended that you post a link to the script in your second post, so new people can understad the rules and the game itself.
+                </p>
+                <div>
+                    <p class="ink-label warning"> You should allways check the catalog before creating a new thread.</p>
+                    <p class="ink-label caution"> don't spam the front page with dragon raid threads!</p>
+                </div>
+                <h2>The Boss</h2>
+                <p>
+                    The boss has a radom HP depending on OP roll. this allows for stronger or weaker dragons.
+                    The minimum HP is now set to 16.000HP.
+                </p>
+                <h2>Damage</h2>
+                <p>
+                    Your is calculated based on your <a href="#t_roll">roll</a>.
+                    The script woll output everyone`s damage as well as other actions.
+                </p>
+                <div>
+                    <img class="ink-l100 ink-m90 ink-s90" src="/images/howtolog.jpg"/>
+                </div>
+
+                <h2>Death</h2>
+                <p>
+                    When you roll under 11 you will die. this means your posts will no longer do damage until you are revived. (death knights may cheat death)
+                </p>
+                <p>
+                    Everytime you someone dies, the boss will heal for a small amouth depending on your roll. If you are a healer, try reviving your falled team mates, they will thank you for that.                    
+                </p>
+                <h2>Enrage</h2>
+                <p>
+                    When the boss HP drops below 20% he will enrage. the minumum roll will be 22 (if you roll under 22 you die).
+                    An enraged boss can not heal himself.
+                </p>
+                <h2>Victory</h2>
+                <p>
+                    The game ends when the dragon reaches 0HP.
+                    By this time the script will tell you who delivered the last hit. Be noble and congratulate your new hero!
+                </p>
+                <h2>TOP</h2>
+                <p>
+                   The script keeps a sidebar with diferent TOP10 lists so you can track the raid overall effectiveness.
+                   <br/>
+                   Allways keep an eye on the top damage, your ID might be there!
+                </p>
+            </div>
         </div>
     </div>
 </div>
 
 <script type="text/javascript">
     $(document).ready(function(){
-        $('.tutorialPage').hide();
         $('.tutorialMenu a').click(function(){
+            if(!this.href) return;
+
             $('.tutorialPage').hide();
             var tab = "#"+this.href.toString().split('#')[1];
             $(tab).show();
+            $('.tutorialMenu a').parent().removeClass('active');
+            $(this).parent().addClass('active');
+        });
+        
+        $('.tutorialPage').hide(function(){
+            $('#t_main').show();
         });
 
-
     });
-
 </script>
 
 <hr/>
