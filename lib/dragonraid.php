@@ -131,7 +131,7 @@
                 $post->class = self::getPlayerClass($post->id);
 
                 //ignore fallen players with the exeption of deadknights
-                if($this->isDeadPlayer($post->id) && $post->class!=="DK"){
+                if($this->isDeadPlayer($post->id) && !in_array($post->class,array('DK','DVK'))){
                     continue;
                 }
 
@@ -827,7 +827,7 @@
          * @return string ['H','B','P','K']
          */
         static function getPlayerClass($post_id){
-
+           
             //heaven is allways a pleb knight
             if($post_id=="Heaven"){
                 return "K";

@@ -10,9 +10,9 @@
                     <li><a href="#t_basic">Basic Mechanics</a></li>
                     <li><a href="#t_roll">What is a Roll?</a></li>
                     <li><a href="#t_id">What is my ID?</a></li>
-                    <!--
+                    
                     <li><a href="#t_classes">Classes</a>
-                        <ul style="padding-left:20px;">
+                    <!--    <ul style="padding-left:20px;">
                             <li><a href="#c_healer"><span class="ink-label class-H">Healer</span></a></li>
                             <li><a href="#c_bard"><span class="ink-label class-B">Bard</span></a></li>
                             <li><a href="#c_warlock"><span class="ink-label class-W">Warlock</span></a></li>
@@ -20,8 +20,9 @@
                             <li><a href="#c_paladin"><span class="ink-label class-P">Paladin</span></a></li>
                             <li><a href="#c_deathknigh"><span class="ink-label class-DK">Death Knight</span></a></li>
                         </ul>
+                    -->
                     </li>
-                    <li><a>Skills</a>
+                    <!-- <li><a>Skills</a>
                         <ul style="padding-left:20px;">
                             <li><a href="#s_taget">How to target</a></li>
                             <li><a href="#s_avenging">Avenge</a></li>
@@ -80,20 +81,15 @@
                     The class you get depends on your ID in the current thread, you can check the Rules section to understand the class system.
                 </p>
                 <ul class="rules">
-                    <li>If your ID starts with a number you are a <span class="ink-label class-H">Healer</span>.</li>
-                    <li>If your ID starts with a vowel you are a <span class="ink-label class-B">Bard</span>.</li>
-                    <li>If your ID starts with a "/" or "+" you are a <span class="ink-label class-P">Paladin</span>.</li>
-                    <li>If your ID starts with "W","R","L","C" or "K" you are a <span class="ink-label class-W">Warlock</span>.</li>
-                    <li>If your ID has a "+" or "/" in it, you are a <span class="ink-label class-DK">Death Knight</span></li>
-                    <li>Otherwise you are a <span class="ink-label class-K">Knight</span></li>
+                    <?php include("class_rolls.tpl"); ?> 
                 </ul>
             </div>
             <div class="tutorialPage" id="t_classes">
                 <h2>Classes</h2>
                 <p>
-                    There are currently 6 diferent classes, each with its own habilities
+                    There are currently 7 diferent classes, each with its own habilities
                 </p>
-                <h4>Suport</h4>
+                <h4>Support</h4>
                 <ul>
                     <li><span class="ink-label class-H">Healer</span> can revive other players.</li>
                     <li><span class="ink-label class-B">Bard</span> will boost other people damage by posting images</li>
@@ -107,6 +103,7 @@
                  <ul>
                     <li><span class="ink-label class-P">Paladin</span> can avenge AND revive fallen team mates</li>
                     <li><span class="ink-label class-DK">Death Knight</span> can attack after death.</li>
+                     <li><span class="ink-label class-DVK">DragonBorn</span> can avenge AND revive when alive, and can attack after death.</li>
                 </ul>
 
                 <hr/>
@@ -116,12 +113,7 @@
                 </p>
 
                 <ul class="rules">
-                    <li>If your ID starts with a number you are a <span class="ink-label class-H">Healer</span>.</li>
-                    <li>If your ID starts with a vowel you are a <span class="ink-label class-B">Bard</span>.</li>
-                    <li>If your ID starts with a "/" or "+" you are a <span class="ink-label class-P">Paladin</span>.</li>
-                    <li>If your ID starts with "W","R","L","C" or "K" you are a <span class="ink-label class-W">Warlock</span>.</li>
-                    <li>If your ID has a "+" or "/" in it, you are a <span class="ink-label class-DK">Death Knight</span></li>
-                    <li>Otherwise you are a <span class="ink-label class-K">Knight</span></li>
+                    <?php include("class_rolls.tpl"); ?> 
                 </ul>
             </div>
             <div class="tutorialPage" id="t_basic">

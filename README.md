@@ -37,9 +37,10 @@ This thread last 2 digits x300 define its HP (plus a flat 3000)
 If your ID starts with a number you are a HEALER.
 If your ID starts with a vowel you are a BARD.
 If your ID starts with a "/" or "+" you are a PALADIN.
+If your ID ends with a "/" or "+" you are a DEATH KNIGHT.
+If your ID starts AND ends with a "/" or "+" you are DRAGONBORN.
 If your ID starts with "W","R","L","C" or "K" you are a WARLOCK.
 Otherwise you are a KNIGHT
-BUT if you have a "+" or "/" in your ID you are a DEATH KNIGHT
 
 Your last 2 digits represent the damage you do
 If you roll under 11 you DIE! (your posts will no longer do damage)
@@ -51,6 +52,7 @@ KNIGHTS avenge fallen soldiers by targeting them and rolling an EVEN number. Ave
 PALADINS can avenge AND revive!
 WARLOCKS can summon minions by posting an image. The last 2 digits of the image filename will be added to his damage. if his roll last digit matches his minion last digit he BURSTS massive damage.
 DEATH KNIGHTS can continue attacking after they die. they will do x3 damage when dead but only 2/3 when alive.
+DRAGONBORN will can avenge and revive when alive, and will transform into a Death knight after death. this is the ultimate class!
 you can be avenged/revived 6 times max
 If you roll 00 or 69 you REVIVE everyone! their damage will count again!
 The boss will enrage bellow 20% HP, the minimum roll will be 22. however, he will no longer heal himself
@@ -62,6 +64,14 @@ I have a webpage to track things, I will post a link to it here.
 
 Changelog
 =========
+__v1.6- 27-04-2013__
+   - New Class: 'Dragonborn'
+   - Code Cleanup and new sprites
+   - Changes to death knight damage output
+   - Changes to warlock summon system
+   - Adding element mechanics
+   - Boss minimum HP is not set to 16.000
+
 __v1.5- 24-04-2013__
    - New Classes: 'Death Knight' and 'Warlock'
    - Added memcache so it doesn`t stress the api

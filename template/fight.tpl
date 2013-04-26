@@ -90,12 +90,7 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
               <div class="ink-l60">
                 <h4>Classes</h4>
                 <ul>
-                  <li>If your ID starts with a number you are a <span class="ink-label class-H">Healer</span>.</li>
-                  <li>If your ID starts with a vowel you are a <span class="ink-label class-B">Bard</span>.</li>
-                  <li>If your ID starts with a "/" or "+" you are a <span class="ink-label class-P">Paladin</span>.</li>
-                  <li>If your ID starts with "W","R","L","C" or "K" you are a <span class="ink-label class-W">Warlock</span>.</li>
-                  <li>Otherwise you are a <span class="ink-label class-K">Knight</span></li>
-                  <li>BUT if you have a "+" or "/" in your ID you are a <span class="ink-label class-DK">Death Knight</span></li>
+                  <?php include("class_rolls.tpl"); ?> 
                   <li>Your last 2 digits represent the damage you do</li>
                   <li><a target="_blank" href="/info">(see the full rules)</a></li>
                 </ul>

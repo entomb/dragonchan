@@ -59,7 +59,11 @@
                 case 'avenge':
                     sprite("/avenge.png");
                     if($_bonus>0){
+                        sprite('/attack_up.png');
                         echo "avenges <b>".$_row['target']."</b> for extra damage <span class='ink-label caution'>".($_damage+$_bonus)." <small>(+$_bonus)</small> HP</span>";
+                    }elseif($_bonus<0){
+                        sprite('/attack_down.png');
+                        echo "avenges <b>".$_row['target']."</b> for extra damage <span class='ink-label caution'>".($_damage+$_bonus)." <small>($_bonus)</small> HP</span>";
                     }else{
                         echo "avenges <b>".$_row['target']."</b> for extra damage <span class='ink-label caution'>$_damage HP</span>";
                     }
