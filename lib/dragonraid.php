@@ -827,6 +827,12 @@
          * @return string ['H','B','P','K']
          */
         static function getPlayerClass($post_id){
+
+            //heaven is allways a pleb knight
+            if($post_id=="Heaven"){
+                return "K";
+            }
+
             //healer
             if(in_array($post_id[0],array('0','1','2','3','4','5','6','7','8','9'))){
                 return "H";
