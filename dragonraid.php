@@ -97,7 +97,8 @@
 
             //boss status
             $this->BossIMG = "http://thumbs.4chan.org/b/thumb/".$this->OPost->tim."s.jpg";
-            $this->BossHP_MAX = 3000+self::roll($this->OPost->no)*$this->boss_hp_factor;
+            $boss_min_hp = 3000+self::roll($this->OPost->no)*$this->boss_hp_factor;
+            $this->BossHP_MAX = ($boss_min_hp < 16000 ? 16000 : $boss_min_hp);
             $this->BossHP = $this->BossHP_MAX;
             $this->BossElement = self::bossElement($this->OPost->no);
 
