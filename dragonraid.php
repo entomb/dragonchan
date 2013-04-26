@@ -390,7 +390,7 @@ error_reporting(E_ALL);
                     }
                     elseif($this->BossElement == $chosen_element) {
                         // If the element is the same as the boss, make him resistant
-                        $_pet_damage += ($_pet_damage * .75);
+                        $_pet_damage += ($_pet_damage * .5);
                     }
 
                     $post->bonus+=$_pet_damage;
