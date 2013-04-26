@@ -47,8 +47,8 @@
                         <li>If your ID starts with a vowel you are a <span class="ink-label class-B">Bard</span>.</li>
                         <li>If your ID starts with a "/" or "+" you are a <span class="ink-label class-P">Paladin</span>.</li>
                         <li>If your ID starts with "W","R","L","C" or "K" you are a <span class="ink-label class-W">Warlock</span>.</li>
+                        <li>If your ID has a "+" or "/" in it, you are a <span class="ink-label class-DK">Death Knight</span></li>
                         <li>Otherwise you are a <span class="ink-label class-K">Knight</span></li>
-                        <li>BUT if you have a "+" or "/" in your ID you are a <span class="ink-label class-DK">Death Knight</span></li>
                         <li>Your last 2 digits represent the damage you do</li>
                         <li>If you roll under 11 you DIE! <i style="font-size:11px;">(your posts will no longer do damage)</i></li>
                         <li><span class="ink-label class-H">Healers</span> revive fallen soldiers by targeting them and rolling an EVEN number</li>
@@ -56,9 +56,10 @@
                         <li><span class="ink-label class-K">Knights</span> can critical hit by rolling 5 or 0</li>
                         <li><span class="ink-label class-K">Knights</span> avenge fallen soldiers by targeting them and rolling an EVEN number. Avenging does more damage for the glory of the fallen mate.</li>
                         <li><span class="ink-label class-P">Paladins</span> can avenge AND revive!</li>
-                        <li><span class="ink-label class-W">Warlocks</span> can summon minions by posting an image. The last 2 digits of the image filename will be added to his damage. if his roll last digit matches his minion last digit he BURSTS massive damage.</li>
-                        <li><span class="ink-label class-DK">Death Knights</span> can continue attacking after they die. they will do x3 damage when dead but only 2/3 when alive.</li>
+                        <li><span class="ink-label class-W">Warlocks</span> can summon minions by posting an image. The last 2 digits of the image filename will be added to his damage. if his roll last digit matches his minion last digit he BURSTS massive damage. If the Warlock types the words "ice", "fire", "water", "electric", or "earth" in their post, they can summon a minion of the specific element for 1.5x additional minion damage if the Beast is weak to the element. If the element is the same as the Beast, the additional minion damage will do .5x the damage instead.</li>
+                        <li><span class="ink-label class-DK">Death Knights</span> can continue attacking after they die. they will do x2 damage when dead but only 2/3 when alive.</li>
                         <li>you can be avenged/revived 6 times max</li>
+                        <li>The elemental grid is: Earth is weak to Ice, Water is weak to Electric, Fire is weak to Water, Electric is weak to Earth, Ice is weak to Fire.</li>
                         <li>If you roll 00 or 69 you REVIVE everyone! their damage will count again! </li>
                         <li>The boss will enrage bellow 20% HP, the minimum roll will be 22. however, he will no longer heal himself </li>
                     </ul>
