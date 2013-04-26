@@ -714,7 +714,7 @@
             $BATTLE = &$this->LOG;
             $BATTLE = array_reverse($BATTLE);
             //template goes here
-            include("fight.tpl");
+            include("template/fight.tpl");
         }
 
         /**
@@ -727,7 +727,7 @@
             $BATTLE = &$this->LOG;
             $BATTLE = array_reverse($BATTLE);
             //template goes here
-            include("status.tpl");
+            include("template/status.tpl");
         }
         /**
          * Calls the status iframe template
@@ -740,7 +740,7 @@
             $BATTLE = array_reverse($BATTLE);
 
             //template goes here
-            include("status_core.tpl");
+            include("template/status_core.tpl");
         }
 
 

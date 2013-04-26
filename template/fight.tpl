@@ -66,7 +66,7 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
                     <h3>Latest Hit</h3>
                     <table class="ink-table">
                         <?php $_row =  $BATTLE[0]; ?>
-                        <?php include('attack_sequence.php'); ?>
+                        <?php include('attack_sequence.tpl'); ?>
                     </table>
 
 
@@ -168,7 +168,7 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
                             echo "</tr>";
                         } else {
                           //combat log
-                          include('attack_sequence.php');
+                          include('attack_sequence.tpl');
                         }
 
                         ?>
