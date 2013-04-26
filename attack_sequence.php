@@ -9,7 +9,7 @@
         <img src="images/sprites/rpg/armor/<?php echo $_row['sprite']; ?>" />
         <img src="images/sprites/rpg/weapons/<?php echo $_row['weapon']; ?>" />
     </td>
-    <td style="font-size:13px;">
+    <td style="font-size:13px;" width="100">
         <span class="ink-label class-<?php echo $_row['class']; ?>"><?php echo $_row['class']; ?></span>
         <span class="ink-label class-<?php echo $_row['class']; ?>">
             <?php echo $_row['id']; ?>
@@ -26,7 +26,11 @@
             switch ($_row['action']) {
                 case 'damage':
                     if($_bonus>0){
-                        echo "<img src='images/sprites/rpg/attack_up.png' /> <i>rolls $_roll</i> and damages the beast for <span class='ink-label caution'>".($_damage+$_bonus)." <small>(+$_bonus)</small> HP</span>";
+                        echo "<img src='images/sprites/rpg/attack_up.png' />";
+                        if($_row['chosen_element'] != "normal" && $_row['class'] == "W") { ?> <img src="images/sprites/rpg/elements/summon.png" title="Summon" />, summons an (<?php echo strtoupper($_row['chosen_element']); ?> <img src="images/sprites/rpg/elements/<?php echo $_row['chosen_element']; ?>.png" title="<?php echo $_row['chosen_element']; ?>"> Golem),
+                        <?php } elseif($_row['chosen_element'] == "normal" && $_row['class'] == "W") { ?> <img src="images/sprites/rpg/elements/summon.png" title="Summon" />, summons an (IMP),
+                        <?php }
+                        echo " <i>rolls $_roll</i> and damages the beast for <span class='ink-label caution'>".($_damage+$_bonus)."<small>(+$_bonus)</small> HP</span>";
                     }elseif($_bonus<0){
                         echo "<img src='images/sprites/rpg/attack_down.png' /> <i>rolls $_roll</i> and damages the beast for <span class='ink-label caution'>".($_damage+$_bonus)." <small>($_bonus)</small> HP</span>";
                     }else{

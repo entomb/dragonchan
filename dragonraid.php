@@ -59,28 +59,28 @@ error_reporting(E_ALL);
 
         var $available_elements = array(
             // key, Friendly Name
-            'electric' => 'Electric',
-            'fire' => 'Fire',
-            'water' => 'Water',
-            'earth' => 'Earth',
-            'ice' => 'Ice'
+            'electric',
+            'fire',
+            'water',
+            'earth',
+            'ice',
         );
 
         var $element_weakness = array(
             // water is weak to electric
             'electric' => 'earth',
-            'water' => 'electric',
             'fire' => 'water',
+            'water' => 'electric',
             'earth' => 'ice',
             'ice' => 'fire'
         );
 
         var $warlock_minions = array(
-            'electric' => 'Odin',
-            'water' => 'Abyss Bottom Feeder',
-            'fire' => 'Ember Drake (hatchling)',
-            'ice' => 'Swarm of Snow Imps',
-            'earth' => 'Earth Golem'
+            'electric' => 'Eletric Golem',
+            'water' => 'Water Golem',
+            'fire' => 'Fire Golem',
+            'earth' => 'Earth Golem',
+            'ice' => 'Frost Golem',
         );
 
 
@@ -147,6 +147,9 @@ error_reporting(E_ALL);
                 $post->com      = isset($post->com) ? $post->com : "";
                 //$post->filename = isset($post->filename) ? $post->filename : "";
                 $post->tim      = isset($post->tim) ? $post->tim : "";
+
+                // Default an element
+                $post->chosen_element = "normal";
 
 
                 //mass resurection and damage
@@ -269,34 +272,34 @@ error_reporting(E_ALL);
             switch ($last_digit) {
 
                 case 0:
-                    $element = $this->available_elements['electric'];
+                    $element = $this->available_elements[0];
                     break;
                 case 1:
-                    $element = $this->available_elements['electric'];
+                    $element = $this->available_elements[0];
                     break;
                 case 2:
-                    $element = $this->available_elements['fire'];
+                    $element = $this->available_elements[1];
                     break;
                 case 3:
-                    $element = $this->available_elements['fire'];
+                    $element = $this->available_elements[1];
                     break;
                 case 4:
-                    $element = $this->available_elements['water'];
+                    $element = $this->available_elements[2];
                     break;
                 case 5:
-                    $element = $this->available_elements['water'];
+                    $element = $this->available_elements[2];
                     break;
                 case 6:
-                    $element = $this->available_elements['earth'];
+                    $element = $this->available_elements[3];
                     break;
                 case 7:
-                    $element = $this->available_elements['earth'];
+                    $element = $this->available_elements[3];
                     break;
                 case 8:
-                    $element = $this->available_elements['ice'];
+                    $element = $this->available_elements[4];
                     break;
                 case 9:
-                    $element = $this->available_elements['ice'];
+                    $element = $this->available_elements[4];
                     break;
             }
 
@@ -348,13 +351,15 @@ error_reporting(E_ALL);
          * @return void
          */
         function damage($post,$canCritical=true,$reportDamage=true){
+
+            $chosen_element = $post->chosen_element;
+
             //define damage
             if( ($post->class=='K') && $canCritical && self::isCriticalHit($post->roll)){
                 $post->damage = $post->roll*$this->critical_hit_ratio;
             }else{
                 $post->damage = $post->roll;
             }
-
 
             if($post->roll<=99){
                 $post->bonus = $this->bardBonusValue;
@@ -369,13 +374,32 @@ error_reporting(E_ALL);
                         $_pet_damage = $_pet_damage*$this->burst_hit_ratio;
                     }
 
+                    // Give W's a possible elemental damage for their pets
+                    // Maybe break out into a summoner class?
+                    foreach($this->available_elements as $element) {
+                        if(strpos(strtolower($post->com), $element) !== false) {
+                            $chosen_element = $element;
+                            $post->chosen_element = $chosen_element;
+                            break;
+                        }
+                    }
+
+                    // Give the pet bonus damage if it's the boss's weakness
+                    if($this->element_weakness[$this->BossElement] == $chosen_element) {
+                        $_pet_damage += ($_pet_damage * 1.5);
+                    }
+                    elseif($this->BossElement == $chosen_element) {
+                        // If the element is the same as the boss, make him resistant
+                        $_pet_damage += ($_pet_damage * .75);
+                    }
+
                     $post->bonus+=$_pet_damage;
                 }
 
                 //death knight death bonus
                 if($post->class=="DK"){
                     if($this->isDeadPlayer($post->id)){
-                        $post->bonus+= $post->damage*$this->critical_hit_ratio;
+                        $post->bonus+= $post->damage;
                     }else{
                         $post->bonus-= floor($post->damage/3);
                     }
@@ -384,7 +408,6 @@ error_reporting(E_ALL);
             }else{
                 $post->bonus = 0;
             }
-
 
             //take the damage
             $this->BossHP-= ($post->damage+$post->bonus);
@@ -561,6 +584,7 @@ error_reporting(E_ALL);
                     'color'  => self::getPostColor($post->id),
                     'sprite' => self::getPlayerSprite($post),
                     'weapon' => self::getPlayerWeapon($post),
+                    'chosen_element' => $post->chosen_element,
                     'roll'   => $post->roll,
                     'class'  => $post->class,
                     'action' => $action,
