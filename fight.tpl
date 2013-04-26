@@ -36,7 +36,7 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
                             <div class="health-total" style="width:<?php echo 100 - ($boss_hp_percentage); ?>%;"></div>
                         </div>
                         <div class="clear"></div>
-                        <div class="health-remaining-text">HP: <?php echo number_format($this->BossHP); ?> / <?php echo number_format($this->BossHP_MAX); ?></div>
+                        <div class="health-remaining-text">HP: <?php echo number_format($this->BossHP); ?> / <?php echo number_format($this->BossHP_MAX); ?> <?php echo $this->BossElement; ?></div>
                     </div>
 
                     <?php if($this->bossIsDead()) { ?>

@@ -1,5 +1,4 @@
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond $1 !^(index\.php|api)
 RewriteRule ^(.*)$ index.php?id=$1 [L]

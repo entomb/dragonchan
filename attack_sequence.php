@@ -5,7 +5,7 @@
         </a>
     </td>
 
-    <td class="class-<?php echo $_row['class']; ?>-sprite">
+    <td class="class-<?php echo $_row['class']; ?>-sprite" width="55">
         <img src="images/sprites/rpg/armor/<?php echo $_row['sprite']; ?>" />
         <img src="images/sprites/rpg/weapons/<?php echo $_row['weapon']; ?>" />
     </td>
