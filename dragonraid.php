@@ -10,7 +10,7 @@
  *
 */
 
-error_reporting(E_ALL);
+
     /**
      * Chan Boss Raid main class
      */
