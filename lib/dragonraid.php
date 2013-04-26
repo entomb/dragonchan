@@ -833,16 +833,6 @@
                 return "K";
             }
 
-            //healer
-            if(in_array($post_id[0],array('0','1','2','3','4','5','6','7','8','9'))){
-                return "H";
-            }
-
-            //bard
-            if(in_array($post_id[0],array('A','E','I','O','U','Y','a','e','i','o','u','y'))){
-                return "B";
-            }
-
             //dragonborn
             if(in_array($post_id[0],array('+','/')) && in_array($post_id[7],array('+','/'))){
                 return "DVK";
@@ -856,6 +846,16 @@
             //death knight
             if(in_array($post_id[7],array('+','/'))){
                 return "DK";
+            }
+
+            //healer
+            if(in_array($post_id[0],array('0','1','2','3','4','5','6','7','8','9'))){
+                return "H";
+            }
+
+            //bard
+            if(in_array($post_id[0],array('A','E','I','O','U','Y','a','e','i','o','u','y'))){
+                return "B";
             }
 
             //warlock
