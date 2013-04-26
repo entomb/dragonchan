@@ -10,6 +10,7 @@
  *
 */
 
+
     /**
      * Chan Boss Raid main class
      */
@@ -38,6 +39,9 @@
         var $_cached_post_authors = array();
         var $_set_nicknames       = array();
 
+        var $available_characters = array('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",'0','1','2','3','4','5','6','7','8','9','+','/');
+
+
 
         /**
          * CONFIGS
@@ -53,6 +57,32 @@
         var $critical_hit_ratio = 2;
         var $burst_hit_ratio    = 4;
 
+        var $available_elements = array(
+            // key, Friendly Name
+            'electric',
+            'fire',
+            'water',
+            'earth',
+            'ice',
+        );
+
+        var $element_weakness = array(
+            // water is weak to electric
+            'electric' => 'earth',
+            'fire' => 'water',
+            'water' => 'electric',
+            'earth' => 'ice',
+            'ice' => 'fire'
+        );
+
+        var $warlock_minions = array(
+            'electric' => 'Eletric Golem',
+            'water' => 'Water Golem',
+            'fire' => 'Fire Golem',
+            'earth' => 'Earth Golem',
+            'ice' => 'Frost Golem',
+        );
+
 
         /**
          * Init functions
@@ -67,8 +97,10 @@
 
             //boss status
             $this->BossIMG = "http://thumbs.4chan.org/b/thumb/".$this->OPost->tim."s.jpg";
-            $this->BossHP_MAX = 3000+self::roll($this->OPost->no)*$this->boss_hp_factor;
+            $boss_min_hp = 3000+self::roll($this->OPost->no)*$this->boss_hp_factor;
+            $this->BossHP_MAX = ($boss_min_hp < 16000 ? 16000 : $boss_min_hp);
             $this->BossHP = $this->BossHP_MAX;
+            $this->BossElement = self::bossElement($this->OPost->no);
 
         }
 
@@ -116,6 +148,9 @@
                 $post->com      = isset($post->com) ? $post->com : "";
                 //$post->filename = isset($post->filename) ? $post->filename : "";
                 $post->tim      = isset($post->tim) ? $post->tim : "";
+
+                // Default an element
+                $post->chosen_element = "normal";
 
 
                 //mass resurection and damage
@@ -221,6 +256,57 @@
             return in_array($_id, $this->deadPlayers);
         }
 
+        function bossElement($id) {
+
+            $last_digit = substr($id, -1);
+            $element = "normal";
+
+            /*
+            'electric' => 'Electric',
+            'fire' => 'Fire',
+            'water' => 'Water',
+            'earth' => 'Earth',
+            'ice' => 'Ice'
+
+            */
+
+            switch ($last_digit) {
+
+                case 0:
+                    $element = $this->available_elements[0];
+                    break;
+                case 1:
+                    $element = $this->available_elements[0];
+                    break;
+                case 2:
+                    $element = $this->available_elements[1];
+                    break;
+                case 3:
+                    $element = $this->available_elements[1];
+                    break;
+                case 4:
+                    $element = $this->available_elements[2];
+                    break;
+                case 5:
+                    $element = $this->available_elements[2];
+                    break;
+                case 6:
+                    $element = $this->available_elements[3];
+                    break;
+                case 7:
+                    $element = $this->available_elements[3];
+                    break;
+                case 8:
+                    $element = $this->available_elements[4];
+                    break;
+                case 9:
+                    $element = $this->available_elements[4];
+                    break;
+            }
+
+            return $element;
+        }
+
 
         /**
          * Calculates and returns the current bard bonus
@@ -266,13 +352,15 @@
          * @return void
          */
         function damage($post,$canCritical=true,$reportDamage=true){
+
+            $chosen_element = $post->chosen_element;
+
             //define damage
             if( ($post->class=='K') && $canCritical && self::isCriticalHit($post->roll)){
                 $post->damage = $post->roll*$this->critical_hit_ratio;
             }else{
                 $post->damage = $post->roll;
             }
-
 
             if($post->roll<=99){
                 $post->bonus = $this->bardBonusValue;
@@ -287,13 +375,32 @@
                         $_pet_damage = $_pet_damage*$this->burst_hit_ratio;
                     }
 
+                    // Give W's a possible elemental damage for their pets
+                    // Maybe break out into a summoner class?
+                    foreach($this->available_elements as $element) {
+                        if(strpos(strtolower($post->com), $element) !== false) {
+                            $chosen_element = $element;
+                            $post->chosen_element = $chosen_element;
+                            break;
+                        }
+                    }
+
+                    // Give the pet bonus damage if it's the boss's weakness
+                    if($this->element_weakness[$this->BossElement] == $chosen_element) {
+                        $_pet_damage += ($_pet_damage * 1.5);
+                    }
+                    elseif($this->BossElement == $chosen_element) {
+                        // If the element is the same as the boss, make him resistant
+                        $_pet_damage = $_pet_damage * .5;
+                    }
+
                     $post->bonus+=$_pet_damage;
                 }
 
                 //death knight death bonus
                 if($post->class=="DK"){
                     if($this->isDeadPlayer($post->id)){
-                        $post->bonus+= $post->damage*$this->critical_hit_ratio;
+                        $post->bonus+= $post->damage;
                     }else{
                         $post->bonus-= floor($post->damage/3);
                     }
@@ -302,7 +409,6 @@
             }else{
                 $post->bonus = 0;
             }
-
 
             //take the damage
             $this->BossHP-= ($post->damage+$post->bonus);
@@ -479,6 +585,7 @@
                     'color'  => self::getPostColor($post->id),
                     'sprite' => self::getPlayerSprite($post),
                     'weapon' => self::getPlayerWeapon($post),
+                    'chosen_element' => $post->chosen_element,
                     'roll'   => $post->roll,
                     'class'  => $post->class,
                     'action' => $action,
@@ -735,204 +842,6 @@
         }
 
 
-        // Let's deprecate this for a more robust colorful version
-
-        /*
-         * Gets the sprite of a player based on his ID
-         * @param  string $post_id Player ID
-         * @return string "male_knight_1.png"
-
-        static function getPlayerSprite($post){
-            // ** There's a better way to do this, but let's slap something neat together for now.
-
-            // Let's set some variables we can expect later
-            $sprite = "";
-            $segment = "1";
-            $gender = "male";
-            $class = $post->class;
-            $post_id = $post->id;
-
-            //this is a temp overwrite
-            if($class=='DK') $class = 'K';
-            if($class=='W')  $class = 'H';
-
-            // 64 variations
-            $range = array('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",'0','1','2','3','4','5','6','7','8','9','+','/');
-
-            // Knight
-            if($class == "K"){
-
-                // Currently 9 available sprites, 6 male, 3 female
-                // 64 / 9 ~= 7, so we'll chunk it into pieces of 7
-                $segment_range = array_chunk($range, 7);
-
-                // @@TODO: Can we make this simplier?
-                if( in_array( $post_id[0], $segment_range[0] ) ) {
-                    $gender = "male";
-                    $segment = "1";
-                }
-                if( in_array($post_id[0], $segment_range[1] ) ) {
-                    $gender = "male";
-                    $segment = "2";
-                }
-                if( in_array($post_id[0], $segment_range[2] ) ) {
-                    $gender = "male";
-                    $segment = "3";
-                }
-                if( in_array($post_id[0], $segment_range[3] ) ) {
-                    $gender = "male";
-                    $segment = "4";
-                }
-                if( in_array($post_id[0], $segment_range[4] ) ) {
-                    $gender = "male";
-                    $segment = "5";
-                }
-                if( in_array($post_id[0], $segment_range[5] ) ) {
-                    $gender = "male";
-                    $segment = "6";
-                }
-
-
-                if( in_array( $post_id[0], $segment_range[6] ) ) {
-                    $gender = "female";
-                    $segment = "1";
-                }
-                if( in_array($post_id[0], $segment_range[7] ) ) {
-                    $gender = "female";
-                    $segment = "2";
-                }
-                if( in_array($post_id[0], $segment_range[8] ) ) {
-                    $gender = "female";
-                    $segment = "3";
-                }
-
-            }
-
-            // Healer
-            if($class == "H"){
-
-                $segment_range = array_chunk($range, 7);
-
-                // @@TODO: Can we make this simplier?
-                if( in_array( $post_id[0], $segment_range[0] ) ) {
-                    $gender = "female";
-                    $segment = "1";
-                }
-                if( in_array($post_id[0], $segment_range[1] ) ) {
-                    $gender = "female";
-                    $segment = "2";
-                }
-                if( in_array($post_id[0], $segment_range[2] ) ) {
-                    $gender = "female";
-                    $segment = "3";
-                }
-                if( in_array($post_id[0], $segment_range[3] ) ) {
-                    $gender = "female";
-                    $segment = "4";
-                }
-                if( in_array($post_id[0], $segment_range[4] ) ) {
-                    $gender = "female";
-                    $segment = "5";
-                }
-
-                if( in_array( $post_id[0], $segment_range[6] ) ) {
-                    $gender = "male";
-                    $segment = "1";
-                }
-                if( in_array($post_id[0], $segment_range[7] ) ) {
-                    $gender = "male";
-                    $segment = "2";
-                }
-                if( in_array($post_id[0], $segment_range[8] ) ) {
-                    $gender = "male";
-                    $segment = "3";
-                }
-
-            }
-
-            // Bard
-            if($class == "B"){
-
-                $segment_range = array_chunk($range, 7);
-
-                // @@TODO: Can we make this simplier?
-                if( in_array( $post_id[0], $segment_range[0] ) ) {
-                    $gender = "male";
-                    $segment = "1";
-                }
-                if( in_array($post_id[0], $segment_range[1] ) ) {
-                    $gender = "male";
-                    $segment = "2";
-                }
-                if( in_array($post_id[0], $segment_range[2] ) ) {
-                    $gender = "male";
-                    $segment = "3";
-                }
-                if( in_array($post_id[0], $segment_range[3] ) ) {
-                    $gender = "male";
-                    $segment = "4";
-                }
-
-                if( in_array( $post_id[0], $segment_range[4] ) ) {
-                    $gender = "female";
-                    $segment = "1";
-                }
-                if( in_array($post_id[0], $segment_range[5] ) ) {
-                    $gender = "female";
-                    $segment = "2";
-                }
-                if( in_array($post_id[0], $segment_range[6] ) ) {
-                    $gender = "female";
-                    $segment = "3";
-                }
-                if( in_array($post_id[0], $segment_range[7] ) ) {
-                    $gender = "female";
-                    $segment = "4";
-                }
-                if( in_array($post_id[0], $segment_range[8] ) ) {
-                    $gender = "female";
-                    $segment = "5";
-                }
-
-
-            }
-
-            // Bard
-            if($class == "P"){
-
-                $segment_range = array_chunk($range, 21);
-
-                // @@TODO: Can we make this simplier?
-                if( in_array( $post_id[0], $segment_range[0] ) ) {
-                    $gender = "male";
-                    $segment = "1";
-                }
-                if( in_array($post_id[0], $segment_range[1] ) ) {
-                    $gender = "male";
-                    $segment = "2";
-                }
-                if( in_array($post_id[0], $segment_range[2] ) ) {
-                    $gender = "female";
-                    $segment = "1";
-                }
-
-
-            }
-
-            /*
-            @@ TODO: Better revive sequence
-            if(isset($post->action) && $post->action == "revive") {
-                $gender = "female";
-                $class = "reviver";
-                $segment = "1";
-            }
-
-            $sprite .= $gender . "_" . $class . "_" . $segment . ".png";
-
-            return $sprite;
-        }
-        */
-
         /*
          * Gets the sprite of a player based on his ID
          * @param  string $post_id Player ID
@@ -949,7 +858,10 @@
             $post_id = $post->id;
 
             // 64 variations
+            /* @@TODO: This needs to be instantiated into the Dragonraid
+                       class as a static properly instead of being redundant */
             $range = array('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",'0','1','2','3','4','5','6','7','8','9','+','/');
+
 
             // Knight
             if($class == "K"){
