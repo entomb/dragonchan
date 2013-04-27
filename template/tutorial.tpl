@@ -205,9 +205,14 @@
     $(document).ready(function(){
         $('.tutorialMenu a').click(function(){
             if(!this.href) return;
-
+            
             $('.tutorialPage').hide();
             var tab = "#"+this.href.toString().split('#')[1];
+            
+            if(_gaq){
+                _gaq.push(['_trackEvent', 'Info', tab]);
+            }
+
             $(tab).show();
             $('.tutorialMenu a').parent().removeClass('active');
             $(this).parent().addClass('active');
