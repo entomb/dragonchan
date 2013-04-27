@@ -1,7 +1,7 @@
 <div class="ink-row">
     <div class="ink-gutter">
         <div class="ink-l30">
-            <b>chan Boss Raid (<?php echo $this->THREAD_ID ?>)</b>
+            <b>Dragonchan (<?php echo $this->THREAD_ID ?>)</b>
             <a target="_blank" href="/info">version <?php echo $this->_version;?></a>
             
             <h1>HP: <span id="bossHP"><?php echo $this->BossHP ?></span>/<?php echo $this->BossHP_MAX ?></h1>

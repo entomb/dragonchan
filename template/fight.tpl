@@ -9,14 +9,14 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
         <link rel="stylesheet" type="text/css" href="http://css.ink.sapo.pt/v1/css/ink.css" />
 
 
-        <title>Chan Boss Raid</title>
+        <title>Dragonchan</title>
         <link href="site.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <a target="_blank" href="https://github.com/entomb/dragonchan"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
         <div class="ink-container" style="width:90%;">
 
-        <h2>chan Boss Raid <span class="small"><a href="http://boards.4chan.org/b/res/<?php echo $this->THREAD_ID; ?>">#<?php echo $this->THREAD_ID; ?></a></span>
+        <h2>Dragonchan <span class="small"><a href="http://boards.4chan.org/b/res/<?php echo $this->THREAD_ID; ?>">#<?php echo $this->THREAD_ID; ?></a></span>
             <small><a target="_blank" href="/info">version <?php echo $this->_version; ?> (More Info)</a></small>
         </h2>
         <br />
@@ -66,7 +66,7 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
                     <h3>Latest Hit</h3>
                     <table class="ink-table">
                         <?php $_row =  $BATTLE[0]; ?>
-                        <?php include('attack_sequence.php'); ?>
+                        <?php include('attack_sequence.tpl'); ?>
                     </table>
 
 
@@ -90,12 +90,7 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
               <div class="ink-l60">
                 <h4>Classes</h4>
                 <ul>
-                  <li>If your ID starts with a number you are a <span class="ink-label class-H">Healer</span>.</li>
-                  <li>If your ID starts with a vowel you are a <span class="ink-label class-B">Bard</span>.</li>
-                  <li>If your ID starts with a "/" or "+" you are a <span class="ink-label class-P">Paladin</span>.</li>
-                  <li>If your ID starts with "W","R","L","C" or "K" you are a <span class="ink-label class-W">Warlock</span>.</li>
-                  <li>Otherwise you are a <span class="ink-label class-K">Knight</span></li>
-                  <li>BUT if you have a "+" or "/" in your ID you are a <span class="ink-label class-DK">Death Knight</span></li>
+                  <?php include("class_rolls.tpl"); ?> 
                   <li>Your last 2 digits represent the damage you do</li>
                   <li><a target="_blank" href="/info">(see the full rules)</a></li>
                 </ul>
@@ -168,7 +163,7 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
                             echo "</tr>";
                         } else {
                           //combat log
-                          include('attack_sequence.php');
+                          include('attack_sequence.tpl');
                         }
 
                         ?>

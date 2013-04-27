@@ -10,30 +10,19 @@
         <a target="_blank" href="https://github.com/entomb/dragonchan"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
         <div class="ink-container">
 
-        <h2>chan Boss Raid <wb><small>version 1.5</small></h2>
-        <div class="ink-row">
+        <h2>Dragonchan <wb><small>version 1.6</small></h2> 
+        <?php include('tutorial.tpl'); ?>
+
+        <hr/>
+
+        <div class="ink-row ink-vspace">
             <div class="ink-gutter">
-                <div class="ink-l40">
-                    <h1>Credits</h1>
+                <div class="ink-l40"> 
+                    <h3>Open Source</h3>
                     <p> Github Project<br/>
                         <a target="_blank" href="https://github.com/entomb/dragonchan">https://github.com/entomb/dragonchan</a>
                     </p>
-
-                    <p> Original Idea and code:<br/>
-                        <a target="_blank" href="https://github.com/entomb">entomb</a>
-                    </p>
-
-
-                    <p> New Ideas, game mechanics and code:<br/>
-                        <ul>
-                            <li>Bryan</li>
-                            <li><a target="_blank" href="https://github.com/RobertsOma">RobertsOma</a></li>
-                            <li><a target="_blank" href="https://github.com/tselaty">tselaty</a></li>
-                            <li>Q4-Bi.</li>
-                        </ul>
-                    </p>
-
-
+                    <span class="note"> Have any sugestions? contact us on github!</span>
 
                     <p> CSS framework: <a target="_blank" href="http://ink.sapo.pt/">Ink</a></p>
                     <p> Hosting: <a target="_blank" href="https://www.appfog.com/">AppFog</a></p>
@@ -42,39 +31,40 @@
 
                 </div>
                 <div class="ink-l60">
-                    <h1>Rules</h1>
-                    <ul class="rules">
-                        <li>If your ID starts with a number you are a <span class="ink-label class-H">Healer</span>.</li>
-                        <li>If your ID starts with a vowel you are a <span class="ink-label class-B">Bard</span>.</li>
-                        <li>If your ID starts with a "/" or "+" you are a <span class="ink-label class-P">Paladin</span>.</li>
-                        <li>If your ID starts with "W","R","L","C" or "K" you are a <span class="ink-label class-W">Warlock</span>.</li>
-                        <li>If your ID has a "+" or "/" in it, you are a <span class="ink-label class-DK">Death Knight</span></li>
-                        <li>Otherwise you are a <span class="ink-label class-K">Knight</span></li>
-                        <li>Your last 2 digits represent the damage you do</li>
-                        <li>If you roll under 11 you DIE! <i style="font-size:11px;">(your posts will no longer do damage)</i></li>
-                        <li><span class="ink-label class-H">Healers</span> revive fallen soldiers by targeting them and rolling an EVEN number</li>
-                        <li><span class="ink-label class-B">Bards</span> are here to motive troops! each time they post an image the next 3 posts will do bonus damage!</li>
-                        <li><span class="ink-label class-K">Knights</span> can critical hit by rolling 5 or 0</li>
-                        <li><span class="ink-label class-K">Knights</span> avenge fallen soldiers by targeting them and rolling an EVEN number. Avenging does more damage for the glory of the fallen mate.</li>
-                        <li><span class="ink-label class-P">Paladins</span> can avenge AND revive!</li>
-                        <li><span class="ink-label class-W">Warlocks</span> can summon minions by posting an image. The last 2 digits of the image filename will be added to his damage. if his roll last digit matches his minion last digit he BURSTS massive damage. If the Warlock types the words "ice", "fire", "water", "electric", or "earth" in their post, they can summon a minion of the specific element for 1.5x additional minion damage if the Beast is weak to the element. If the element is the same as the Beast, the additional minion damage will do .5x the damage instead.</li>
-                        <li><span class="ink-label class-DK">Death Knights</span> can continue attacking after they die. they will do x2 damage when dead but only 2/3 when alive.</li>
-                        <li>you can be avenged/revived 6 times max</li>
-                        <li>The elemental grid is: Earth is weak to Ice, Water is weak to Electric, Fire is weak to Water, Electric is weak to Earth, Ice is weak to Fire.</li>
-                        <li>If you roll 00 or 69 you REVIVE everyone! their damage will count again! </li>
-                        <li>The boss will enrage bellow 20% HP, the minimum roll will be 22. however, he will no longer heal himself </li>
-                    </ul>
+                    <h3>Credits</h3>
+                    <p> Original Idea and code:<br/>
+                        <ul>
+                            <li><a target="_blank" href="https://github.com/entomb">entomb</a></li>
+                        </ul>
+                    </p>
+
+
+                    <p> New Ideas, game mechanics and code:<br/>
+                        <ul>
+                            <li><a target="_blank" href="https://github.com/tselaty">tselaty</a></li>
+                            <li><a target="_blank" href="https://github.com/RobertsOma">RobertsOma</a></li>
+                            <li><a target="_blank" href="https://github.com/Q4-Bi">Q4-Bi.</a></li>
+                            <li>Bryan</li>
+                        </ul>
+                    </p>
                 </div>
             </div>
-        </div>
+        </div> 
 
         <hr/>
-
-        <?php include('tutorial.tpl'); ?>
 
         <div class="ink-row">
             <div class="ink-gutter">
                 <h3>Changelog</h3>
+                <h4>v1.6- 27-04-2013</h4>
+                    <ul>
+                        <li>New Class: 'Dragonborn'</li>
+                        <li>Code Cleanup and new sprites</li>
+                        <li>Changes to death knight damage output</li>
+                        <li>Changes to warlock summon system</li>
+                        <li>Adding element mechanics</li>
+                        <li>Boss minimum HP is not set to 16.000</li>
+                    </ul>
                 <h4>v1.5- 24-04-2013</h4>
                     <ul>
                         <li>New Classes: 'Death Knight' and 'Warlock'</li>
@@ -151,7 +141,7 @@
 
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-37723000-2']);
-  _gaq.push(['_trackPageview']);
+  _gaq.push(['_trackPageview']); 
 
   (function() {
     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
