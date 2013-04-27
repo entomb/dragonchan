@@ -10,15 +10,23 @@
         <a target="_blank" href="https://github.com/entomb/dragonchan"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
         <div class="ink-container">
 
-        <h2>chan Boss Raid <wb><small>version 1.5</small></h2>
+        <h2>chan Boss Raid <wb><small>version 1.6</small></h2>
         <div class="ink-row">
             <div class="ink-gutter">
                 <div class="ink-l40">
-                    <h1>Credits</h1>
+                    <h1>Dragonchan</h1>
                     <p> Github Project<br/>
                         <a target="_blank" href="https://github.com/entomb/dragonchan">https://github.com/entomb/dragonchan</a>
-                    </p>
+                    </p> 
 
+                    <p> CSS framework: <a target="_blank" href="http://ink.sapo.pt/">Ink</a></p>
+                    <p> Hosting: <a target="_blank" href="https://www.appfog.com/">AppFog</a></p>
+                    <p> 4chan API: <a target="_blank" href="https://github.com/4chan/4chan-API">Github repo</a></p>
+                    <p> Sprites: <a target="_blank" href="http://leon-murayami.deviantart.com/">Leon-Murayami</a></p>
+
+                </div>
+                <div class="ink-l60">
+                    <h1>Credits</h1>
                     <p> Original Idea and code:<br/>
                         <a target="_blank" href="https://github.com/entomb">entomb</a>
                     </p>
@@ -32,34 +40,6 @@
                             <li>Q4-Bi.</li>
                         </ul>
                     </p>
-
-
-
-                    <p> CSS framework: <a target="_blank" href="http://ink.sapo.pt/">Ink</a></p>
-                    <p> Hosting: <a target="_blank" href="https://www.appfog.com/">AppFog</a></p>
-                    <p> 4chan API: <a target="_blank" href="https://github.com/4chan/4chan-API">Github repo</a></p>
-                    <p> Sprites: <a target="_blank" href="http://leon-murayami.deviantart.com/">Leon-Murayami</a></p>
-
-                </div>
-                <div class="ink-l60">
-                    <h1>Rules</h1>
-                    <ul class="rules">
-                        <?php include("class_rolls.tpl"); ?> 
-                        <li>Your last 2 digits represent the damage you do</li>
-                        <li>If you roll under 11 you DIE! <i style="font-size:11px;">(your posts will no longer do damage)</i></li>
-                        <li><span class="ink-label class-H">Healers</span> revive fallen soldiers by targeting them and rolling an EVEN number</li>
-                        <li><span class="ink-label class-B">Bards</span> are here to motive troops! each time they post an image the next 3 posts will do bonus damage!</li>
-                        <li><span class="ink-label class-K">Knights</span> can critical hit by rolling 5 or 0</li>
-                        <li><span class="ink-label class-K">Knights</span> avenge fallen soldiers by targeting them and rolling an EVEN number. Avenging does more damage for the glory of the fallen mate.</li>
-                        <li><span class="ink-label class-P">Paladins</span> can avenge AND revive!</li>
-                        <li><span class="ink-label class-W">Warlocks</span> can summon minions by posting an image. The last 2 digits of the image filename will be added to his damage. if his roll last digit matches his minion last digit he BURSTS massive damage. If the Warlock types the words "ice", "fire", "water", "electric", or "earth" in their post, they can summon a minion of the specific element for 1.5x additional minion damage if the Beast is weak to the element. If the element is the same as the Beast, the additional minion damage will do .5x the damage instead.</li>
-                        <li><span class="ink-label class-DK">Death Knights</span> can continue attacking after they die. they will do x2 damage when dead but only 2/3 when alive.</li>
-                        <li><span class="ink-label class-DVK">DragonBorn</span> can avenge and revive when alive, and will transform into a Death knight after death. this is the ultimate class!</li>
-                        <li>you can be avenged/revived 6 times max</li>
-                        <li>The elemental grid is: Earth is weak to Ice, Water is weak to Electric, Fire is weak to Water, Electric is weak to Earth, Ice is weak to Fire.</li>
-                        <li>If you roll 00 or 69 you REVIVE everyone! their damage will count again! </li>
-                        <li>The boss will enrage bellow 20% HP, the minimum roll will be 22. however, he will no longer heal himself </li>
-                    </ul>
                 </div>
             </div>
         </div>

@@ -69,8 +69,8 @@ __v1.6- 27-04-2013__
    - Code Cleanup and new sprites
    - Changes to death knight damage output
    - Changes to warlock summon system
-   - Adding element mechanics
-   - Boss minimum HP is not set to 16.000
+   - Adding 'element' mechanics
+   - Boss minimum HP is now set to 16.000
 
 __v1.5- 24-04-2013__
    - New Classes: 'Death Knight' and 'Warlock'
