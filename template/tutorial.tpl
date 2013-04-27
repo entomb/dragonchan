@@ -126,7 +126,7 @@
                 </div>
                 <h2>Starting a thead</h2>
                 <p>
-                    To start a new dragon slayer thread <a href="">copy/paste the thead template from the github repo</a> and start a new thead with the desired boss image.
+                    To start a new dragon slayer thread <a target="_blank" href="https://github.com/entomb/dragonchan">copy/paste the thead template from the github repo</a> and start a new thead with the desired boss image.
                     <br/>
                     Its recomended that you post a link to the script in your second post, so new people can read and understad the rules and the game itself.
                     <br/>
