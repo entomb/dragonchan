@@ -20,7 +20,7 @@ error_reporting(0);
  * Load the "more info" page template
  */
 if(isset($_GET['id']) && $_GET['id'] === "info" || !isset($_GET['id'])){
-    include 'info.php';
+    include 'template/info.tpl';
     exit();
 }
 
@@ -79,7 +79,7 @@ if($thread_id > 0) {
         /**
          * An error parsing the thread (possibly HTTP/404)
          */
-        include("invalid_thread.php");
+        include("template/invalid_thread.tpl");
         exit();
     }
 }
@@ -88,13 +88,13 @@ if($thread_id > 0) {
  * Thread has no posts
  */
 if(!isset($THREAD->posts) || count($THREAD->posts)<1){
-    include("invalid_thread.php");
+    include("template/invalid_thread.tpl");
     exit();
 }
 
 
 //require the main class
-include("dragonraid.php");
+include("lib/dragonraid.php");
 
 
 /**
