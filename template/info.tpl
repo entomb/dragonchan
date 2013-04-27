@@ -10,14 +10,19 @@
         <a target="_blank" href="https://github.com/entomb/dragonchan"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
         <div class="ink-container">
 
-        <h2>chan Boss Raid <wb><small>version 1.6</small></h2>
-        <div class="ink-row">
+        <h2>Dragonchan <wb><small>version 1.6</small></h2> 
+        <?php include('tutorial.tpl'); ?>
+
+        <hr/>
+
+        <div class="ink-row ink-vspace">
             <div class="ink-gutter">
-                <div class="ink-l40">
-                    <h1>Dragonchan</h1>
+                <div class="ink-l40"> 
+                    <h3>Open Source</h3>
                     <p> Github Project<br/>
                         <a target="_blank" href="https://github.com/entomb/dragonchan">https://github.com/entomb/dragonchan</a>
-                    </p> 
+                    </p>
+                    <span class="note"> Have any sugestions? contact us on github!</span>
 
                     <p> CSS framework: <a target="_blank" href="http://ink.sapo.pt/">Ink</a></p>
                     <p> Hosting: <a target="_blank" href="https://www.appfog.com/">AppFog</a></p>
@@ -26,27 +31,27 @@
 
                 </div>
                 <div class="ink-l60">
-                    <h1>Credits</h1>
+                    <h3>Credits</h3>
                     <p> Original Idea and code:<br/>
-                        <a target="_blank" href="https://github.com/entomb">entomb</a>
+                        <ul>
+                            <li><a target="_blank" href="https://github.com/entomb">entomb</a></li>
+                        </ul>
                     </p>
 
 
                     <p> New Ideas, game mechanics and code:<br/>
                         <ul>
-                            <li>Bryan</li>
-                            <li><a target="_blank" href="https://github.com/RobertsOma">RobertsOma</a></li>
                             <li><a target="_blank" href="https://github.com/tselaty">tselaty</a></li>
-                            <li>Q4-Bi.</li>
+                            <li><a target="_blank" href="https://github.com/RobertsOma">RobertsOma</a></li>
+                            <li><a target="_blank" href="https://github.com/Q4-Bi">Q4-Bi.</a></li>
+                            <li>Bryan</li>
                         </ul>
                     </p>
                 </div>
             </div>
-        </div>
+        </div> 
 
         <hr/>
-
-        <?php include('tutorial.tpl'); ?>
 
         <div class="ink-row">
             <div class="ink-gutter">

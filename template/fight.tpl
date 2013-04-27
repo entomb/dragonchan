@@ -9,14 +9,14 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
         <link rel="stylesheet" type="text/css" href="http://css.ink.sapo.pt/v1/css/ink.css" />
 
 
-        <title>Chan Boss Raid</title>
+        <title>Dragonchan</title>
         <link href="site.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <a target="_blank" href="https://github.com/entomb/dragonchan"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
         <div class="ink-container" style="width:90%;">
 
-        <h2>chan Boss Raid <span class="small"><a href="http://boards.4chan.org/b/res/<?php echo $this->THREAD_ID; ?>">#<?php echo $this->THREAD_ID; ?></a></span>
+        <h2>Dragonchan <span class="small"><a href="http://boards.4chan.org/b/res/<?php echo $this->THREAD_ID; ?>">#<?php echo $this->THREAD_ID; ?></a></span>
             <small><a target="_blank" href="/info">version <?php echo $this->_version; ?> (More Info)</a></small>
         </h2>
         <br />

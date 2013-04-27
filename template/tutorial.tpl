@@ -10,7 +10,7 @@
                     <li><a href="#t_basic">Basic Mechanics</a></li>
                     <li><a href="#t_roll">What is a Roll?</a></li>
                     <li><a href="#t_id">What is my ID?</a></li>
-                    <li><a href="#t_rules">Full Rules</a></li>
+                    <li class="active"><a href="#t_rules">Full Rules</a></li>
                     
                     <li><a href="#t_classes">Classes</a>
                     <!--    <ul style="padding-left:20px;">
@@ -39,7 +39,7 @@
             </nav>
         </div>
         <div class="ink-l66" style="margin-left:20px;">
-            <div class="tutorialPage" id="t_main">
+            <div class="tutorialPage" id="t_main" style="display:none;">
                 <h2>Main Goal</h2>
                 <p>Dragonchan is a script that converts any /b/ thread into a dragon slaying match<p>
                 <p>The script parses the thread using the json API and calculates damage/classes and other skills depending on post rolls, images, replies, etc...</p>
@@ -47,7 +47,7 @@
                 <p>The game focus on cooperation, as every class depends on eachother for its full benefit, this is why we implemented a diferent set of classes and skills and balanced them in a co-dependent way.</p>
                 <p>Using your class specific skills you can help eachother in the quest of defeating a dragon. if cooperation is not achived the thread will simply die by itself...</p>
             </div>
-            <div class="tutorialPage" id="t_roll">
+            <div class="tutorialPage" id="t_roll" style="display:none;">
                 <h2>What is a roll?</h2>
                 <p>
                     A 'roll' consists in the last 2 digits of your post number. Ocasionaly, some skills will use the last 2 digits of the id generated for images you post.
@@ -62,7 +62,7 @@
                     This system is only possible because /b/ has a very very very fast post per second ratio, making the last 2 digits of your post nearly random.
                 </p>
             </div>
-            <div class="tutorialPage" id="t_id">
+            <div class="tutorialPage" id="t_id" style="display:none;">
                 <h2>What is my ID?</h2>
                 <p>
                     Your ID is a randomly generated hash that 4chan gives you.
@@ -85,7 +85,7 @@
                     <?php include("class_rolls.tpl"); ?> 
                 </ul>
             </div>
-            <div class="tutorialPage" id="t_classes">
+            <div class="tutorialPage" id="t_classes" style="display:none;">
                 <h2>Classes</h2>
                 <p>
                     There are currently 7 diferent classes, each with its own habilities
@@ -117,7 +117,7 @@
                     <?php include("class_rolls.tpl"); ?> 
                 </ul>
             </div>
-            <div class="tutorialPage" id="t_basic">
+            <div class="tutorialPage" id="t_basic" style="display:none;">
                 <h2>Basic Mechanics</h2>
                 <p>The game is very simple. Find a dragonslayer thead and post on it.</p>
                 <p>You can use this webpage to track the party damage, by placing the 4chan thread ID after the URL</p>
@@ -176,7 +176,7 @@
                    Allways keep an eye on the top damage, your ID might be there!
                 </p>
             </div>
-            <div class="tutorialPage" id="t_rules">
+            <div class="tutorialPage" id="t_rules" style="display:none;">
                 <h2>Full Rules Copypasta</h2>
                 <ul class="rules">
                     <?php include("class_rolls.tpl"); ?> 
@@ -201,6 +201,7 @@
 </div>
 
 <script type="text/javascript">
+    
     $(document).ready(function(){
         $('.tutorialMenu a').click(function(){
             if(!this.href) return;
@@ -212,11 +213,10 @@
             $(this).parent().addClass('active');
         });
         
-        $('.tutorialPage').hide(function(){
-            $('#t_main').show();
-        });
+        
+            $('.tutorialMenu li.active a').click();
+         
 
     });
 </script>
-
-<hr/>
+ 
