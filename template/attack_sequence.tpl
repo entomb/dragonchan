@@ -31,10 +31,10 @@
                         if($_row['class'] == "W" && ($_row['_pet_damage'])){
                             if($_row['chosen_element'] == "normal") {
                                 sprite("/elements/summon.png");
-                                echo "summons an (IMP) ";
+                                echo "summons an IMP ";
                             }else{
                                 sprite("/elements/".$_row['chosen_element'].".png");
-                                echo "summons an (".strtoupper($_row['chosen_element'])." Golem)";
+                                echo "summons a ".strtoupper($_row['chosen_element'])." Golem ";
                             }
                             echo "with ".$_row['_pet_damage']." power,";
                             echo "<br/>";
