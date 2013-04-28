@@ -467,9 +467,9 @@
             $('.tutorialPage').hide();
             var tab = "#"+this.href.toString().split('#')[1];
 
-            //if(_gaq){
-              //  _gaq.push(['_trackEvent', 'Info', tab]);
-            //}
+            if(_gaq){
+                _gaq.push(['_trackEvent', 'Info', tab]);
+            }
 
             $(tab).show();
             $('.tutorialMenu a').parent().removeClass('active');
