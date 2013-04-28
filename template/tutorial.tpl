@@ -200,7 +200,7 @@
                 <p>
                     To revive a fallen soldier you must target them (by quoting his post) and roll an EVEN number (ends in 0,2,4,6,8).
                 </p>
-                
+
                 <div class="ink-vspace">
                     <img class="ink-l100 ink-m90 ink-s90" src="/images/howto_revive.jpg">
                 </div>
@@ -271,7 +271,7 @@
                 <p>
                     To revive a fallen soldier you must target them (by quoting his post) and roll an EVEN number (ends in 0,2,4,6,8).
                 </p>
-                
+
                 <div class="ink-vspace">
                     <img class="ink-l100 ink-m90 ink-s90" src="/images/howto_revive.jpg">
                 </div>
@@ -363,7 +363,7 @@
                 </p>
                 <p>Warlocks have the power to conjure monions by posting an image. the minion power is calculated by the roll of the generated filename.</p>
                 <p>Warlocks will critical hit if the minion last digit matches their roll last digit.</p>
-                
+
                 <h3>How to Summon</h3>
                 <p>
                     To summon a minion simply post an image. The image filename roll will be added to your damage as a bonus.
@@ -432,7 +432,7 @@
                             <span class="ink-label e_water">WATER</span> is strong agaist <span class="ink-label e_fire">FIRE</span>
                         </li>
                     </ul>
-                </div> 
+                </div>
                 <div class="ink-row"></div>
                 <p class="note">
                 Right now the only class using elements are Warlocks, but soon more classes will interact with them.
@@ -451,7 +451,12 @@
 
                 <h3>Rolling 69</h3>
                 <p>Rolling a 69 will <span class="ink-label success">REVIVE EVERYONE</span></p>
+                <p>Your damage is ignored for this roll</p>
                 <p>All other skills and abilities are ignored (avenges don't work, bonus are not applied, critical hits are not trigered).</p>
+
+                <div class="ink-l30 ink-m30 ink-s90">
+                    <img class="" src="/images/howto_69.jpg">
+                </div>
             </div>
         </div>
     </div>
