@@ -8,6 +8,7 @@ src: url('fonts/visitor/visitor1.ttf');
 }
 .visitor {font-family: "Visitor";}
 h2 small {font-size:12px;}
+h2 small.note{ font-size:.4em; }
 
 td.death{ color:#FF706C; }
 td.revive{ color:#59B407; }
@@ -32,6 +33,7 @@ ul.rules{ font-size: .9em; }
 .ink-row .praise{margin: 1.2%; padding: .3%; border:1px solid #EEE; background: #fff; min-height: 100px;}
 .ink-row .praise h4{margin-bottom:1em;}
 .ink-label small{ font-size:11px; color:#DDD; }
+/*classes*/
 .ink-label.class-K{  background-color: #C79C6E;  color: #FFF; }
 .ink-label.class-H{  background-color: #ABD473;  color: #FFF; }
 .ink-label.class-P{  background-color: #FCD349;  color: #FFF; }
@@ -39,6 +41,14 @@ ul.rules{ font-size: .9em; }
 .ink-label.class-DK{ background-color: #666666;  color: #FFF; }
 .ink-label.class-W{  background-color: #9482C9;  color: #FFF; }
 .ink-label.class-DVK{  background-color: #000000;  color: #FFF; }
+/*elements*/
+.e_normal{   color:#666; background-color: #CCC;}
+.e_water{    color:#06e; background-color: #CCC;}
+.e_fire{     color:#f20; background-color: #CCC;}
+.e_ice{      color:#FFF; background-color: #CCC;}
+.e_earth{    color:#960; background-color: #CCC;}
+.e_electric{ color:#80F; background-color: #CCC;}
+
 .sidebar span.ink-label{ padding:1px 6px; font-size:.8em; font-weight: normal; }
 .sidebar h3{ padding-top:15px; font-size:1.3em; }
 

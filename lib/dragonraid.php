@@ -100,7 +100,7 @@
             $boss_min_hp = 3000+self::roll($this->OPost->no)*$this->boss_hp_factor;
             $this->BossHP_MAX = ($boss_min_hp < 16000 ? 16000 : $boss_min_hp);
             $this->BossHP = $this->BossHP_MAX;
-            $this->BossElement = self::bossElement($this->OPost->no);
+            $this->BossElement = self::getBossElement($this->OPost->no);
 
         }
 
@@ -259,7 +259,7 @@
             return in_array($_id, $this->deadPlayers);
         }
 
-        function bossElement($id) {
+        function getBossElement($id) {
 
             $last_digit = substr($id, -1);
             $element = "normal";
@@ -390,11 +390,11 @@
 
                     // Give the pet bonus damage if it's the boss's weakness
                     if($this->element_weakness[$this->BossElement] == $chosen_element) {
-                        $_pet_damage += ($_pet_damage * 1.5);
+                        $_pet_damage += ceil($_pet_damage * 1.5);
                     }
                     elseif($this->BossElement == $chosen_element) {
                         // If the element is the same as the boss, make him resistant
-                        $_pet_damage = $_pet_damage * .5;
+                        $_pet_damage = ceil($_pet_damage * .5);
                     }
                     $post->_pet_damage = $_pet_damage;
                     $post->bonus+=$_pet_damage;
@@ -404,7 +404,8 @@
                 if($post->class=="DK" || $post->class=="DVK"){
                     if($this->isDeadPlayer($post->id)){
                         $post->bonus+= $post->damage;
-                    }else{
+                    }elseif($post->class=="DK"){
+                        //only DK have life penalty
                         $post->bonus-= floor($post->damage/3);
                     }
                 }
