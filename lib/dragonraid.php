@@ -882,6 +882,7 @@
             $sprite = "";
             $segment = "1";
             $class = $post->class;
+            $post_id = $post->id;
 
             // 64 variations
             /* @@TODO: This needs to be instantiated into the Dragonraid
@@ -923,10 +924,9 @@
             if($class == "DVK"){
                 $class == "DK"; //temp
                 $segment_range = array_chunk($range, 32);
-                $post_id = $post_id[0];
             }
 
-            $segment = array_tree_search_key($segment_range, $post_id);
+            $segment = array_tree_search_key($segment_range, $post_id[1]);
 
             $sprite .= $class . "/" . $class . "_" . $segment . ".png";
 
@@ -983,7 +983,7 @@
             }
 
             // Last character of ID, instead of the first
-            $segment = array_tree_search_key($segment_range, $post_id[0]);
+            $segment = array_tree_search_key($segment_range, $post_id[1]);
 
             $sprite .= $class . "/" . $class . "_" . $segment . ".png";
 
