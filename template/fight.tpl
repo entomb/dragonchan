@@ -134,7 +134,7 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
                     echo "<div class='ink-l20 praise'>";
                      echo "<h4 class='ink-label class-".$_item->class."'>
                      <img src='images/sprites/rpg/armor/" . $_item->sprite . "' />
-                     <img src='images/sprites/rpg/weapons/" . $_item->weapon . "' /> ".$_item->id." says:</h4>";
+                     <img src='images/sprites/rpg/weapons/" . $_item->weapon . "' /> ".$this->getNickname($_item->id)." says:</h4>";
                      echo $_item->text;
                     echo "</div>";
                     if($i == 3) { $i = 0; echo "<div class='ink-row ink-vspace'></div>"; } else { $i++; }
