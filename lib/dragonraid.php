@@ -576,6 +576,7 @@
         function getNickname($user_id){
             if(isset($this->_set_nicknames[$user_id])){
                 return $this->_set_nicknames[$user_id]." <small>($user_id)</small>";
+                //return "<b title='$user_id'>".$this->_set_nicknames[$user_id]."</b>";
             }else{
                 return $user_id;
             }
@@ -1023,6 +1024,8 @@
 
             $_text = strtolower($post->com);
             $_text = strip_tags($_text,"<br>");
+            $_text = str_replace("<br>", " ", $_text);
+            $_text = str_replace("<br/>", " ", $_text);
 
             $_commands = array();
             $_command_regex = '/(\w+@)([a-zA-Z0-9\S]{3,15})/i';
