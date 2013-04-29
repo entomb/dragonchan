@@ -1022,7 +1022,7 @@
             }
 
             $_text = strtolower($post->com);
-            $_text = strip_tags($_text);
+            $_text = strip_tags($_text,"<br>");
 
             $_commands = array();
             $_command_regex = '/(\w+@)([a-zA-Z0-9\S]{3,15})/i';
