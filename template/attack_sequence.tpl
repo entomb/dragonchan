@@ -1,5 +1,5 @@
 <tr>
-    <td>
+    <td style="font-size:.8em;">
         <a target="_blank" href="<?php echo $_row['link']; ?>">
             &gt;&gt;<?php echo $_row['post']; ?>
         </a>
@@ -9,10 +9,9 @@
         <img src="images/sprites/rpg/armor/<?php echo $_row['sprite']; ?>" />
         <img src="images/sprites/rpg/weapons/<?php echo $_row['weapon']; ?>" />
     </td>
-    <td style="font-size:13px;" width="100">
-        <span class="ink-label class-<?php echo $_row['class']; ?>"><?php echo $_row['class']; ?></span>
+    <td style="font-size:13px;">
         <span class="ink-label class-<?php echo $_row['class']; ?>">
-            <?php echo $_row['id']; ?>
+            <?php echo $this->getNickname($_row['id']); ?>
         </span>
     </td>
 

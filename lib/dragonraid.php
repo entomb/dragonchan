@@ -129,6 +129,12 @@
 
                 //get the current player class
                 $post->class = self::getPlayerClass($post->id);
+                $post->commands = self::parseCommandValues($post);
+
+                //check and set nickname from command
+                if($nickname = self::checkForCommand('nickname@',$post)){
+                    $this->setNickname($post->id,$nickname);
+                }
 
                 //ignore fallen players with the exeption of deadknights
                 if($this->isDeadPlayer($post->id) && !in_array($post->class,array('DK','DVK'))){
@@ -414,6 +420,11 @@
                 $post->bonus = 0;
             }
 
+            //OVER NINETHOUSAND!
+            if($post->damage===9000){
+                $post->damage++;
+            }
+
             //take the damage
             $this->BossHP-= ($post->damage+$post->bonus);
 
@@ -537,43 +548,39 @@
             }
         }
 
-        /*
-         * sets a nickname for a user
-         * @param  object $post   the full post object
 
-        function setNickname(&$post){
-            if(isset($this->_set_nicknames[$post->id])){
-                //was already set
+       /**
+        *  sets a nickname for a user
+        * @param string $user_id  the user ID to map
+        * @param string $nickname the desired nickname
+        */
+        function setNickname($user_id,$nickname){
+            if($nickname=="heaven"){
+              return false; //fuck off
+            }
+            if(in_array($nickname,$this->_set_nicknames)){
+                //was already used
                 return false;
             }
-
-            $post->email = strip_tags($post->email);
-            if(isset($post->email) && strlen($post->email)<100){
-                if(in_array($post->email,$this->_set_nicknames)){
-                    //was already used
-                    return false;
-                }
-                //set the nick
-                $this->_set_nicknames[$post->id] = $post->email;
-                return true;
-            }
-            return false;
+            //set the nick
+            $this->_set_nicknames[$user_id] = $nickname;
+            return true;
         }
-        */
+
 
         /*
          * gets a previously set nickname
          * @param  string $user_id the user to search for
          * @return string the nickname to use
-
+        */
         function getNickname($user_id){
             if(isset($this->_set_nicknames[$user_id])){
-                return $this->_set_nicknames[$user_id];
+                return $this->_set_nicknames[$user_id]." <small>($user_id)</small>";
             }else{
                 return $user_id;
             }
         }
-        */
+
 
         /**
          * Logs an action
@@ -828,7 +835,7 @@
          * @return string ['H','B','P','K']
          */
         static function getPlayerClass($post_id){
-           
+
             //heaven is allways a pleb knight
             if($post_id=="Heaven"){
                 return "K";
@@ -1002,6 +1009,41 @@
             }else{
                 return false;
             }
+        }
+
+
+        static function parseCommandValues($post){
+            if(!isset($post->com)){
+                return array();
+            }
+
+            if(empty($post->com)){
+                return array();
+            }
+
+            $_text = strtolower($post->com);
+            $_text = strip_tags($_text);
+
+            $_commands = array();
+            $_command_regex = '/(\w+@)([a-zA-Z0-9\S]{3,15})/i';
+            if($count_commands = (int)preg_match_all($_command_regex, $_text, $match)){
+                for($k=0;$k<$count_commands;$k++){
+                    $_commands[$match[1][$k]] = $match[2][$k];
+               }
+            }
+
+            return $_commands;
+
+        }
+
+        static function checkForCommand($command,$post){
+
+            if(isset($post->commands[$command])){
+                return $post->commands[$command];
+            }else{
+                return false;
+            }
+
         }
 
         /**
