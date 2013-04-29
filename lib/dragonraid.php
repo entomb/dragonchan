@@ -390,7 +390,7 @@
 
                     // Give the pet bonus damage if it's the boss's weakness
                     if($this->element_weakness[$this->BossElement] == $chosen_element) {
-                        $_pet_damage += ceil($_pet_damage * 1.5);
+                        $_pet_damage = ceil($_pet_damage * 1.5);
                     }
                     elseif($this->BossElement == $chosen_element) {
                         // If the element is the same as the boss, make him resistant
@@ -828,7 +828,7 @@
          * @return string ['H','B','P','K']
          */
         static function getPlayerClass($post_id){
-           
+
             //heaven is allways a pleb knight
             if($post_id=="Heaven"){
                 return "K";
@@ -882,7 +882,6 @@
             $sprite = "";
             $segment = "1";
             $class = $post->class;
-            $post_id = $post->id;
 
             // 64 variations
             /* @@TODO: This needs to be instantiated into the Dragonraid
@@ -924,9 +923,10 @@
             if($class == "DVK"){
                 $class == "DK"; //temp
                 $segment_range = array_chunk($range, 32);
+                $post_id = $post_id[0];
             }
 
-            $segment = array_tree_search_key($segment_range, $post_id[0]);
+            $segment = array_tree_search_key($segment_range, $post_id);
 
             $sprite .= $class . "/" . $class . "_" . $segment . ".png";
 
