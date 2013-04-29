@@ -21,6 +21,9 @@
             $_bonus  = $_row['bonus'];
             $_roll   = $_row['roll'];
             $_class  = $_row['class'];
+            if($_row['target']){
+                $_target = $this->getNickname($_row['target']);
+            }
 
             switch ($_row['action']) {
                 case 'damage':
@@ -59,18 +62,18 @@
                     sprite("/avenge.png");
                     if($_bonus>0){
                         sprite('/attack_up.png');
-                        echo "avenges <b>".$_row['target']."</b> for extra damage <span class='ink-label caution'>".($_damage+$_bonus)." <small>(+$_bonus)</small> HP</span>";
+                        echo "avenges <b>$_target</b> for extra damage <span class='ink-label caution'>".($_damage+$_bonus)." <small>(+$_bonus)</small> HP</span>";
                     }elseif($_bonus<0){
                         sprite('/attack_down.png');
-                        echo "avenges <b>".$_row['target']."</b> for extra damage <span class='ink-label caution'>".($_damage+$_bonus)." <small>($_bonus)</small> HP</span>";
+                        echo "avenges <b>$_target</b> for extra damage <span class='ink-label caution'>".($_damage+$_bonus)." <small>($_bonus)</small> HP</span>";
                     }else{
-                        echo "avenges <b>".$_row['target']."</b> for extra damage <span class='ink-label caution'>$_damage HP</span>";
+                        echo "avenges <b>$_target</b> for extra damage <span class='ink-label caution'>$_damage HP</span>";
                     }
 
                 break;
                 case 'revive':
                     sprite("/phoenix_down.png");
-                    echo "revives <b>".$_row['target']."</b> by rolling $_roll";
+                    echo "revives <b>$_target</b> by rolling $_roll";
                 break;
                 case 'massrevive':
                     echo "<span class='ink-label success'>REVIVES EVERYONE!</span>";
