@@ -28,32 +28,35 @@ How to start a dragonchan thread:
 ================================
 _Allways check this page for the correct template before posting. rules will be updated as the game evolves_
 
-__OP options: dificulty command__
+__OP options: dificulty@ command__
 
-`dificulty@noob` - very easy boss
-`dificulty@easy` - default
-`dificulty@medium` - challaging boss
-`dificulty@hard` - almost impossible boss
+- `dificulty@noob` - very easy boss
+- `dificulty@easy` - default
+- `dificulty@medium` - challenging boss
+- `dificulty@hard` - almost impossible boss
 
-__OP options: name command__
+__OP options: name@ command__
+
 this will set the boss name (no spaces, no numbers):
 
 `name@[desired name]`
 
 
 __OP options: element command__
+
 this will set the boss element:
 
-`name@fire`
-`name@ice`
-`name@eath`
-`name@electric`
-`name@water`
+`element@fire`
+`element@ice`
+`element@eath`
+`element@electric`
+`element@water`
 
 
 
-OP POST TEMPALTE:
+POST TEMPALTE:
 ================
+_use the commands described above to configure the boss_
 ```
 ITT: /b/ dragon slayer raid!
 
@@ -79,8 +82,9 @@ If you roll under 11 you DIE! (your posts will no longer do damage)
 ```
 
 
-FIRST REPLY:
+FIRST REPLY TEMPLATE:
 ================
+_Dont forget to copy/paste the thread ID into the url_
 ```
 http://dragonslayer.eu01.aws.af.cm/[place thread_id here]
 
