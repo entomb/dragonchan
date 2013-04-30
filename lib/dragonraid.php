@@ -97,7 +97,7 @@
 
             //boss status
             $this->BossIMG = "http://thumbs.4chan.org/b/thumb/".$this->OPost->tim."s.jpg";
-            $this->setBossDificulty('easy');
+            $this->setBossDifficulty('easy');
             $this->BossElement = self::getBossElement($this->OPost->no);
             $this->BossName = "RandomBeast";
 
@@ -107,9 +107,9 @@
              */
             $this->OPost->commands = self::parseCommandValues($this->OPost);
 
-            //set OP options [dificulty@]
-            if($_dificulty = self::checkForCommand('dificulty@',$this->OPost)){
-                $this->setBossDificulty($_dificulty);
+            //set OP options [difficulty@]
+            if($_difficulty = self::checkForCommand('difficulty@',$this->OPost)){
+                $this->setBossDifficulty($_difficulty);
             }
 
             //set OP options [name@]
@@ -296,8 +296,8 @@
             return in_array($_id, $this->deadPlayers);
         }
 
-        function setBossDificulty($dificulty){
-            switch ($dificulty) {
+        function setBossDifficulty($difficulty){
+            switch ($difficulty) {
                 case 'noob':
                     $boss_min_hp = self::roll($this->OPost->no)*$this->boss_hp_factor;
                     $this->BossHP_MAX = ($boss_min_hp < 6000 ? 6000 : $boss_min_hp);
