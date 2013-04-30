@@ -54,10 +54,29 @@ ul.rules{ font-size: .9em; }
 
 .boss-element {position: absolute; right:0; top:28px; font-size: 12px; font-family: arial; text-transform: uppercase; line-height: 22px; height: 22px; }
 .boss-element img {float:left; margin-right:5px;}
-
+.command{ font-family: Ubuntu_monospaced, serif; }
 ul.menu ul{
      box-shadow:none;
 }
 .ink-navigation ul.menu li.active li a{
     background-color:#FFF !important;
+}
+.left-pad b,
+.left-pad p,
+.left-pad ul{
+    padding-left: 50px;
+}
+
+#t_commands h3{
+
+    color:#900;
+}
+#t_commands ul pre{
+    color:#090;
+    margin:1px;
+    padding:1px;
+}
+#t_commands ul li{
+    padding:1px;
+    margin-left:40px;
 }

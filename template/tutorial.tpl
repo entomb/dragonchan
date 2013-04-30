@@ -25,6 +25,7 @@
                     </li>
                     <li><a href="#t_elements">Elements</a></li>
                     <li><a href="#t_special">Special Rolls</a></li>
+                    <li><a href="#t_commands">Commands</a></li>
                 </ul>
             </nav>
         </div>
@@ -443,6 +444,9 @@
                 <h2>Special Rolls</h2>
                 <p>Some rolls have special effects.</p>
 
+                <h3>Miss!</h3>
+                <p>Some rolls will miss regardless of the roll damage. This is calculated randomly (around 4% chance).</p>
+
                 <h3>Rolling 000 trips, 0000 Quads, 00000 Quints, <small>etc</small></h3>
                 <p>Rolls are calculated in a way that they allways return a >0 number, this means that if your last 2 digits are "00" the script will look for your last 3 digits. if you last 3 digits are still "000", the script will look for your last 4 digits. this will go on until a >1 digit is found.</p>
                 <p>If you roll a number enting in more than two zeros (000,0000,0000,00000) your roll will give a great amouth of damage.</p>
@@ -456,6 +460,50 @@
 
                 <div class="ink-l30 ink-m30 ink-s90">
                     <img class="" src="/images/howto_69.jpg">
+                </div>
+            </div>
+            <div class="tutorialPage" id="t_commands" style="display:none;">
+                <p>Commands are used to trow some user input to the game, this allows for greater interactivity.</p>
+                <p>Commands are used with simple sintax <pre>command@value</pre> </p>
+
+                <h2>OP Commands</h2>
+                <p>Will work only on OP first post</p>
+                <div class="left-pad">
+                    <h3 class="command">difficulty@</h3>
+                    <p>Defines the boss dificulty, ranging from very easy to impossible</p>
+                    <b>Possible values</b>
+                    <ul>
+                        <li><pre>difficulty@noob</pre></li>
+                        <li><pre>difficulty@easy</pre></li>
+                        <li><pre>difficulty@medium</pre></li>
+                        <li><pre>difficulty@hard</pre></li>
+                    </ul>
+                    <h3 class="command">name@</h3>
+                    <p>Defines the boss name</p>
+                    <b>Variable value</b>
+                    <ul>
+                        <li><pre>name@[bossname]</pre></li>
+                    </ul>
+                    <h3 class="command">element@</h3>
+                    <p>Defines the boss element</p>
+                    <b>Possible values</b>
+                    <ul>
+                        <li><pre>element@random</pre></li>
+                        <li><pre>element@fire</pre></li>
+                        <li><pre>element@earth</pre></li>
+                        <li><pre>element@water</pre></li>
+                        <li><pre>element@ice</pre></li>
+                        <li><pre>element@electric</pre></li>
+                    </ul>
+                </div>
+                <div class="left-pad">
+                <h2>Player Commands</h2>
+                    <h3 class="command">nickname@</h3>
+                    <p>Sets your nickname, you only need to set it once</p>
+                    <b>variable value</b>
+                    <ul>
+                        <li><pre>nickname@[yournick]</pre></li>
+                    </ul>
                 </div>
             </div>
         </div>
