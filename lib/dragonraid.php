@@ -97,10 +97,32 @@
 
             //boss status
             $this->BossIMG = "http://thumbs.4chan.org/b/thumb/".$this->OPost->tim."s.jpg";
-            $boss_min_hp = 3000+self::roll($this->OPost->no)*$this->boss_hp_factor;
-            $this->BossHP_MAX = ($boss_min_hp < 16000 ? 16000 : $boss_min_hp);
-            $this->BossHP = $this->BossHP_MAX;
+            $this->setBossDificulty('easy');
             $this->BossElement = self::getBossElement($this->OPost->no);
+            $this->BossName = "RandomBeast";
+
+
+            /**
+             * OP COMMANDS
+             */
+            $this->OPost->commands = self::parseCommandValues($this->OPost);
+
+            //set OP options [dificulty@]
+            if($_dificulty = self::checkForCommand('dificulty@',$this->OPost)){
+                $this->setBossDificulty($_dificulty);
+            }
+
+            //set OP options [name@]
+            if($_name = self::checkForCommand('name@',$this->OPost)){
+                $this->BossName = $_name;
+            }
+
+            //set OP options [element@]
+            if($_element = self::checkForCommand('element@',$this->OPost)){
+                if(in_array($_element,$this->available_elements)){
+                    $this->BossElement = $_element;
+                }
+            }
 
         }
 
@@ -118,8 +140,8 @@
                 $this->_cached_post_authors[$post->no] = $post->id;
 
                 //ignore OP first post
-                if($post->no==$this->THREAD_ID){
-                  continue;
+                if($post->no==$this->THREAD_ID){ 
+                    continue;
                 }
 
                 //boss is already dead!
@@ -129,6 +151,8 @@
 
                 //get the current player class
                 $post->class = self::getPlayerClass($post->id);
+
+                //parse post commands
                 $post->commands = self::parseCommandValues($post);
 
                 //check and set nickname from command
@@ -152,7 +176,6 @@
 
                 //mandatory data (that might not be on the API item)
                 $post->com      = isset($post->com) ? $post->com : "";
-                //$post->filename = isset($post->filename) ? $post->filename : "";
                 $post->tim      = isset($post->tim) ? $post->tim : "";
 
                 // Default an element
@@ -271,6 +294,43 @@
          */
         function isDeadPlayer($_id){
             return in_array($_id, $this->deadPlayers);
+        }
+
+        function setBossDificulty($dificulty){
+            switch ($dificulty) {
+                case 'noob':
+                    $boss_min_hp = self::roll($this->OPost->no)*$this->boss_hp_factor;
+                    $this->BossHP_MAX = ($boss_min_hp < 6000 ? 6000 : $boss_min_hp);
+                    $this->BossHP_MAX = ($boss_min_hp > 16000 ? 16000 : $boss_min_hp);
+                    $this->BossHP = $this->BossHP_MAX;
+                    $this->boss_heal_factor = 30;
+                break;
+                default:
+                case 'easy':
+                    $boss_min_hp = self::roll($this->OPost->no)*$this->boss_hp_factor;
+                    $this->BossHP_MAX = ($boss_min_hp < 16000 ? 16000 : $boss_min_hp);
+                    $this->BossHP = $this->BossHP_MAX;
+                    $this->boss_heal_factor = 30;
+                break;
+                case 'medium':
+                    $boss_min_hp = self::roll($this->OPost->no)*$this->boss_hp_factor*1.5;
+                    $this->BossHP_MAX = ($boss_min_hp < 22000 ? 22000 : $boss_min_hp);
+                    $this->BossHP = $this->BossHP_MAX;
+                    $this->boss_heal_factor = 40;
+                break;
+                case 'hard':
+                    $boss_min_hp = self::roll($this->OPost->no)*$this->boss_hp_factor*2;
+                    $this->BossHP_MAX = ($boss_min_hp < 27000 ? 27000 : $boss_min_hp);
+                    $this->BossHP = $this->BossHP_MAX;
+                    $this->boss_heal_factor = 50;
+                break;
+                case 'nigger':
+                    $this->BossHP_MAX = 66666;
+                    $this->BossHP = $this->BossHP_MAX;
+                    $this->boss_heal_factor = 50;
+                break;
+            }
+
         }
 
         function getBossElement($id) {
