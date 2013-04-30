@@ -495,6 +495,12 @@
                         <li><pre>element@ice</pre></li>
                         <li><pre>element@electric</pre></li>
                     </ul>
+                    <h3 class="command">health@</h3>
+                    <p>Defines the boss manually.</p>
+                    <b>Variable value</b>
+                    <ul>
+                        <li><pre>health@</pre></li>
+                    </ul>
                 </div>
                 <div class="left-pad">
                 <h2>Player Commands</h2>
