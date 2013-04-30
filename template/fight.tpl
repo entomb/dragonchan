@@ -78,19 +78,22 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
             <div class="ink-gutter">
               <div class="ink-l40">
                 <div class="ink-l90">
-                  <h4>Bookmarklet!</h4>
+                  <h4><span class="ink-label warning">NEW!</span> NICKNAMES!</h4>
+                  <p> set your nickname by using the <b>nickname@</b> command!</p>
+                  <p> example: <pre>nickname@LeroyJenkins</pre></p>
+                  <h4>Bookmarklet</h4>
                   <p>Drag this link to your bookmark bar and use it on any /b/ thread to get a real time update on the fight!
                     <br/>
                      <a class="ink-button success" href='javascript:(function(){var e=window.location.toString().split("http://boards.4chan.org/b/res/");if(e.length!=2){alert("this is not a valid 4chan thread.");return}if(document.getElementById("dragonraid")){return}var t=e[1].split("#")[0];var n=document.createElement("DIV");n.id="dragonraid";n.style.padding="0px;";n.style.margin="0px;";n.style.position="fixed";n.style.top="0px";n.style.left="0px";n.style.width="100%";n.style.height="100px";n.style.zIndex="1";n.style.overflow="hidden";var r=document.createElement("IFRAME");r.src="http://dragonslayer.eu01.aws.af.cm/"+t+"/status";r.style.width="110%";r.style.height="200px";r.style.border="none;";n.appendChild(r);var i=document.createElement("style");i.innerHTML=".fitToScreen{margin-top:100px;}";document.body.appendChild(i);document.body.appendChild(n);document.body.style.paddingTop="100px";document.getElementById("quickReply").style.zIndex=1001})();'>DragonChan</a>
                     </br>
-                    <em>(this is beta so it might not work very well)</em>
+                    <em>(will not work over HTTPS)</em>
                   </p>
                 </div>
               </div>
               <div class="ink-l60">
                 <h4>Classes</h4>
                 <ul>
-                  <?php include("class_rolls.tpl"); ?> 
+                  <?php include("class_rolls.tpl"); ?>
                   <li>Your last 2 digits represent the damage you do</li>
                   <li><a target="_blank" href="/info">(see the full rules)</a></li>
                 </ul>
@@ -114,7 +117,7 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
             echo '</a>';
             echo "&nbsp;&nbsp;";
             echo "<p style='color:#666;'> $WINNER_text &nbsp; - <span class='ink-label info' style='font-size:15px;'>";
-            echo $this->WINNER->id;
+            echo $this->getNickname($this->WINNER->id);
             echo "</span>";
             echo "</p>";
             echo "</h2>";
@@ -131,7 +134,7 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
                     echo "<div class='ink-l20 praise'>";
                      echo "<h4 class='ink-label class-".$_item->class."'>
                      <img src='images/sprites/rpg/armor/" . $_item->sprite . "' />
-                     <img src='images/sprites/rpg/weapons/" . $_item->weapon . "' /> ".$_item->id." says:</h4>";
+                     <img src='images/sprites/rpg/weapons/" . $_item->weapon . "' /> ".$this->getNickname($_item->id)." says:</h4>";
                      echo $_item->text;
                     echo "</div>";
                     if($i == 3) { $i = 0; echo "<div class='ink-row ink-vspace'></div>"; } else { $i++; }
@@ -175,35 +178,45 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
                     <h3>Top Damage</h3>
                      <?php foreach($topDamage as $_id => $_damage){
                      echo "<span class='ink-label caution'>".$_damage." HP</span>";
-                     echo "&nbsp;<span class='ink-label class-".self::getPlayerClass($_id)."'>".$_id."</span>";
+                     echo "&nbsp;<span class='ink-label class-".self::getPlayerClass($_id)."'>";
+                     echo $this->getNickname($_id);
+                     echo "</span>";
                      echo "<br/>";
                      } ?>
 
                     <h3>Top Revives</h3>
                      <?php foreach($topRevive as $_id => $_revives){
                      echo "<span class='ink-label success'>".$_revives."</span>";
-                     echo "&nbsp;<span class='ink-label class-".self::getPlayerClass($_id)."'>".$_id."</span>";
+                     echo "&nbsp;<span class='ink-label class-".self::getPlayerClass($_id)."'>";
+                     echo $this->getNickname($_id);
+                     echo "</span>";
                      echo "<br/>";
                      } ?>
 
                     <h3>Top Avengers</h3>
                      <?php foreach($topAvenge as $_id => $_avenges){
                      echo "<span class='ink-label info'>".$_avenges."</span>";
-                     echo "&nbsp;<span class='ink-label class-".self::getPlayerClass($_id)."'>".$_id."</span>";
+                     echo "&nbsp;<span class='ink-label class-".self::getPlayerClass($_id)."'>";
+                     echo $this->getNickname($_id);
+                     echo "</span>";
                      echo "<br/>";
                      } ?>
 
                     <h3>Top Bards</h3>
                      <?php foreach($topBuffs as $_id => $_count){
                      echo "<span class='ink-label caution' style='background-color:#F49D9D'>+".$_count."</span>";
-                     echo "&nbsp;<span class='ink-label class-".self::getPlayerClass($_id)."'>".$_id."</span>";
+                     echo "&nbsp;<span class='ink-label class-".self::getPlayerClass($_id)."'>";
+                     echo $this->getNickname($_id);
+                     echo "</span>";
                      echo "<br/>";
                      } ?>
 
                     <h3>Fallen Soldiers</h3>
                      <?php foreach($this->deadPlayers as $_id){
                      echo "&#x271D;";
-                     echo "&nbsp;<span class='ink-label class-".self::getPlayerClass($_id)."'>".$_id."</span>";
+                     echo "&nbsp;<span class='ink-label class-".self::getPlayerClass($_id)."'>";
+                     echo $this->getNickname($_id);
+                     echo "</span>";
                      echo "<br/>";
                      } ?>
 
@@ -211,7 +224,9 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
                      <?php foreach($topDeaths as $_id => $_count){
                      echo " <i>".$_count."</i>";
                      echo "&nbsp;&#x271D;";
-                     echo "&nbsp;<span class='ink-label class-".self::getPlayerClass($_id)."'>".$_id."</span>";
+                     echo "&nbsp;<span class='ink-label class-".self::getPlayerClass($_id)."'>";
+                     echo $this->getNickname($_id);
+                     echo "</span>";
                      echo "<br/>";
                      } ?>
 

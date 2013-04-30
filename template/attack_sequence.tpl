@@ -1,5 +1,5 @@
 <tr>
-    <td>
+    <td style="font-size:.8em;">
         <a target="_blank" href="<?php echo $_row['link']; ?>">
             &gt;&gt;<?php echo $_row['post']; ?>
         </a>
@@ -9,10 +9,9 @@
         <img src="images/sprites/rpg/armor/<?php echo $_row['sprite']; ?>" />
         <img src="images/sprites/rpg/weapons/<?php echo $_row['weapon']; ?>" />
     </td>
-    <td style="font-size:13px;" width="100">
-        <span class="ink-label class-<?php echo $_row['class']; ?>"><?php echo $_row['class']; ?></span>
+    <td style="font-size:13px;">
         <span class="ink-label class-<?php echo $_row['class']; ?>">
-            <?php echo $_row['id']; ?>
+            <?php echo $this->getNickname($_row['id']); ?>
         </span>
     </td>
 
@@ -22,6 +21,9 @@
             $_bonus  = $_row['bonus'];
             $_roll   = $_row['roll'];
             $_class  = $_row['class'];
+            if($_row['target']){
+                $_target = $this->getNickname($_row['target']);
+            }
 
             switch ($_row['action']) {
                 case 'miss':
@@ -65,18 +67,18 @@
                     sprite("/avenge.png");
                     if($_bonus>0){
                         sprite('/attack_up.png');
-                        echo "avenges <b>".$_row['target']."</b> for extra damage <span class='ink-label caution'>".($_damage+$_bonus)." <small>(+$_bonus)</small> HP</span>";
+                        echo "avenges <b>$_target</b> for extra damage <span class='ink-label caution'>".($_damage+$_bonus)." <small>(+$_bonus)</small> HP</span>";
                     }elseif($_bonus<0){
                         sprite('/attack_down.png');
-                        echo "avenges <b>".$_row['target']."</b> for extra damage <span class='ink-label caution'>".($_damage+$_bonus)." <small>($_bonus)</small> HP</span>";
+                        echo "avenges <b>$_target</b> for extra damage <span class='ink-label caution'>".($_damage+$_bonus)." <small>($_bonus)</small> HP</span>";
                     }else{
-                        echo "avenges <b>".$_row['target']."</b> for extra damage <span class='ink-label caution'>$_damage HP</span>";
+                        echo "avenges <b>$_target</b> for extra damage <span class='ink-label caution'>$_damage HP</span>";
                     }
 
                 break;
                 case 'revive':
                     sprite("/phoenix_down.png");
-                    echo "revives <b>".$_row['target']."</b> by rolling $_roll";
+                    echo "revives <b>$_target</b> by rolling $_roll";
                 break;
                 case 'massrevive':
                     echo "<span class='ink-label success'>REVIVES EVERYONE!</span>";
