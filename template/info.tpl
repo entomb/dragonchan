@@ -10,7 +10,7 @@
         <a target="_blank" href="https://github.com/entomb/dragonchan"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
         <div class="ink-container">
 
-        <h2>Dragonchan <wb><small>version 1.6</small></h2> 
+        <h2>Dragonchan <wb><small>version 1.6.5</small></h2> 
         <?php include('tutorial.tpl'); ?>
 
         <hr/>
