@@ -28,12 +28,12 @@ How to start a dragonchan thread:
 ================================
 _Allways check this page for the correct template before posting. rules will be updated as the game evolves_
 
-__OP options: dificulty@ command__
+__OP options: difficulty@ command__
 
-- `dificulty@noob` - very easy boss
-- `dificulty@easy` - default
-- `dificulty@medium` - challenging boss
-- `dificulty@hard` - almost impossible boss
+- `difficulty@noob` - very easy boss
+- `difficulty@easy` - default
+- `difficulty@medium` - challenging boss
+- `difficulty@hard` - almost impossible boss
 
 __OP options: name@ command__
 
@@ -42,7 +42,7 @@ this will set the boss name (no spaces, no numbers):
 `name@[desired name]`
 
 
-__OP options: element command__
+__OP options: element@ command__
 
 this will set the boss element:
 
