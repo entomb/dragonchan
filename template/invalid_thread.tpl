@@ -3,14 +3,14 @@
     <head>
         <link rel="stylesheet" type="text/css" href="http://css.ink.sapo.pt/v1/css/ink.css" />
 
-        <title>Chan Boss Raid</title>
+        <title><?php echo $_gamename;?></title>
         <link href="site.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <a target="_blank" href="https://github.com/entomb/dragonchan"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
         <div class="ink-container" style="width:90%;">
 
-        <h2>Dragonchan</h2>
+        <h2><?php echo $_gamename;?></h2>
         <br />
         <div class="ink-row">
             <div class="ink-gutter">
