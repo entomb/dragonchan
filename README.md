@@ -111,7 +111,7 @@ The boss will enrage bellow 20% HP, the minimum roll will be 22. however, he wil
 
 Changelog
 =========
-__v1.6.5- 27-04-2013__
+__v1.6.5- 30-04-2013__
    - Player commands
    - OP commands
    - sprite fix
