@@ -37,7 +37,7 @@ ul.rules{ font-size: .9em; }
 .ink-label.class-H{  background-color: #ABD473;  color: #222; }
 .ink-label.class-P{  background-color: #FCD349;  color: #222; }
 .ink-label.class-B{  background-color: #69CCF0;  color: #222; }
-.ink-label.class-DK{ background-color: #666666;  color: #222; }
+.ink-label.class-DK{ background-color: #666666;  color: #eee; }
 .ink-label.class-W{  background-color: #9482C9;  color: #222; }
 .ink-label.class-DVK{  background-color: #000000;  color: #FFF; }
 .ink-label small{ font-size:10px; color:#fff; }
