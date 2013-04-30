@@ -646,7 +646,7 @@
                 return $this->_set_nicknames[$user_id]." <small>($user_id)</small>";
                 //return "<b title='$user_id'>".$this->_set_nicknames[$user_id]."</b>";
             }else{
-                return $user_id;
+                return "<small>($user_id)</small>";
             }
         }
 
