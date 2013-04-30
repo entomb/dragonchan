@@ -485,8 +485,14 @@
 
                     // Give W's a possible elemental damage for their pets
                     // Maybe break out into a summoner class?
+
+                    //set OP options [difficulty@]
+                    if($_summon = self::checkForCommand('summon@',$this->OPost)){
+                        $_summon_element = $_summon;
+                    }
+
                     foreach($this->available_elements as $element) {
-                        if(strpos(strtolower($post->com), $element) !== false) {
+                        if(!empty($_summon_element) && $_summon_element == $element) {
                             $chosen_element = $element;
                             $post->chosen_element = $chosen_element;
                             break;
@@ -501,6 +507,7 @@
                         // If the element is the same as the boss, make him resistant
                         $_pet_damage = ceil($_pet_damage * .5);
                     }
+
                     $post->_pet_damage = $_pet_damage;
                     $post->bonus+=$_pet_damage;
                 }
