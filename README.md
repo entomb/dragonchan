@@ -48,7 +48,7 @@ this will set the boss element:
 
 `element@fire`
 `element@ice`
-`element@eath`
+`element@earth`
 `element@electric`
 `element@water`
 
