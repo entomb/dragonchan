@@ -29,7 +29,7 @@
                 case 'miss':
                         sprite('/miss.png');
 
-                        echo "<i>rolls $_roll</i> and misses the beast";
+                        echo "<i>rolls $_roll</i> and misses $BossName";
                 break;
                 case 'damage':
                     if($_bonus>0){
@@ -46,12 +46,12 @@
                             echo "with ".$_row['_pet_damage']." power,";
                             echo "<br/>";
                         }
-                        echo "<i>rolls $_roll</i> and damages the beast for <span class='ink-label caution'>".($_damage+$_bonus)."<small>(+$_bonus)</small> HP</span>";
+                        echo "<i>rolls $_roll</i> and damages $BossName for <span class='ink-label caution'>".($_damage+$_bonus)."<small>(+$_bonus)</small> HP</span>";
                     }elseif($_bonus<0){
                         sprite("/attack_down.png");
-                        echo "<i>rolls $_roll</i> and damages the beast for <span class='ink-label caution'>".($_damage+$_bonus)." <small>($_bonus)</small> HP</span>";
+                        echo "<i>rolls $_roll</i> and damages $BossName for <span class='ink-label caution'>".($_damage+$_bonus)." <small>($_bonus)</small> HP</span>";
                     }else{
-                        echo "<i>rolls $_roll</i> and damages the beast for <span class='ink-label caution'>$_damage HP</span>";
+                        echo "<i>rolls $_roll</i> and damages $BossName for <span class='ink-label caution'>$_damage HP</span>";
                     }
                 break;
                 case 'death':
@@ -60,7 +60,7 @@
                         echo "dies by rolling $_roll";
                     }else{
                         sprite("/death.png");
-                        echo "dies by rolling $_roll. the beast heals for <span class='ink-label warning'>".(-$_damage)." HP</span>";
+                        echo "dies by rolling $_roll. <b>$BossName</b> heals for <span class='ink-label warning'>".(-$_damage)." HP</span>";
                     }
                 break;
                 case 'avenge':

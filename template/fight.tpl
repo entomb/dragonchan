@@ -1,7 +1,7 @@
 <?php
 
 $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
-
+$BossName = $this->BossName;
 ?>
 <!DOCTYPE html>
 <html>
@@ -23,6 +23,7 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
         <div class="ink-row">
             <div class="ink-gutter">
                 <div class="ink-l40">
+                    <h3><?php echo $BossName; ?></h3>
                     <img style="width:300px;" src="<?php echo $this->BossIMG;?>">
                 </div>
                 <div class="ink-l60">
@@ -47,7 +48,7 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
                         <table class="ink-table">
                             <tr>
                                 <td colspan='4' style='font-size:22px;'>
-                                    <span class='ink-label success'>THE BEAST HAS BEEN SLAIN!</span>
+                                    <span class='ink-label success'>THE <?php echo $BossName; ?> HAS BEEN SLAIN!</span>
                                 </td>
                             </tr>
                         </table>
@@ -57,7 +58,7 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
                         <table class="ink-table">
                             <tr>
                                 <td colspan='4' style='font-size:22px;'>
-                                    <span class='ink-label caution'>THE BEAST HAS ENRAGED!</span> <small>Every roll under <?php echo $this->min_roll; ?> will result in death!!</small>
+                                    <span class='ink-label caution'><?php echo $BossName; ?> HAS ENRAGED!</span> <small>Every roll under <?php echo $this->min_roll; ?> will result in death!!</small>
                                 </td>
                             </tr>
                         </table>
@@ -106,8 +107,12 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
         <?php
         if($this->WINNER){
             $WINNER_praises =  $this->getPostReplies($this->WINNER->no);
-            $WINNER_text = html_entity_decode(strip_tags($this->WINNER->com));
+            $WINNER_text = $this->WINNER->com;
+            $WINNER_text = str_replace("<br>",' ',$WINNER_text);
+            $WINNER_text = str_replace("<br/>",' ',$WINNER_text);
+            $WINNER_text = html_entity_decode(strip_tags($WINNER_text));
             $WINNER_text = preg_replace('/>>(\d+){9}/i','',$WINNER_text);
+            $WINNER_class = $this->WINNER->class;
 
             echo "<h2 class='hero'>";
             echo "WINRAR!!! Hail the new monster slayer!";
@@ -116,7 +121,7 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
             echo " &gt;&gt;".$this->WINNER->no;
             echo '</a>';
             echo "&nbsp;&nbsp;";
-            echo "<p style='color:#666;'> $WINNER_text &nbsp; - <span class='ink-label info' style='font-size:15px;'>";
+            echo "<p style='color:#666;'> $WINNER_text &nbsp; - <span class='ink-label class-$WINNER_class' style='font-size:15px;'>";
             echo $this->getNickname($this->WINNER->id);
             echo "</span>";
             echo "</p>";
@@ -159,7 +164,7 @@ $boss_hp_percentage = floor($this->BossHP/$this->BossHP_MAX * 100);
                             echo "<tr>";
                                 echo "<td colspan='4' style='text-align:center; font-size:24px;'>";
                                   echo "<div class='ink-vspace'>";
-                                    echo "<span class='ink-label caution'>THE BEAST HAS ENRAGED!</span>";
+                                    echo "<span class='ink-label caution'>$BossName HAS ENRAGED!</span>";
                                     echo "<br/><small>Every roll under $this->min_roll will result in death!!</small>";
                                   echo "</div>";
                                 echo "</td>";

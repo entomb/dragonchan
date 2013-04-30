@@ -10,14 +10,14 @@
         <a target="_blank" href="https://github.com/entomb/dragonchan"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
         <div class="ink-container">
 
-        <h2>Dragonchan <wb><small>version 1.6</small></h2> 
+        <h2>Dragonchan <wb><small>version 1.6.5</small></h2>
         <?php include('tutorial.tpl'); ?>
 
         <hr/>
 
         <div class="ink-row ink-vspace">
             <div class="ink-gutter">
-                <div class="ink-l40"> 
+                <div class="ink-l40">
                     <h3>Open Source</h3>
                     <p> Github Project<br/>
                         <a target="_blank" href="https://github.com/entomb/dragonchan">https://github.com/entomb/dragonchan</a>
@@ -43,19 +43,26 @@
                         <ul>
                             <li><a target="_blank" href="https://github.com/tselaty">tselaty</a></li>
                             <li><a target="_blank" href="https://github.com/RobertsOma">RobertsOma</a></li>
-                            <li><a target="_blank" href="https://github.com/Q4-Bi">Q4-Bi.</a></li>
+                            <li><a target="_blank" href="https://github.com/Q4-Bi">Q4-Bi</a></li>
+                            <li><a target="_blank" href="https://github.com/poisonrune">poisonrune</a></li>
                             <li>Bryan</li>
                         </ul>
                     </p>
                 </div>
             </div>
-        </div> 
+        </div>
 
         <hr/>
 
         <div class="ink-row">
             <div class="ink-gutter">
                 <h3>Changelog</h3>
+                <h4>v1.6.5- 30-04-2013</h4>
+                    <ul>
+                        <li>Player commands</li>
+                        <li>OP commands</li>
+                        <li>sprite fix</li>
+                    </ul>
                 <h4>v1.6- 27-04-2013</h4>
                     <ul>
                         <li>New Class: 'Dragonborn'</li>

@@ -24,15 +24,50 @@ If you have complains about being banned for posting too many dragon threads in 
 Please don`t spam with dragon threads or you will end up ruining it for other people.
 
 
-Thread Template:
-================
+How to start a dragonchan thread:
+================================
 _Allways check this page for the correct template before posting. rules will be updated as the game evolves_
+
+__OP options: difficulty@ command__
+
+- `difficulty@noob` - very easy boss
+- `difficulty@easy` - default
+- `difficulty@medium` - challenging boss
+- `difficulty@hard` - almost impossible boss
+
+__OP options: name@ command__
+
+this will set the boss name (no spaces, no numbers):
+
+`name@[desired name]`
+
+
+__OP options: element@ command__
+
+this will set the boss element:
+
+`element@fire`
+`element@ice`
+`element@earth`
+`element@electric`
+`element@water`
+
+
+
+POST TEMPALTE:
+================
+_use the commands described above to configure the boss_
 ```
 ITT: /b/ dragon slayer raid!
 
 Rules:
 This huge motherfucking dragon appears out of nowhere.
-This thread last 2 digits x300 define its HP (plus a flat 3000)
+Read the full rules here: http://dragonslayer.eu01.aws.af.cm
+
+Heres some info about this boss:
+name@Dragon
+dificulty@easy
+element@random
 
 If your ID starts with a number you are a HEALER.
 If your ID starts with a vowel you are a BARD.
@@ -44,26 +79,43 @@ Otherwise you are a KNIGHT
 
 Your last 2 digits represent the damage you do
 If you roll under 11 you DIE! (your posts will no longer do damage)
+```
 
-HEALERS revive fallen soldiers by targeting them and rolling an EVEN number
-BARDS are here to motive troops! each time they post an image the next 3 posts will do bonus damage!
-KNIGHTS can critical hit by rolling 5 or 0
-KNIGHTS avenge fallen soldiers by targeting them and rolling an EVEN number. Avenging does more damage for the glory of the fallen mate.
+
+FIRST REPLY TEMPLATE:
+================
+_Dont forget to copy/paste the thread ID into the url_
+```
+http://dragonslayer.eu01.aws.af.cm/[place thread_id here]
+
+
+HEALERS revive fallen soldiers
+BARDS can boost the party damage by posting images
+KNIGHTS can critical hit and avenge!
 PALADINS can avenge AND revive!
-WARLOCKS can summon minions by posting an image. The last 2 digits of the image filename will be added to his damage. if his roll last digit matches his minion last digit he BURSTS massive damage.
-DEATH KNIGHTS can continue attacking after they die. they will do x3 damage when dead but only 2/3 when alive.
-DRAGONBORN can avenge and revive when alive, and will transform into a Death knight after death. this is the ultimate class!
+WARLOCKS can summon minions by posting an image.
+DEATH KNIGHTS can continue attacking after they die.
+DRAGONBORN can avenge and revive when alive, and attack after death.
+
 you can be avenged/revived 6 times max
 If you roll 00 or 69 you REVIVE everyone! their damage will count again!
 The boss will enrage bellow 20% HP, the minimum roll will be 22. however, he will no longer heal himself
-
-I have a webpage to track things, I will post a link to it here.
 ```
+
+
+
+
+
 
 
 
 Changelog
 =========
+__v1.6.5- 30-04-2013__
+   - Player commands
+   - OP commands
+   - sprite fix
+
 __v1.6- 27-04-2013__
    - New Class: 'Dragonborn'
    - Code Cleanup and new sprites
