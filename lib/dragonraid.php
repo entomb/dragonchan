@@ -996,8 +996,7 @@
 
             // Dragonborn
             if($class == "DVK"){
-                $class == "DK"; //temp
-                $segment_range = array_chunk($range, 32);
+                $segment_range = array_chunk($range, 5);
             }
 
             $segment = array_tree_search_key($segment_range, $post_id[1]);
@@ -1052,8 +1051,7 @@
 
             // Dragonborn
             if($class == "DVK"){
-                $class = "DK"; //temp
-                $segment_range = array_chunk($range, 3);
+                $segment_range = array_chunk($range, 5);
             }
 
             // Last character of ID, instead of the first
