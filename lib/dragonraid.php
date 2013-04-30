@@ -158,7 +158,6 @@
                 // Default an element
                 $post->chosen_element = "normal";
 
-
                 //mass resurection and damage
                 if($post->roll>99){
                     $this->damage($post,false);
@@ -193,6 +192,15 @@
                     $this->killPlayer($post);
                     continue;
                 }
+
+
+                if( (int)substr($post->time, -2) < 4) {
+                    $action = 'miss';
+                    $post->action = $action;
+                    $this->log($action,$post);
+                    continue;
+                }
+
 
                 //calculate regular hit
                 $this->damage($post);
@@ -396,7 +404,7 @@
 
                     // Give the pet bonus damage if it's the boss's weakness
                     if($this->element_weakness[$this->BossElement] == $chosen_element) {
-                        $_pet_damage += ceil($_pet_damage * 1.5);
+                        $_pet_damage = ceil($_pet_damage * 1.5);
                     }
                     elseif($this->BossElement == $chosen_element) {
                         // If the element is the same as the boss, make him resistant
@@ -934,7 +942,7 @@
                 $segment_range = array_chunk($range, 32);
             }
 
-            $segment = array_tree_search_key($segment_range, $post_id[0]);
+            $segment = array_tree_search_key($segment_range, $post_id[1]);
 
             $sprite .= $class . "/" . $class . "_" . $segment . ".png";
 
@@ -991,7 +999,7 @@
             }
 
             // Last character of ID, instead of the first
-            $segment = array_tree_search_key($segment_range, $post_id[0]);
+            $segment = array_tree_search_key($segment_range, $post_id[1]);
 
             $sprite .= $class . "/" . $class . "_" . $segment . ".png";
 
