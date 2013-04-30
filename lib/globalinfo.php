@@ -11,7 +11,7 @@
 */
 
 $_version = "1.7.2";
-$_gamename = "chan Boss raid";
+$_gamename = "Dragonchan";
 
 //EOF
 ?>

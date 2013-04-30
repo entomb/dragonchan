@@ -1217,11 +1217,12 @@
          */
         function getTargetPosts($text){
             $text = html_entity_decode($text);
-            $preg = preg_match_all('/>>(\d+){9}/i', $text,$raw);
+            $text = str_replace("\"","",$text);
+            $preg = preg_match_all('/>>>([0-9]+)<\/a>/', $text,$raw);
             $match = array();
             if(isset($raw[0])){
                 foreach ($raw[0] as $key => $value) {
-                    $match[$key] = str_replace(">", '', $value);
+                    $match[$key] = str_replace(array('>', '</a'), "", $value);
                 }
             }
 

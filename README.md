@@ -105,6 +105,9 @@ The boss will enrage bellow 20% HP, the minimum roll will be 22. however, he wil
 Changelog
 =========
 
+__v1.7.2- 07-05-2017__
+   - Fixed reviving and avenging (fixed reply detection)
+
 __v1.7.1- 06-05-2017__
    - Fixed 4chan API links
    - Changed default board to /bant/
