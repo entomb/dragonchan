@@ -10,7 +10,7 @@
         <a target="_blank" href="https://github.com/entomb/dragonchan"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
         <div class="ink-container">
 
-        <h2>Dragonchan <wb><small>version 1.6.5</small></h2>
+        <h2>Dragonchan <wb><small>version 1.7</small></h2>
         <?php include('tutorial.tpl'); ?>
 
         <hr/>
@@ -57,6 +57,10 @@
         <div class="ink-row">
             <div class="ink-gutter">
                 <h3>Changelog</h3>
+                <h4>v1.7- 09-07-2013</h4>
+                    <ul>
+                        <li>New class: 'Ranger'</li>
+                    </ul>
                 <h4>v1.6.5- 30-04-2013</h4>
                     <ul>
                         <li>Player commands</li>
