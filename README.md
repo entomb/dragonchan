@@ -1,23 +1,14 @@
 dragonchan
 ==========
 
-A prototype script to transform any /b/ thread into a dragon slaying match.
+A prototype script to transform any /bant/ thread into a dragon slaying match.
 
 Set up (or hijack) any thread using the template below and copy paste it's ID into this URL:
 
 
-# Offical Domain
-- Hosted on AppFog: `http://dragonslayer.eu01.aws.af.cm/[thread_id]`
-
-# Domain Mirror's
-- `http://slayer.pw/[thread_id]`
-- `http://dragon.slayer.pw/[thread_id]`
-- `http://mlp.pw/[thread_id]`
-
-
 Disclaimer
 ==========
-I`m not posting this threads, random people have been doing that. I have no control over it. If you have complains about the spam, sage the threads yourself.
+I`m not posting these threads, random people have been doing that. I have no control over it. If you have complains about the spam, sage the threads yourself.
 
 If you have complains about being banned for posting too many dragon threads in one day, well, its not my fault either.
 
@@ -58,11 +49,11 @@ POST TEMPALTE:
 ================
 _use the commands described above to configure the boss_
 ```
-ITT: /b/ dragon slayer raid!
+ITT: /bant/ dragon slayer raid!
 
 Rules:
 This huge motherfucking dragon appears out of nowhere.
-Read the full rules here: http://dragonslayer.eu01.aws.af.cm
+Read the full rules here: (place official link here)
 
 Heres some info about this boss:
 name@Dragon
@@ -87,7 +78,7 @@ FIRST REPLY TEMPLATE:
 ================
 _Dont forget to copy/paste the thread ID into the url_
 ```
-http://dragonslayer.eu01.aws.af.cm/[place thread_id here]
+http://link/[place thread_id here]
 
 
 HEALERS revive fallen soldiers
@@ -113,6 +104,12 @@ The boss will enrage bellow 20% HP, the minimum roll will be 22. however, he wil
 
 Changelog
 =========
+
+__v1.7.1- 06-05-2017__
+   - Fixed 4chan API links
+   - Changed default board to /bant/
+   - Removed old domains
+
 __v1.7- 09-07-2013__
    - New class: 'Ranger'
 

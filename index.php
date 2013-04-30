@@ -1,8 +1,8 @@
 <?php
 /**
- * DragonRaid - A prototype script to transform any /b/ thread into a dragon slaying match.
+ * DragonRaid - A prototype script to transform any /bant/ thread into a dragon slaying match.
  *
- * @version  1.3.1
+ * @version  1.7.1
  * @author Jonathan Tavares <the.entomb@gmail.com>
  * @license GNU General Public License, version 3
  * @link https://github.com/entomb/dragonchan GitHub Source
@@ -35,7 +35,7 @@ $thread_id = (isset($_GET['id']) ? (int)$_GET['id'] : 0);
  * IDEA: extend this to other boards
  * @var string
  */
-$api_url = "http://api.4chan.org/b/res/$thread_id.json";
+$api_url = "http://a.4cdn.org/bant/thread/$thread_id.json";
 
 
 /**

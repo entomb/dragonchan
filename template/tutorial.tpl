@@ -33,9 +33,9 @@
         <div class="ink-l66" style="margin-left:20px;">
             <div class="tutorialPage" id="t_main" style="display:none;">
                 <h2>Main Goal</h2>
-                <p>Dragonchan is a script that converts any /b/ thread into a dragon slaying match<p>
+                <p>Dragonchan is a script that converts any /bant/ thread into a dragon slaying match<p>
                 <p>The script parses the thread using the json API and calculates damage/classes and other skills depending on post rolls, images, replies, etc...</p>
-                <p>The main goal is to kill a dragon (or any other boss) by roleplaing on /b/ posting your hits and skills and checking the script page for damage output and fight status</p>
+                <p>The main goal is to kill a dragon (or any other boss) by roleplaing on /bant/ posting your hits and skills and checking the script page for damage output and fight status</p>
                 <p>The game focus on cooperation, as every class depends on eachother for its full benefit, this is why we implemented a diferent set of classes and skills and balanced them in a co-dependent way.</p>
                 <p>Using your class specific skills you can help eachother in the quest of defeating a dragon. if cooperation is not achived the thread will simply die by itself...</p>
             </div>
@@ -48,10 +48,7 @@
                     Rolls are calculated in a way that they allways return a >0 number, this means that if your last 2 digits are "00" the script will look for your last 3 digits. if you last 3 digits are still "000", the script will look for your last 4 digits. this will go on until a >1 digit is found.
                 </p>
                 <p>
-                    Sometimes people are going to burst >1000 damage in one hit, this is because 00 dubs are disabled on /b/ but 000 trips are allowed. the damage for this roll will be from 1000 to 9000. This is intended (same goes for quads "0000"). This is extremely rare but will make some "lucky" rolls enjoyable.
-                </p>
-                <p>
-                    This system is only possible because /b/ has a very very very fast post per second ratio, making the last 2 digits of your post nearly random.
+                    This system was only possible because /b/ had a very very very fast post per second ratio, making the last 2 digits of your post nearly random.
                 </p>
             </div>
             <div class="tutorialPage" id="t_id" style="display:none;">
