@@ -310,24 +310,24 @@
                     $boss_min_hp = self::roll($this->OPost->no)*$this->boss_hp_factor;
                     $this->BossHP_MAX = ($boss_min_hp < 16000 ? 16000 : $boss_min_hp);
                     $this->BossHP = $this->BossHP_MAX;
-                    $this->boss_heal_factor = 30;
+                    $this->boss_heal_factor = 33;
                 break;
                 case 'medium':
                     $boss_min_hp = self::roll($this->OPost->no)*$this->boss_hp_factor*1.5;
                     $this->BossHP_MAX = ($boss_min_hp < 22000 ? 22000 : $boss_min_hp);
                     $this->BossHP = $this->BossHP_MAX;
-                    $this->boss_heal_factor = 40;
+                    $this->boss_heal_factor = 35;
                 break;
                 case 'hard':
                     $boss_min_hp = self::roll($this->OPost->no)*$this->boss_hp_factor*2;
                     $this->BossHP_MAX = ($boss_min_hp < 27000 ? 27000 : $boss_min_hp);
                     $this->BossHP = $this->BossHP_MAX;
-                    $this->boss_heal_factor = 50;
+                    $this->boss_heal_factor = 38;
                 break;
                 case 'nigger':
                     $this->BossHP_MAX = 66666;
                     $this->BossHP = $this->BossHP_MAX;
-                    $this->boss_heal_factor = 50;
+                    $this->boss_heal_factor = 20;
                 break;
             }
 
