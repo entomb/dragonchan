@@ -39,7 +39,7 @@
         var $_cached_post_authors = array();
         var $_set_nicknames       = array();
 
-        var $available_characters = array('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",'0','1','2','3','4','5','6','7','8','9','+','/');
+        protected static $available_characters = array('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",'0','1','2','3','4','5','6','7','8','9','+','/');
 
 
 
@@ -83,6 +83,7 @@
             'ice' => 'Frost Golem',
         );
 
+        var $_miss_hits = array('2','31','51');
 
         /**
          * Init functions
@@ -140,7 +141,7 @@
                 $this->_cached_post_authors[$post->no] = $post->id;
 
                 //ignore OP first post
-                if($post->no==$this->THREAD_ID){ 
+                if($post->no==$this->THREAD_ID){
                     continue;
                 }
 
@@ -216,8 +217,8 @@
                     continue;
                 }
 
-
-                if( (int)substr($post->time, -2) < 4) {
+                //miss hit!
+                if(in_array(self::roll($post->time),$this->_miss_hits)){
                     $action = 'miss';
                     $post->action = $action;
                     $this->log($action,$post);
@@ -662,7 +663,6 @@
                     'link'   => $post->link,
                     'post'   => $post->no,
                     'id'     => $post->id,
-                    'color'  => self::getPostColor($post->id),
                     'sprite' => self::getPlayerSprite($post),
                     'weapon' => self::getPlayerWeapon($post),
                     'chosen_element' => $post->chosen_element,
@@ -961,9 +961,7 @@
             $post_id = $post->id;
 
             // 64 variations
-            /* @@TODO: This needs to be instantiated into the Dragonraid
-                       class as a static properly instead of being redundant */
-            $range = array('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",'0','1','2','3','4','5','6','7','8','9','+','/');
+            $range = self::$available_characters;
 
 
             // Knight
@@ -1020,7 +1018,7 @@
             $post_id = $post->id;
 
             // 64 variations
-            $range = array('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",'0','1','2','3','4','5','6','7','8','9','+','/');
+            $range = self::$available_characters;
 
             // Knight
             if($class == "K"){
@@ -1080,7 +1078,11 @@
             }
         }
 
-
+        /**
+         * Parses a post to check for command calls
+         * @param  object $post the full post object
+         * @return array full command list
+         */
         static function parseCommandValues($post){
             if(!isset($post->com)){
                 return array();
@@ -1107,6 +1109,12 @@
 
         }
 
+        /**
+         * Checks if a post is calling a set command and returns the command value
+         * @param  string $command 'comand@' to check
+         * @param  object $post the full post object
+         * @return false|string returns the command value or false on not-found
+         */
         static function checkForCommand($command,$post){
 
             if(isset($post->commands[$command])){
@@ -1179,7 +1187,7 @@
                 $targets = $this->getTargetPosts($post->com);
                 $targets = array_keys($targets);
 
-                $post->class = self::getPlayerClass($post->id);
+                $post->class  = self::getPlayerClass($post->id);
                 $post->weapon = self::getPlayerWeapon($post);
                 $post->sprite = self::getPlayerSprite($post);
 
@@ -1193,16 +1201,6 @@
             }
             return $replies;
         }
-
-        static function getPostColor($id){
-            $md5 = md5($id);
-            $r = substr($md5, 0,2);
-            $g = substr($md5, 5,2);
-            $b = substr($md5, 10,2);
-
-            return "#".$r.$g.$b;
-        }
-
 
     }
 
