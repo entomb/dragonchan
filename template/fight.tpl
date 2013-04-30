@@ -107,8 +107,12 @@ $BossName = $this->BossName;
         <?php
         if($this->WINNER){
             $WINNER_praises =  $this->getPostReplies($this->WINNER->no);
-            $WINNER_text = html_entity_decode(strip_tags($this->WINNER->com));
+            $WINNER_text = $this->WINNER->com;
+            $WINNER_text = str_replace("<br>",' ',$WINNER_text);
+            $WINNER_text = str_replace("<br/>",' ',$WINNER_text);
+            $WINNER_text = html_entity_decode(strip_tags($WINNER_text));
             $WINNER_text = preg_replace('/>>(\d+){9}/i','',$WINNER_text);
+            $WINNER_class = $this->WINNER->class;
 
             echo "<h2 class='hero'>";
             echo "WINRAR!!! Hail the new monster slayer!";
@@ -117,7 +121,7 @@ $BossName = $this->BossName;
             echo " &gt;&gt;".$this->WINNER->no;
             echo '</a>';
             echo "&nbsp;&nbsp;";
-            echo "<p style='color:#666;'> $WINNER_text &nbsp; - <span class='ink-label info' style='font-size:15px;'>";
+            echo "<p style='color:#666;'> $WINNER_text &nbsp; - <span class='ink-label class-$WINNER_class' style='font-size:15px;'>";
             echo $this->getNickname($this->WINNER->id);
             echo "</span>";
             echo "</p>";
