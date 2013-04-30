@@ -24,6 +24,11 @@
             $_class  = $_row['class'];
 
             switch ($_row['action']) {
+                case 'miss':
+                        sprite('/miss.png');
+
+                        echo "<i>rolls $_roll</i> and misses the beast";
+                break;
                 case 'damage':
                     if($_bonus>0){
                         sprite('/attack_up.png');

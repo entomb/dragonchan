@@ -152,7 +152,6 @@
                 // Default an element
                 $post->chosen_element = "normal";
 
-
                 //mass resurection and damage
                 if($post->roll>99){
                     $this->damage($post,false);
@@ -187,6 +186,15 @@
                     $this->killPlayer($post);
                     continue;
                 }
+
+
+                if( (int)substr($post->time, -2) < 4) {
+                    $action = 'miss';
+                    $post->action = $action;
+                    $this->log($action,$post);
+                    continue;
+                }
+
 
                 //calculate regular hit
                 $this->damage($post);
