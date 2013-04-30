@@ -83,26 +83,34 @@
             'ice' => 'Frost Golem',
         );
 
-        var $_miss_hits = array('2','31','51');
+        // Less than 22 = death while enraged
+        var $_miss_hits = array('23','51','71');
 
         /**
          * Init functions
          * @param array $_parsed_thread Parsed thread from the json API
          */
         function __construct($_parsed_thread){
+
+
             $this->THREAD = $_parsed_thread;
             $this->OPost = $this->THREAD->posts[0];
             $this->OP = $this->OPost->id;
             $this->THREAD_ID = $this->OPost->no;
 
 
+            /* Uncomment to force dev variables
+            $this->OPost->com = "name@LichKing
+                                difficulty@hard
+                                element@ice
+                                health@19900";
+            */
+
             //boss status
             $this->BossIMG = "http://thumbs.4chan.org/b/thumb/".$this->OPost->tim."s.jpg";
             $this->setBossDifficulty('easy');
             $this->BossElement = self::getBossElement($this->OPost->no);
             $this->BossName = "RandomBeast";
-
-
             /**
              * OP COMMANDS
              */
@@ -123,6 +131,12 @@
                 if(in_array($_element,$this->available_elements)){
                     $this->BossElement = $_element;
                 }
+            }
+
+            //set OP options [health@]
+            if($_health = self::checkForCommand('health@',$this->OPost)){
+                echo "yeah";
+                $this->setBossHealth($_health);
             }
 
         }
@@ -297,6 +311,11 @@
             return in_array($_id, $this->deadPlayers);
         }
 
+        /**
+         * Set boss difficulty
+         * @param  string $difficulty preg_matched difficulty
+         * @return null
+         */
         function setBossDifficulty($difficulty){
             switch ($difficulty) {
                 case 'noob':
@@ -332,6 +351,15 @@
                 break;
             }
 
+        }
+
+        /**
+         * Overrides boss's health
+         * @param  string $health preg_matched health
+         */
+        function setBossHealth($health){
+            $this->BossHP_MAX = ($boss_min_hp > 27000 ? 27000 : $health);
+            $this->BossHP = $this->BossHP_MAX;
         }
 
         function getBossElement($id) {
