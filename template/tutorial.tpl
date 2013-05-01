@@ -505,7 +505,7 @@
                 <div class="left-pad">
                 <h2>Player Commands</h2>
                     <h3 class="command">nickname@</h3>
-                    <p>Sets your nickname, you only need to set it once</p>
+                    <p>Sets your nickname, you only need to set it once (max length 14 characters)</p>
                     <b>variable value</b>
                     <ul>
                         <li><pre>nickname@[yournick]</pre></li>
