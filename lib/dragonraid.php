@@ -111,10 +111,13 @@
             $this->setBossDifficulty('easy');
             $this->BossElement = self::getBossElement($this->OPost->no);
             $this->BossName = "RandomBeast";
+
             /**
              * OP COMMANDS
              */
-            $this->OPost->commands = self::parseCommandValues($this->OPost);
+
+            // OP's commands should be case sensitive, like the boss name
+            $this->OPost->commands = self::parseCommandValues($this->OPost, true);
 
             //set OP options [difficulty@]
             if($_difficulty = self::checkForCommand('difficulty@',$this->OPost)){
@@ -135,8 +138,7 @@
 
             //set OP options [health@]
             if($_health = self::checkForCommand('health@',$this->OPost)){
-                echo "yeah";
-                $this->setBossHealth($_health);
+                $this->setBossHealth((int)$_health);
             }
 
         }
@@ -358,7 +360,7 @@
          * @param  string $health preg_matched health
          */
         function setBossHealth($health){
-            $this->BossHP_MAX = ($boss_min_hp > 27000 ? 27000 : $health);
+            $this->BossHP_MAX = ($health > 27000 ? 27000 : $health);
             $this->BossHP = $this->BossHP_MAX;
         }
 
@@ -1109,7 +1111,7 @@
          * @param  object $post the full post object
          * @return array full command list
          */
-        static function parseCommandValues($post){
+        static function parseCommandValues($post, $case_sensitive = false){
             if(!isset($post->com)){
                 return array();
             }
@@ -1118,7 +1120,10 @@
                 return array();
             }
 
-            $_text = strtolower($post->com);
+            $_text = $post->com;
+            if($case_sensitive == false) {
+                $_text = strtolower($post->com);
+            }
             $_text = strip_tags($_text,"<br>");
             $_text = str_replace("<br>", " ", $_text);
             $_text = str_replace("<br/>", " ", $_text);

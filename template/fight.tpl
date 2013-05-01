@@ -17,7 +17,7 @@ $BossName = $this->BossName;
         <div class="ink-container" style="width:90%;">
 
         <h2>Dragonchan <span class="small"><a href="http://boards.4chan.org/b/res/<?php echo $this->THREAD_ID; ?>">#<?php echo $this->THREAD_ID; ?></a></span>
-            <small><a target="_blank" href="/info">version <?php echo $this->_version; ?> (More Info)</a></small>
+            <small><a target="_blank" href="info">version <?php echo $this->_version; ?> (More Info)</a></small>
         </h2>
         <br />
         <div class="ink-row">
@@ -96,7 +96,7 @@ $BossName = $this->BossName;
                 <ul>
                   <?php include("class_rolls.tpl"); ?>
                   <li>Your last 2 digits represent the damage you do</li>
-                  <li><a target="_blank" href="/info">(see the full rules)</a></li>
+                  <li><a target="_blank" href="info">(see the full rules)</a></li>
                 </ul>
               </div>
             </div>
