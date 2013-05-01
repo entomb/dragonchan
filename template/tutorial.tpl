@@ -116,7 +116,7 @@
                    You can use this webpage to track the party damage, by placing the 4chan thread ID after the URL.
                 </p>
                 <div>
-                    <img class="ink-l100 ink-m90 ink-s90" src="/images/howto_start.jpg"/>
+                    <img class="ink-l100 ink-m90 ink-s90" src="images/howto_start.jpg"/>
                 </div>
                 <h2>Starting a thead</h2>
                 <p>
@@ -143,7 +143,7 @@
                     Some skills (depending on your class) will add or remove damage to your roll.
                 </p>
                 <div>
-                    <img class="ink-l100 ink-m90 ink-s90" src="/images/howto_log.jpg"/>
+                    <img class="ink-l100 ink-m90 ink-s90" src="images/howto_log.jpg"/>
                 </div>
 
                 <h2>Death</h2>
@@ -181,7 +181,7 @@
                     <li><span class="ink-label class-K">Knights</span> can critical hit by rolling 5 or 0</li>
                     <li><span class="ink-label class-K">Knights</span> avenge fallen soldiers by targeting them and rolling an EVEN number. Avenging does more damage for the glory of the fallen mate.</li>
                     <li><span class="ink-label class-P">Paladins</span> can avenge AND revive!</li>
-                    <li><span class="ink-label class-W">Warlocks</span> can summon minions by posting an image. The last 2 digits of the image filename will be added to his damage. if his roll last digit matches his minion last digit he BURSTS massive damage. If the Warlock types the words "ice", "fire", "water", "electric", or "earth" in their post, they can summon a minion of the specific element for 1.5x additional minion damage if the Beast is weak to the element. If the element is the same as the Beast, the additional minion damage will do .5x the damage instead.</li>
+                    <li><span class="ink-label class-W">Warlocks</span> can summon minions by posting an image. The last 2 digits of the image filename will be added to his damage. if his roll last digit matches his minion last digit he BURSTS massive damage. If the Warlock types the words "summon@ice", "summon@fire", "summon@water", "summon@electric", or "summon@earth" in their post, they can summon a minion of the specific element for 1.5x additional minion damage if the Beast is weak to the element. If the element is the same as the Beast, the additional minion damage will do .5x the damage instead.</li>
                     <li><span class="ink-label class-DK">Death Knights</span> can continue attacking after they die. they will do x2 damage when dead but only 2/3 when alive.</li>
                     <li><span class="ink-label class-DVK">DragonBorn</span> can avenge and revive when alive, and will transform into a Death knight after death. this is the ultimate class!</li>
                     <li>you can be avenged/revived 6 times max</li>
@@ -203,7 +203,7 @@
                 </p>
 
                 <div class="ink-vspace">
-                    <img class="ink-l100 ink-m90 ink-s90" src="/images/howto_revive.jpg">
+                    <img class="ink-l100 ink-m90 ink-s90" src="images/howto_revive.jpg">
                 </div>
 
                 <p>
@@ -228,7 +228,7 @@
                 <h3>Critical Hit Chance</h3>
                 <p>Knights critical hit if their roll ends in "0" or "5". this means the hit does double damage.</p>
                 <div class="ink-vspace">
-                    <img class="ink-l100 ink-m90 ink-s90" src="/images/howto_critical.jpg">
+                    <img class="ink-l100 ink-m90 ink-s90" src="images/howto_critical.jpg">
                 </div>
 
                 <h3>How to Avenge</h3>
@@ -237,7 +237,7 @@
                     To avenge a fallen soldier you must target him (by quoting his post) and roll an EVEN number (ends in 0,2,4,6,8).
                 </p>
                  <div class="ink-vspace">
-                    <img class="ink-l100 ink-m90 ink-s90" src="/images/howto_avenge.jpg">
+                    <img class="ink-l100 ink-m90 ink-s90" src="images/howto_avenge.jpg">
                 </div>
                 <p>
                     If the avenging roll is successfull you will swing your sword once again for every target.
@@ -265,7 +265,7 @@
                 <p>Paladins can NOT critical hit.</p>
 
                 <div class="ink-vspace">
-                    <img class="ink-l100 ink-m90 ink-s90" src="/images/howto_paladin.jpg">
+                    <img class="ink-l100 ink-m90 ink-s90" src="images/howto_paladin.jpg">
                 </div>
 
                 <h3>How to Revive</h3>
@@ -274,7 +274,7 @@
                 </p>
 
                 <div class="ink-vspace">
-                    <img class="ink-l100 ink-m90 ink-s90" src="/images/howto_revive.jpg">
+                    <img class="ink-l100 ink-m90 ink-s90" src="images/howto_revive.jpg">
                 </div>
 
                 <p>
@@ -295,7 +295,7 @@
                     To avenge a fallen soldier you must target him (by quoting his post) and roll an EVEN number (ends in 0,2,4,6,8).
                 </p>
                 <div class="ink-vspace">
-                    <img class="ink-l100 ink-m90 ink-s90" src="/images/howto_avenge.jpg">
+                    <img class="ink-l100 ink-m90 ink-s90" src="images/howto_avenge.jpg">
                 </div>
                 <p>
                     If the avenging roll is successfull you will swing your sword once again for every target.
@@ -351,7 +351,7 @@
                 </p>
                 <p><b>Bard buffs stack</b> with each other and with every other bonus!</p>
                 <div class="ink-vspace">
-                    <img class="ink-l100 ink-m90 ink-s90" src="/images/howto_bard.jpg">
+                    <img class="ink-l100 ink-m90 ink-s90" src="images/howto_bard.jpg">
                 </div>
 
             </div>
@@ -372,35 +372,35 @@
                     If a minion rolls trips or quads, that many damage is added.
                 </p>
                 <div class="ink-vspace">
-                    <img class="ink-l100 ink-m90 ink-s90" src="/images/howto_summon.jpg">
+                    <img class="ink-l100 ink-m90 ink-s90" src="images/howto_summon.jpg">
                 </div>
                 <h3>Elemental Damage</h3>
                 <p>
                     You can summon 6 diferent minions by typing diferent commands in your post:
                     <ul>
-                        <li><span class="ink-label e_normal"> <img align="absmiddle" src='/images/sprites/rpg/elements/summon.png'> IMP </span> - default summon</li>
-                        <li><span class="ink-label e_water"> <img align="absmiddle" src='/images/sprites/rpg/elements/water.png'> WATER golem</span> - type 'water' in your post</li>
-                        <li><span class="ink-label e_fire"> <img align="absmiddle" src='/images/sprites/rpg/elements/fire.png'> FIRE golem</span> - type 'fire' in your post</li>
-                        <li><span class="ink-label e_ice"> <img align="absmiddle" src='/images/sprites/rpg/elements/ice.png'> ICE golem</span> - type 'ice' in your post</li>
-                        <li><span class="ink-label e_earth"> <img align="absmiddle" src='/images/sprites/rpg/elements/earth.png'> EARTH golem</span> - type 'earth' in your post</li>
-                        <li><span class="ink-label e_electric"> <img align="absmiddle" src='/images/sprites/rpg/elements/electric.png'> ELECTRIC golem</span> - type 'electric' in your post</li>
+                        <li><span class="ink-label e_normal"> <img align="absmiddle" src='images/sprites/rpg/elements/summon.png'> IMP </span> - default summon</li>
+                        <li><span class="ink-label e_water"> <img align="absmiddle" src='images/sprites/rpg/elements/water.png'> WATER golem</span> - type 'summon@water' in your post</li>
+                        <li><span class="ink-label e_fire"> <img align="absmiddle" src='images/sprites/rpg/elements/fire.png'> FIRE golem</span> - type 'summon@fire' in your post</li>
+                        <li><span class="ink-label e_ice"> <img align="absmiddle" src='images/sprites/rpg/elements/ice.png'> ICE golem</span> - type 'summon@ice' in your post</li>
+                        <li><span class="ink-label e_earth"> <img align="absmiddle" src='images/sprites/rpg/elements/earth.png'> EARTH golem</span> - type 'summon@earth' in your post</li>
+                        <li><span class="ink-label e_electric"> <img align="absmiddle" src='images/sprites/rpg/elements/electric.png'> ELECTRIC golem</span> - type 'summon@electric' in your post</li>
                     </ul>
                     <br/>
-                    If you summon the correct element, your summon will be more powerfull.
+                    If you summon the correct element, your summon will be more powerful.
                     <br/>
                     You can only assign 1 element per post, so if you type more than one only the first one will be considered.
                     <br/>
                     The bonus and element are visible on the battle log.
                 </p>
                 <div class="ink-vspace">
-                    <img class="ink-l100 ink-m90 ink-s90" src="/images/howto_summon_element.jpg">
+                    <img class="ink-l100 ink-m90 ink-s90" src="images/howto_summon_element.jpg">
                 </div>
                 <h3>Burst Damage</h3>
                 <p>Warlocks will critical hit if the minion last digit matches their roll last digit. This is called burst damage and it will greatly increase the minion's power.</p>
                 <p>Burst damage stacks with elemental bonus!</p>
                 <p>If a minion rolls trips or quads, that many damage is added, but the burst damage is not applied.</p>
                 <div class="ink-vspace">
-                    <img class="ink-l100 ink-m90 ink-s90" src="/images/howto_summon_burst.jpg">
+                    <img class="ink-l100 ink-m90 ink-s90" src="images/howto_summon_burst.jpg">
                 </div>
             </div>
             <div class="tutorialPage" id="t_elements" style="display:none;">
@@ -413,7 +413,7 @@
                 <p>Each element has a weakness.</p>
 
                 <div class="ink-l30 ink-m30 ink-s90">
-                    <img class="" src="/images/elements.jpg">
+                    <img class="" src="images/elements.jpg">
                 </div>
                 <div class="ink-space ink-l50 ink-m50 ink-s90">
                     <ul style="list-style:none;">
@@ -459,7 +459,7 @@
                 <p>All other skills and abilities are ignored (avenges don't work, bonus are not applied, critical hits are not trigered).</p>
 
                 <div class="ink-l30 ink-m30 ink-s90">
-                    <img class="" src="/images/howto_69.jpg">
+                    <img class="" src="images/howto_69.jpg">
                 </div>
             </div>
             <div class="tutorialPage" id="t_commands" style="display:none;">
@@ -499,7 +499,7 @@
                     <p>Defines the boss manually.</p>
                     <b>Variable value</b>
                     <ul>
-                        <li><pre>health@</pre></li>
+                        <li><pre>health@[number]</pre></li>
                     </ul>
                 </div>
                 <div class="left-pad">
@@ -509,6 +509,12 @@
                     <b>variable value</b>
                     <ul>
                         <li><pre>nickname@[yournick]</pre></li>
+                    </ul>
+                    <h3 class="command">summon@</h3>
+                    <p>Summons a beast of a particular element. See <a href="#c_warlock" class="switch">Warlock - Summon</a> for more information.</p>
+                    <b>variable value</b>
+                    <ul>
+                        <li><pre>summon@[element]</pre></li>
                     </ul>
                 </div>
             </div>
@@ -520,7 +526,7 @@
 <script type="text/javascript">
 
     $(document).ready(function(){
-        $('.tutorialMenu a').click(function(){
+        $('.tutorialMenu a, .switch').click(function(){
             if(!this.href) return;
 
             $('.tutorialPage').hide();

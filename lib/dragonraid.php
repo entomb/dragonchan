@@ -166,6 +166,12 @@
                     continue;
                 }
 
+                // Dev variables
+                /*
+                $post->com = "summon@fire";
+                */
+
+
                 //get the current player class
                 $post->class = self::getPlayerClass($post->id);
 
@@ -486,8 +492,7 @@
                     // Give W's a possible elemental damage for their pets
                     // Maybe break out into a summoner class?
 
-                    //set OP options [difficulty@]
-                    if($_summon = self::checkForCommand('summon@',$this->OPost)){
+                    if($_summon = self::checkForCommand('summon@',$post)){
                         $_summon_element = $_summon;
                     }
 
