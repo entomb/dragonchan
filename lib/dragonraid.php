@@ -654,6 +654,12 @@
         * @param string $nickname the desired nickname
         */
         function setNickname($user_id,$nickname){
+
+            // Stop fucking making names a dickyear long
+            if(strlen($nickname) > 14) {
+                $nickname = substr($nickname, 0, 14);
+            }
+
             if($nickname=="heaven"){
               return false; //fuck off
             }
