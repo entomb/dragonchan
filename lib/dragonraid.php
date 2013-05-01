@@ -83,18 +83,28 @@
             'ice' => 'Frost Golem',
         );
 
-        var $_miss_hits = array('2','31','51');
+        // Less than 22 = death while enraged
+        var $_miss_hits = array('23','51','71');
 
         /**
          * Init functions
          * @param array $_parsed_thread Parsed thread from the json API
          */
         function __construct($_parsed_thread){
+
+
             $this->THREAD = $_parsed_thread;
             $this->OPost = $this->THREAD->posts[0];
             $this->OP = $this->OPost->id;
             $this->THREAD_ID = $this->OPost->no;
 
+
+            /* Uncomment to force dev variables
+            $this->OPost->com = "name@LichKing
+                                difficulty@hard
+                                element@ice
+                                health@19900";
+            */
 
             //boss status
             $this->BossIMG = "http://thumbs.4chan.org/b/thumb/".$this->OPost->tim."s.jpg";
@@ -102,11 +112,12 @@
             $this->BossElement = self::getBossElement($this->OPost->no);
             $this->BossName = "RandomBeast";
 
-
             /**
              * OP COMMANDS
              */
-            $this->OPost->commands = self::parseCommandValues($this->OPost);
+
+            // OP's commands should be case sensitive, like the boss name
+            $this->OPost->commands = self::parseCommandValues($this->OPost, true);
 
             //set OP options [difficulty@]
             if($_difficulty = self::checkForCommand('difficulty@',$this->OPost)){
@@ -123,6 +134,11 @@
                 if(in_array($_element,$this->available_elements)){
                     $this->BossElement = $_element;
                 }
+            }
+
+            //set OP options [health@]
+            if($_health = self::checkForCommand('health@',$this->OPost)){
+                $this->setBossHealth((int)$_health);
             }
 
         }
@@ -149,6 +165,12 @@
                 if($this->BossHP<=0){
                     continue;
                 }
+
+                // Dev variables
+                /*
+                $post->com = "summon@fire";
+                */
+
 
                 //get the current player class
                 $post->class = self::getPlayerClass($post->id);
@@ -297,6 +319,11 @@
             return in_array($_id, $this->deadPlayers);
         }
 
+        /**
+         * Set boss difficulty
+         * @param  string $difficulty preg_matched difficulty
+         * @return null
+         */
         function setBossDifficulty($difficulty){
             switch ($difficulty) {
                 case 'noob':
@@ -332,6 +359,15 @@
                 break;
             }
 
+        }
+
+        /**
+         * Overrides boss's health
+         * @param  string $health preg_matched health
+         */
+        function setBossHealth($health){
+            $this->BossHP_MAX = ($health > 27000 ? 27000 : $health);
+            $this->BossHP = $this->BossHP_MAX;
         }
 
         function getBossElement($id) {
@@ -455,8 +491,13 @@
 
                     // Give W's a possible elemental damage for their pets
                     // Maybe break out into a summoner class?
+
+                    if($_summon = self::checkForCommand('summon@',$post)){
+                        $_summon_element = $_summon;
+                    }
+
                     foreach($this->available_elements as $element) {
-                        if(strpos(strtolower($post->com), $element) !== false) {
+                        if(!empty($_summon_element) && $_summon_element == $element) {
                             $chosen_element = $element;
                             $post->chosen_element = $chosen_element;
                             break;
@@ -471,6 +512,7 @@
                         // If the element is the same as the boss, make him resistant
                         $_pet_damage = ceil($_pet_damage * .5);
                     }
+
                     $post->_pet_damage = $_pet_damage;
                     $post->bonus+=$_pet_damage;
                 }
@@ -624,6 +666,12 @@
         * @param string $nickname the desired nickname
         */
         function setNickname($user_id,$nickname){
+
+            // Stop fucking making names a dickyear long
+            if(strlen($nickname) > 14) {
+                $nickname = substr($nickname, 0, 14);
+            }
+
             if($nickname=="heaven"){
               return false; //fuck off
             }
@@ -996,8 +1044,7 @@
 
             // Dragonborn
             if($class == "DVK"){
-                $class == "DK"; //temp
-                $segment_range = array_chunk($range, 32);
+                $segment_range = array_chunk($range, 5);
             }
 
             $segment = array_tree_search_key($segment_range, $post_id[1]);
@@ -1052,8 +1099,7 @@
 
             // Dragonborn
             if($class == "DVK"){
-                $class = "DK"; //temp
-                $segment_range = array_chunk($range, 3);
+                $segment_range = array_chunk($range, 5);
             }
 
             // Last character of ID, instead of the first
@@ -1083,7 +1129,7 @@
          * @param  object $post the full post object
          * @return array full command list
          */
-        static function parseCommandValues($post){
+        static function parseCommandValues($post, $case_sensitive = false){
             if(!isset($post->com)){
                 return array();
             }
@@ -1092,7 +1138,10 @@
                 return array();
             }
 
-            $_text = strtolower($post->com);
+            $_text = $post->com;
+            if($case_sensitive == false) {
+                $_text = strtolower($post->com);
+            }
             $_text = strip_tags($_text,"<br>");
             $_text = str_replace("<br>", " ", $_text);
             $_text = str_replace("<br/>", " ", $_text);
