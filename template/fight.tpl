@@ -79,9 +79,9 @@ $BossName = $this->BossName;
             <div class="ink-gutter">
               <div class="ink-l40">
                 <div class="ink-l90">
-                  <h4><span class="ink-label warning">NEW!</span> NICKNAMES!</h4>
-                  <p> set your nickname by using the <b>nickname@</b> command!</p>
-                  <p> example: <pre>nickname@LeroyJenkins</pre></p>
+                  <h4><span class="ink-label warning">NEW!</span> Ranger (beta)!</h4>
+                  <p>The new Ranger Class is here!, check your ID for X,Y or Z</p>
+                  <p>check the documentation for help on using rangers.</p>
                   <h4>Bookmarklet</h4>
                   <p>Drag this link to your bookmark bar and use it on any /b/ thread to get a real time update on the fight!
                     <br/>

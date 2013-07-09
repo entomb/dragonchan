@@ -12,7 +12,7 @@
 */
 
 //no errors on production please
-error_reporting(0);
+error_reporting(E_ALL);
 
 
 /**
@@ -35,7 +35,7 @@ $thread_id = (isset($_GET['id']) ? (int)$_GET['id'] : 0);
  * IDEA: extend this to other boards
  * @var string
  */
-$api_url   = "http://api.4chan.org/b/res/$thread_id.json";
+$api_url = "http://api.4chan.org/b/res/$thread_id.json";
 
 
 /**
