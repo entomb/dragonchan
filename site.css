@@ -33,6 +33,7 @@ ul.rules{ font-size: .9em; }
 .ink-row .praise{margin: 1.2%; padding: .3%; border:1px solid #EEE; background: #fff; min-height: 100px;}
 .ink-row .praise h4{margin-bottom:1em;}
 /*classes*/
+.ink-label.class-R{  background-color: #FF364D;  color: #222; }
 .ink-label.class-K{  background-color: #C79C6E;  color: #222; }
 .ink-label.class-H{  background-color: #ABD473;  color: #222; }
 .ink-label.class-P{  background-color: #FCD349;  color: #222; }

@@ -15,7 +15,7 @@
      * Chan Boss Raid main class
      */
     Class DragonRaid{
-        var $_version = "1.6.5";
+        var $_version = "1.7";
 
         var $THREAD_ID;
         var $THREAD;
@@ -527,6 +527,21 @@
                     }
                 }
 
+                if($post->class=="R"){
+                    switch (self::lastDigit($post->roll)) {
+                        case 0: $post->damage*=1; break;
+                        case 1: $post->damage*=1; break;
+                        case 2: $post->damage*=2; break;
+                        case 3: $post->damage*=3; break;
+                        case 4: $post->damage*=4; break;
+                        case 5: $post->damage*=5; break;
+                        case 6: $post->damage*=4; break;
+                        case 7: $post->damage*=3; break;
+                        case 8: $post->damage*=1; break;
+                        case 9: $post->damage*=0; break;
+                    }
+                }
+
             }else{
                 $post->bonus = 0;
             }
@@ -943,7 +958,15 @@
          * @return bool
          */
         static function lastDigitMatch($num1,$num2){
-            return (bool)(substr((string)$num1,-1, 1) == substr((string)$num2,-1,1));
+            return (bool)(self::lastDigit($num1) == self::lastDigit($num2));
+        }
+        /**
+         * Checks if the last digit of a numbers
+         * @param  int|string $num1  Number
+         * @return bool
+         */
+        static function lastDigit($num1){
+            return (int)(substr((string)$num1,-1, 1));
         }
 
         /**
@@ -979,13 +1002,18 @@
             }
 
             //bard
-            if(in_array($post_id[0],array('A','E','I','O','U','Y','a','e','i','o','u','y'))){
+            if(in_array($post_id[0],array('A','E','I','O','U','a','e','i','o','u'))){
                 return "B";
             }
 
             //warlock
             if(in_array($post_id[0],array('W','R','L','C','K','w','r','l','c','k'))){
                 return "W";
+            }
+
+            //ranger
+            if(in_array($post_id[0],array('X','Y','Z','x','y','z'))){
+                return "R";
             }
 
             //knight
@@ -1047,6 +1075,11 @@
                 $segment_range = array_chunk($range, 5);
             }
 
+            // Ranger
+            if($class == "R"){
+                $segment_range = array_chunk($range, 5);
+            }
+
             $segment = array_tree_search_key($segment_range, $post_id[1]);
 
             $sprite .= $class . "/" . $class . "_" . $segment . ".png";
@@ -1099,6 +1132,11 @@
 
             // Dragonborn
             if($class == "DVK"){
+                $segment_range = array_chunk($range, 5);
+            }
+
+            // Ranger
+            if($class == "R"){
                 $segment_range = array_chunk($range, 5);
             }
 

@@ -17,6 +17,7 @@
                             <li><a href="#c_healer"><span class="ink-label class-H">Healer</span></a></li>
                             <li><a href="#c_bard"><span class="ink-label class-B">Bard</span></a></li>
                             <li><a href="#c_warlock"><span class="ink-label class-W">Warlock</span></a></li>
+                            <li><a href="#c_ranger"><span class="ink-label class-R">Ranger</span></a></li>
                             <li><a href="#c_knight"><span class="ink-label class-K">Knight</span></a></li>
                             <li><a href="#c_paladin"><span class="ink-label class-P">Paladin</span></a></li>
                             <li><a href="#c_deathknigh"><span class="ink-label class-DK">Death Knight</span></a></li>
@@ -79,7 +80,7 @@
             <div class="tutorialPage" id="t_classes" style="display:none;">
                 <h2>Classes</h2>
                 <p>
-                    There are currently 7 diferent classes, each with its own habilities
+                    There are currently 8 diferent classes, each with its own habilities
                 </p>
                 <h4>Support</h4>
                 <ul>
@@ -90,6 +91,7 @@
                 <ul>
                     <li><span class="ink-label class-W">Warlock</span> can summon diferent creatures for additional damage</li>
                     <li><span class="ink-label class-K">Knight</span> can avenge fallen soldiers for additional damage</li>
+                    <li><span class="ink-label class-K">Ranger</span> is a luck based class, depending on your roll you can hit for a lot</li>
                 </ul>
                 <h4>Special (rare)</h4>
                  <ul>
@@ -178,6 +180,7 @@
                     <li>If you roll under 11 you DIE! <i style="font-size:11px;">(your posts will no longer do damage)</i></li>
                     <li><span class="ink-label class-H">Healers</span> revive fallen soldiers by targeting them and rolling an EVEN number</li>
                     <li><span class="ink-label class-B">Bards</span> are here to motive troops! each time they post an image the next 3 posts will do bonus damage!</li>
+                    <li><span class="ink-label class-R">Rangers</span> are here luck based class, better roll = better damage!</li>
                     <li><span class="ink-label class-K">Knights</span> can critical hit by rolling 5 or 0</li>
                     <li><span class="ink-label class-K">Knights</span> avenge fallen soldiers by targeting them and rolling an EVEN number. Avenging does more damage for the glory of the fallen mate.</li>
                     <li><span class="ink-label class-P">Paladins</span> can avenge AND revive!</li>
@@ -334,7 +337,7 @@
             </div>
             <div class="tutorialPage" id="c_bard" style="display:none;">
                 <h2>Bard
-                <small class="note"> ID starts with a vowel (A E I O U Y) </small></h2>
+                <small class="note"> ID starts with a vowel (A E I O U) </small></h2>
                 <p>
                     Bards are a support class and every time they post an image the next 3 posts will do bonus damage.
                     <br/>
@@ -354,6 +357,30 @@
                     <img class="ink-l100 ink-m90 ink-s90" src="images/howto_bard.jpg">
                 </div>
 
+            </div>
+            <div class="tutorialPage" id="c_ranger" style="display:none;">
+                <h2>Ranger
+                <small class="note"> ID starts with XYZ </small></h2>
+                <p>
+                    Rangers are a luck based class, they can hit for a lot or miss completly.
+                    <br/>
+                </p>
+                <h3>The Rolls</h3>
+                <p>
+                    Your last digit will determinate how much damage you do.
+                </p>
+                <ul>
+                    <li>0 = <b style="font-size:1em">1x</b> damage</li>
+                    <li>1 = <b style="font-size:1em">1x</b> damage</li>
+                    <li>2 = <b style="font-size:1.2em">2x</b> damage</li>
+                    <li>3 = <b style="font-size:1.3em">3x</b> damage</li>
+                    <li>4 = <b style="font-size:1.4em">4x</b> damage</li>
+                    <li>5 = <b style="font-size:1.5em">5x</b> damage</li>
+                    <li>6 = <b style="font-size:1.4em">4x</b> damage</li>
+                    <li>7 = <b style="font-size:1.3em">3x</b> damage</li>
+                    <li>8 = <b style="font-size:1em">1x</b> damage</li>
+                    <li>9 = <b style="font-size:1em">0x</b> damage</li>
+                </ul>
             </div>
             <div class="tutorialPage" id="c_warlock" style="display:none;">
                 <h2>Warlock

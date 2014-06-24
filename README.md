@@ -71,6 +71,7 @@ element@random
 
 If your ID starts with a number you are a HEALER.
 If your ID starts with a vowel you are a BARD.
+If your ID starts with "Y","X","Z", a RANGER.
 If your ID starts with a "/" or "+" you are a PALADIN.
 If your ID ends with a "/" or "+" you are a DEATH KNIGHT.
 If your ID starts AND ends with a "/" or "+" you are DRAGONBORN.
@@ -91,6 +92,7 @@ http://dragonslayer.eu01.aws.af.cm/[place thread_id here]
 
 HEALERS revive fallen soldiers
 BARDS can boost the party damage by posting images
+RANGERS are luck based, better rolls = more damage!
 KNIGHTS can critical hit and avenge!
 PALADINS can avenge AND revive!
 WARLOCKS can summon minions by posting an image.
@@ -111,6 +113,9 @@ The boss will enrage bellow 20% HP, the minimum roll will be 22. however, he wil
 
 Changelog
 =========
+__v1.7- 09-07-2013__
+   - New class: 'Ranger'
+
 __v1.6.5- 30-04-2013__
    - Player commands
    - OP commands
