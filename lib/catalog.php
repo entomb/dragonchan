@@ -1,6 +1,7 @@
 <?php
 /**
- * DragonRaid - A prototype script to transform any /b/ thread into a dragon slaying match.
+ * DragonRaid - A prototype script to transform any /bant/ thread into a dragon slaying match.
+ * 2017 edit to fix API links
  *
  * @author Jonathan Tavares <the.entomb@gmail.com>
  * @license GNU General Public License, version 3
@@ -18,7 +19,7 @@
 
 Class chanCatalog{
 
-    var $api_url = "http://api.4chan.org/b/catalog.json";
+    var $api_url = "http://a.4cdn.org/bant/catalog.json";
     var $_is_cached_request = false;
     var $CATALOG;
 

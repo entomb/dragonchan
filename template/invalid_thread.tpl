@@ -16,7 +16,7 @@
             <div class="ink-gutter">
                 <div class="ink-l100">
                     <h4>Invalid Thread ID</h4>
-                    <p>The thread (#<?php echo $thread_id; ?>) has expired. <a href="http://boards.4chan.org/b/">Back to /b/?</a></p>
+                    <p>The thread (#<?php echo $thread_id; ?>) has expired. <a href="http://boards.4chan.org/bant/">Back to /bant/?</a></p>
                 </div>
             </div>
         </div>

@@ -1,6 +1,7 @@
 <?php
 /**
  * DragonRaid - A prototype script to transform any /b/ thread into a dragon slaying match.
+ * 2017 edit to fix API links
  *
  * @author Jonathan Tavares <the.entomb@gmail.com>
  * @license GNU General Public License, version 3
@@ -107,7 +108,7 @@
             */
 
             //boss status
-            $this->BossIMG = "http://thumbs.4chan.org/b/thumb/".$this->OPost->tim."s.jpg";
+            $this->BossIMG = "http://t.4cdn.org/bant/".$this->OPost->tim."s.jpg";
             $this->setBossDifficulty('easy');
             $this->BossElement = self::getBossElement($this->OPost->no);
             $this->BossName = "RandomBeast";
@@ -192,7 +193,7 @@
                 $this->bardBonusValue = $this->calculateBardBonus();
 
                 //add link to this roll
-                $post->link= "http://boards.4chan.org/b/res/".$this->THREAD_ID."#p".$post->no;
+                $post->link= "http://boards.4chan.org/bant/thread/".$this->THREAD_ID."#p".$post->no;
 
                 //GET THE CURRENT ROLL
                 $post->roll = self::roll($post->no,2);

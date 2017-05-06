@@ -8,7 +8,7 @@
 
 (function(){
 
-    var s = window.location.toString().split('http://boards.4chan.org/b/thread/')
+    var s = window.location.toString().split('http://boards.4chan.org/bant/thread/')
     if(s.length!=2){
         alert("this is not a valid 4chan thread.");
         return;

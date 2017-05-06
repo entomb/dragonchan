@@ -57,6 +57,12 @@
         <div class="ink-row">
             <div class="ink-gutter">
                 <h3>Changelog</h3>
+                <h4>v1.7.1- 06-05-2017</h4>
+                    <ul>
+                        <li>Fixed 4chan API links</li>
+			<li>Changed default board to /bant/</li>
+			<li>Removed old domains</li>
+                    </ul>
                 <h4>v1.7- 09-07-2013</h4>
                     <ul>
                         <li>New class: 'Ranger'</li>
@@ -98,7 +104,7 @@
                 <h4>v1.4- 20-04-2013</h4>
                     <ul>
                         <li>Added an ajax self updating status panel</li>
-                        <li>JS Bookmarklet that opens the status panel on any /b/ thread</li>
+                        <li>JS Bookmarklet that opens the status panel on any /bant/ thread</li>
                         <li>Fixed bug with bard buff only working on pair number roll</li>
                     </ul>
                 <h4>v1.3.1 - 19-04-2013</h4>
