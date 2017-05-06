@@ -60,8 +60,8 @@
                 <h4>v1.7.1- 06-05-2017</h4>
                     <ul>
                         <li>Fixed 4chan API links</li>
-			<li>Changed default board to /bant/</li>
-			<li>Removed old domains</li>
+                        <li>Changed default board to /bant/</li>
+                        <li>Removed old domains</li>
                     </ul>
                 <h4>v1.7- 09-07-2013</h4>
                     <ul>
