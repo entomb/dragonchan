@@ -2,7 +2,6 @@
 /**
  * DragonRaid - A prototype script to transform any /bant/ thread into a dragon slaying match.
  *
- * @version  1.7.1
  * @author Jonathan Tavares <the.entomb@gmail.com>
  * @license GNU General Public License, version 3
  * @link https://github.com/entomb/dragonchan GitHub Source
@@ -10,6 +9,9 @@
  *
  *
 */
+
+//Include game and version info
+include('lib/globalinfo.php');
 
 //no errors on production please
 error_reporting(0);

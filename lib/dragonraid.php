@@ -1,7 +1,6 @@
 <?php
 /**
  * DragonRaid - A prototype script to transform any /b/ thread into a dragon slaying match.
- * 2017 edit to fix API links
  *
  * @author Jonathan Tavares <the.entomb@gmail.com>
  * @license GNU General Public License, version 3
@@ -16,8 +15,6 @@
      * Chan Boss Raid main class
      */
     Class DragonRaid{
-        var $_version = "1.7";
-
         var $THREAD_ID;
         var $THREAD;
         var $LOG;
@@ -1220,11 +1217,12 @@
          */
         function getTargetPosts($text){
             $text = html_entity_decode($text);
-            $preg = preg_match_all('/>>(\d+){9}/i', $text,$raw);
+            $text = str_replace("\"","",$text);
+            $preg = preg_match_all('/>>>([0-9]+)<\/a>/', $text,$raw);
             $match = array();
             if(isset($raw[0])){
                 foreach ($raw[0] as $key => $value) {
-                    $match[$key] = str_replace(">", '', $value);
+                    $match[$key] = str_replace(array('>', '</a'), "", $value);
                 }
             }
 

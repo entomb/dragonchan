@@ -1,7 +1,6 @@
 <?php
 /**
  * DragonRaid - A prototype script to transform any /bant/ thread into a dragon slaying match.
- * 2017 edit to fix API links
  *
  * @author Jonathan Tavares <the.entomb@gmail.com>
  * @license GNU General Public License, version 3
