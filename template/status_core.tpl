@@ -1,13 +1,18 @@
+<?php
+//Include game and version info
+include('lib/globalinfo.php');
+?>
+
 <div class="ink-row">
     <div class="ink-gutter">
         <div class="ink-l30">
-            <b>Dragonchan (<?php echo $this->THREAD_ID ?>)</b>
-            <a target="_blank" href="/info">version <?php echo $this->_version;?></a>
+            <b><?php echo $_gamename;?> (<?php echo $this->THREAD_ID ?>)</b>
+            <a target="_blank" href="/info">version <?php echo $_version;?></a>
             
             <h1>HP: <span id="bossHP"><?php echo $this->BossHP ?></span>/<?php echo $this->BossHP_MAX ?></h1>
             <?php 
             if(!$this->WINNER && $this->bossIsEnraged()){ 
-                echo "<span class='ink-label caution'>The best is enraged!</span>";
+                echo "<span class='ink-label caution'>The boss is enraged!</span>";
             }
             ?> 
         </div>
