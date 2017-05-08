@@ -15,8 +15,6 @@
      * Chan Boss Raid main class
      */
     Class DragonRaid{
-        var $_version = "1.7";
-
         var $THREAD_ID;
         var $THREAD;
         var $LOG;
@@ -107,7 +105,7 @@
             */
 
             //boss status
-            $this->BossIMG = "http://thumbs.4chan.org/b/thumb/".$this->OPost->tim."s.jpg";
+            $this->BossIMG = "http://t.4cdn.org/bant/".$this->OPost->tim."s.jpg";
             $this->setBossDifficulty('easy');
             $this->BossElement = self::getBossElement($this->OPost->no);
             $this->BossName = "RandomBeast";
@@ -192,7 +190,7 @@
                 $this->bardBonusValue = $this->calculateBardBonus();
 
                 //add link to this roll
-                $post->link= "http://boards.4chan.org/b/res/".$this->THREAD_ID."#p".$post->no;
+                $post->link= "http://boards.4chan.org/bant/thread/".$this->THREAD_ID."#p".$post->no;
 
                 //GET THE CURRENT ROLL
                 $post->roll = self::roll($post->no,2);
@@ -1219,11 +1217,12 @@
          */
         function getTargetPosts($text){
             $text = html_entity_decode($text);
-            $preg = preg_match_all('/>>(\d+){9}/i', $text,$raw);
+            $text = str_replace("\"","",$text);
+            $preg = preg_match_all('/>>>([0-9]+)<\/a>/', $text,$raw);
             $match = array();
             if(isset($raw[0])){
                 foreach ($raw[0] as $key => $value) {
-                    $match[$key] = str_replace(">", '', $value);
+                    $match[$key] = str_replace(array('>', '</a'), "", $value);
                 }
             }
 

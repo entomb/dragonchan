@@ -33,9 +33,9 @@
         <div class="ink-l66" style="margin-left:20px;">
             <div class="tutorialPage" id="t_main" style="display:none;">
                 <h2>Main Goal</h2>
-                <p>Dragonchan is a script that converts any /b/ thread into a dragon slaying match<p>
+                <p>This is a script that converts any /bant/ thread into a dragon slaying match<p>
                 <p>The script parses the thread using the json API and calculates damage/classes and other skills depending on post rolls, images, replies, etc...</p>
-                <p>The main goal is to kill a dragon (or any other boss) by roleplaing on /b/ posting your hits and skills and checking the script page for damage output and fight status</p>
+                <p>The main goal is to kill a dragon (or any other boss) by roleplaing on /bant/ posting your hits and skills and checking the script page for damage output and fight status</p>
                 <p>The game focus on cooperation, as every class depends on eachother for its full benefit, this is why we implemented a diferent set of classes and skills and balanced them in a co-dependent way.</p>
                 <p>Using your class specific skills you can help eachother in the quest of defeating a dragon. if cooperation is not achived the thread will simply die by itself...</p>
             </div>
@@ -48,10 +48,7 @@
                     Rolls are calculated in a way that they allways return a >0 number, this means that if your last 2 digits are "00" the script will look for your last 3 digits. if you last 3 digits are still "000", the script will look for your last 4 digits. this will go on until a >1 digit is found.
                 </p>
                 <p>
-                    Sometimes people are going to burst >1000 damage in one hit, this is because 00 dubs are disabled on /b/ but 000 trips are allowed. the damage for this roll will be from 1000 to 9000. This is intended (same goes for quads "0000"). This is extremely rare but will make some "lucky" rolls enjoyable.
-                </p>
-                <p>
-                    This system is only possible because /b/ has a very very very fast post per second ratio, making the last 2 digits of your post nearly random.
+                    This system was only possible because /b/ had a very very very fast post per second ratio, making the last 2 digits of your post nearly random.
                 </p>
             </div>
             <div class="tutorialPage" id="t_id" style="display:none;">
@@ -112,7 +109,7 @@
             </div>
             <div class="tutorialPage" id="t_basic" style="display:none;">
                 <h2>Basic Mechanics</h2>
-                <p>The game is very simple. Find a dragonslayer thead and post on it.</p>
+                <p>The game is very simple. Find a dragonslayer thread and post in it.</p>
                 <p>You will be assigned a class based on your ID and the last 2 digits of every post represent the damage you do.
                    <br/>
                    You can use this webpage to track the party damage, by placing the 4chan thread ID after the URL.
@@ -120,13 +117,65 @@
                 <div>
                     <img class="ink-l100 ink-m90 ink-s90" src="images/howto_start.jpg"/>
                 </div>
-                <h2>Starting a thead</h2>
-                <p>
-                    To start a new dragon slayer thread <a target="_blank" href="https://github.com/entomb/dragonchan">copy/paste the thead template from the github repo</a> and start a new thead with the desired boss image.
-                    <br/>
-                    Its recomended that you post a link to the script in your second post, so new people can read and understad the rules and the game itself.
-                    <br/>
-                    <span class="note">The scrip will work with any thread ID, so fell free to highjack a dead/troll thread!</span>
+                <h2>Starting a thread</h2>
+                    <p>
+                        To start a new thread copy/paste the thead template below and start a new thead with the desired boss image.
+                    </p>
+
+                    <p> 
+                        To view all available OP options and commands, click <a href="#t_commands" class="switch">HERE</a>
+                    </p>
+
+                    <p> Thread template <b>(be sure to edit the default options)</b> </p>
+
+                    <!-- DON'T change the formatting here. It's supposed to be like this -->
+                    <pre style="border: 1px solid black;">
+ITT: /bant/ boss raid!
+
+Rules:
+This huge motherfucking boss appears out of nowhere.
+Read the full rules here: http://drgchan.ddns.net
+
+Here's some info about this boss:
+name@Dragon
+dificulty@easy
+element@random
+
+If your ID starts with a number you are a HEALER.
+If your ID starts with a vowel you are a BARD.
+If your ID starts with "Y","X","Z", a RANGER.
+If your ID starts with a "/" or "+" you are a PALADIN.
+If your ID ends with a "/" or "+" you are a DEATH KNIGHT.
+If your ID starts AND ends with a "/" or "+" you are DRAGONBORN.
+If your ID starts with "W","R","L","C" or "K" you are a WARLOCK.
+Otherwise you are a KNIGHT
+
+Your last 2 digits represent the damage you do
+If you roll under 11 you die. (your posts will no longer do damage)	
+                    </pre>
+                    
+                    <h3>First reply</h3>
+                    
+                    <p>It's recomended that you post a link to the script and the rules in your second post, so that new people can read and understad the rules and the game itself.
+                    <br>
+                    <span class="note">The script will work with any thread ID, so feel free to hijack a dead/troll thread!</span>
+                    
+                    <pre style="border: 1px solid black;">
+http://[link to site]/[place thread_id here]
+
+HEALERS revive fallen soldiers
+BARDS can boost the party damage by posting images
+RANGERS are luck based, better rolls = more damage!
+KNIGHTS can critical hit and avenge!
+PALADINS can avenge AND revive!
+WARLOCKS can summon minions by posting an image.
+DEATH KNIGHTS can continue attacking after they die.
+DRAGONBORN can avenge and revive when alive, and attack after death.
+
+you can be avenged/revived 6 times max
+If you roll 00 or 69 you REVIVE everyone! their damage will count again!
+The boss will enrage bellow 20% HP, the minimum roll will be 22. however, he will no longer heal himself
+                    </pre>
                 </p>
                 <div>
                     <p class="ink-label warning"> You should allways check the catalog before creating a new thread.</p>
